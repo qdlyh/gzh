@@ -1,0 +1,77 @@
+*{padding: 0;margin: 0;list-style-type:none; text-decoration:none;}
+#content{	
+	max-width: 750px;
+	margin: 0 auto;
+	background: #ffffff;
+}
+.content-box{                       
+	margin: 28px;
+}
+.tab-selected{                   /* 头部已选择模块 */
+	height: 156px;
+	box-shadow:8px 8px 16px #cccccc;
+    border: 1px solid #cccccc;
+}
+.selected{                         /* 已选 */
+	float: right;
+	padding-right: 25px;
+	line-height: 156px;
+	color: #464646;
+	font-size: 24px;
+	position: relative;
+}
+.selected-box{
+	width: 520px;
+	height: 105px;
+	display: inline-block;
+}
+.selected-color1{                         /* tab标题背景 */
+	height: 48px;
+	display: inline-block;
+	font-size: 24px;
+	line-height: 48px;
+}
+/*.selected-delete{
+	width: 29px;
+	height: 29px;
+	right: 10px;
+	position: absolute;
+	background-image: url(../images/15615131.png); 
+}*/
+.active2{                        /* tab内容背景 */
+	color: #2aaff1;
+}
+.tab-box{
+	margin-top: 24px;
+}
+.tab-title{                      /* tab标题 */
+	width: 312px;
+	height: 800px;
+	background: #d0d0d0;
+	float: left;
+}
+.tab-title li{                    /* tab标题li */
+	height: 84px;
+	font-size: 28px;
+	color: #464646;
+	padding-left: 28px;
+	line-height: 84px;
+	cursor: pointer;
+}
+.tab-content{                      /* tab内容块 */
+	width: 382px; 
+	height: 800px;
+	background: #f3f3f3;
+	float: right;
+}
+.tab-content ul li{                /* tab内容 */
+	height: 75px;
+	line-height: 75px;
+	display: none;
+	font-size: 28px;
+	color: #464646;
+	cursor: pointer;
+}
+.tab-content ul li p{              /* tab内容左25PX */
+	padding-left: 25px;
+}
