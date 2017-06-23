@@ -21,7 +21,7 @@
 	position: relative;
 }
 .selected-box{
-	width: 520px;
+	width: 450px;
 	height: 105px;
 	display: inline-block;
 }
@@ -29,15 +29,11 @@
 	height: 48px;
 	display: inline-block;
 	font-size: 24px;
-	line-height: 48px;
+	line-height: 48px;	
 }
-/*.selected-delete{
-	width: 29px;
-	height: 29px;
-	right: 10px;
-	position: absolute;
-	background-image: url(../images/15615131.png); 
-}*/
+.active1{
+	background: #f3f3f3;
+}
 .active2{                        /* tab内容背景 */
 	color: #2aaff1;
 }
