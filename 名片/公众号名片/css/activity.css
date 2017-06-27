@@ -1,0 +1,101 @@
+*{padding: 0;margin: 0;list-style-type:none; text-decoration:none;}
+#content{	
+	max-width: 750px;
+	margin: 0 auto;
+	background: #ffffff;
+}
+.content-box{                       
+	margin: 24px;
+}
+.content-box h4{   
+   margin: 24px;                      
+   color: #ADACAC;
+}
+.seek-list{                            /* 添加列表顶部内容 */
+	height: 100px;
+	background: #EFEFEF;
+	text-align: center;
+	line-height: 100px;
+}
+.seek-list input{                         /* 添加列表搜索框 */
+	width: 450px;
+	height: 45px;
+	margin-left: 30px;
+	border-radius: 10px;
+	background: #dfdfdf;
+	padding-left: 12px;
+	border: 0;
+	font-size: 18px;
+	outline:none;
+}
+.add-list img{                                 /* 添加列表图片 */
+	width: 64px;
+	float: right;
+	padding:22px 24px 0 0;
+}
+.activity-box{                                /* 内容模块*/
+	width: 702px;
+    box-shadow:8px 8px 16px #cccccc;
+    border-radius: 10px;
+    border: 1px solid #cccccc;	
+    margin-bottom: 24px;
+}
+.activity-top{                                       /* 顶部圆角*/
+	height: 16px;
+	border-radius: 10px 10px 0 0;
+	background: #f7896f;
+}
+.activity-gray{
+	height: 32px;
+	position: relative;
+	background: #dbe4f9;
+}
+.activity-yellow{                                    /* 倾斜边角 */
+	width: 108px;
+	height: 16px;
+	position: absolute;
+	bottom: 0;
+	border-right:20px transparent dotted;
+	border-bottom:20px #f8f7ab solid;
+}
+.activity-input{                          /* 输入框模块*/
+	height: 94px;
+	background: #ffffff;
+	line-height: 94px;
+	position: relative;
+}
+.activity-input input{                   /* 输入框 */
+	width: 678px;
+	height: 62px;
+	padding-left: 24px;
+	font-size: 24px;
+	line-height: 62px;
+	border: 0;
+	outline:none;
+}
+.inpit-border{                              /* 输入框黑色底线 */
+	position: absolute;
+	bottom: 18px;
+	left: 24px;
+	width: 654px;	
+	height: 1px;
+	display: inline-block;
+	background: #000000;
+}
+.activity-bottom{                                   /* 底部圆角*/
+	height: 16px;
+	border-radius:0 0 10px 10px ;
+	background: #DBE4F9;
+}
+.activity-hr{
+	height: 8px;
+	background: #DBE4F9;
+}
+.activity-ul{
+    height: 84px;
+    line-height: 84px;
+}
+.activity-ul ul li{
+	float: left;
+	padding:0 70px;
+}
