@@ -8,6 +8,7 @@
 	max-width: 750px;
 	height: 88px;
 	margin-top: 10px;
+	text-align: center;
 }
 .content-top ul li{
    float: left;
@@ -15,8 +16,9 @@
 .retreat{
 	padding:0 57px 0 24px;
 }
-.delete{
+.delete-list{
 	padding-left: 57px;
+	cursor: pointer;
 }
 .content-top input{
 	width: 460px;
@@ -33,7 +35,7 @@
 .content-box{                       
 	margin: 28px;
 }
-.list-content{
+.list-content{                                   	
 	height: 204px;
 	margin-top: 24px;
 	padding-left: 24px;
@@ -66,7 +68,6 @@
 	font-style:normal;
 	display:inline-block;
 	width:40px;
-	height:40px;
 	text-align:center;
 	line-height:40px;
 	color:#ffffff;
@@ -74,6 +75,8 @@
 	margin:-2px 2px 1px 0px;
 	border:#cccccc 1px solid;
 	border-radius: 20px;
+	transition: .2s;
+	-webkit-transition: .2s;
 }
 .list-check input[type="checkbox"]{     /* 原始选框消失 */
 	display:none;

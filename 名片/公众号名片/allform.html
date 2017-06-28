@@ -14,11 +14,11 @@
 </head>
 <body>
 	<div id="content">
-         <div class="content-top" style="text-align: center;">
+         <div class="content-top">
              <ul>
                  <li class="retreat"><img src="images/1151515.png" alt=""></li>
                  <li><input type="text" placeholder="请输入关键字"></li>
-                 <li class="delete"><img src="images/1515154.png" alt=""></li>
+                 <li class="delete-list"><img src="images/1515154.png" alt=""></li>
              </ul>
          </div>
          <div class="content-box">
@@ -54,5 +54,17 @@
     </div>
     <script src="js/jquery.js"></script>
     <sctipt src="js/allform.js"></sctipt>
+    <script type="text/javascript">
+        $('.delete-list').click(function(){
+            if (!$('.list-check input').is(':checked')){ 
+               alert("请选择列表");
+               return false;
+           }else{
+               alert('选择成功')
+             
+           }
+    })
+
+    </script>
 </body>
 </html>

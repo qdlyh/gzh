@@ -1,5 +1,0 @@
-*{margin: 0;list-style-type:none;}
-.options div{background: #666;color: white;height: 25px;margin: 10px 10px 0 0;
-    float: left;position: relative;line-height: 25px;font-size: 10px;width: auto;text-indent: 10px;}
-.o_close{cursor: pointer;color: #ccc;margin: 0 8px auto}
-.o_close:hover {color: #ffffff;}
