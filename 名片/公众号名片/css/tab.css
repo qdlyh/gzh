@@ -49,21 +49,7 @@
 	color: #ffffff;
 	cursor: pointer;
 }
-/*.selected-delete{    			
-	float: left;
-	background-image:url(../images/close_btn.jpg);
-	background-repeat:no-repeat;
-	background-position:right;
-	cursor: pointer;
-}
-.selected-delete:after{
-	float: right;
-	padding-left:24px;
-	cursor: pointer;
-	content: 'X';	
-	color: #000000;
-	display: block;
-}*/
+
 .active1{
 	background: #f3f3f3;
 }
@@ -104,6 +90,6 @@
 	color: #464646;
 	cursor: pointer;
 }
-.tab-content ul li div{              /* tab内容左25PX */
+.skillbar span{              /* tab内容左25PX */
 	padding-left: 25px;
 }
