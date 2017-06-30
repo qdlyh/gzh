@@ -7,20 +7,21 @@
 .content-box{                       
 	margin: 28px;
 }
+
 /* 各个板块阴影 */
 .content-top,.content-middle1-input,.content-middle2-input,.content-bottom-input{
     box-shadow:8px 8px 16px #cccccc;
     border-radius: 10px;
     border: 1px solid #cccccc;
 }
-.ucorporation-p{                              /* 编辑完成页面公司名称  */
+.ucorporation-p{                             /* 编辑完成页面公司名称  */
 	height: 100px;
 	line-height: 100px;
 	font-size: 36px;
 	text-align: center;
 	color: #464646;
 }
-.content-top-wx{                               /* 编辑完成页面编辑和微信  */
+.content-top-wx{                              /* 编辑完成页面编辑和微信  */
    width: 250px;
    display: flex;
    flex-direction: column;
@@ -30,15 +31,12 @@
 .content-top-wx img{
     width: 64px;
 }
-.wx-img{                                    
-	cursor: pointer;
-}
 .content-top{                               /* 头部块 */
 	height: 356px;
 	border: 1px solid #cccccc;
 	background: #ffffff;
 }
-.corporation input{                          /* 头部公司输入框 */
+.corporation input{                           /* 头部公司输入框 */
 	width: 690px;
 	height: 90px;
 	border: 0;
@@ -46,7 +44,7 @@
 	margin-bottom: 4px;
 	outline:none;
 }
-.corporation ::-webkit-input-placeholder{    /*公司名字placeholder颜色*/
+.corporation ::-webkit-input-placeholder{   /*公司名字placeholder颜色*/
 	color: #aaa9a9; 
 	padding-left: 99px;
 } 
@@ -81,12 +79,12 @@
 	padding-left: 25px;
 	position: relative;
 }
-.content-middle1-input span,.content-middle2-input span,.content-bottom-input span{      /*文字比如手机，固话*/
+.content-middle1-input span,.content-middle2-input span,.content-bottom-input span{     /*文字比如手机，固话*/
 	padding-right: 13px;
 	font-size: 28px;
 	color: #464646;
 }
-.content-middle1-input input,.content-middle2-input input,.content-bottom-input input{        /* 输入框 */
+.content-middle1-input input,.content-middle2-input input,.content-bottom-input input{         /* 输入框 */
 	width: 578px;
 	height: 62px;
 	margin: 24px 0;
@@ -96,7 +94,7 @@
 	border-bottom: 1px solid #000000;
 	outline:none;
 }
-.btn-uname{	                       /* 手机添加按钮 */
+.btn-uname{	                        /* 手机添加按钮 */
 	width: 100px;
 	height: 42px;
 	cursor:pointer;
@@ -107,11 +105,11 @@
 	right: 20px;
 	top: 35px;
 }
-.uname-none{                          /*手机第二栏*/
+.uname-none{                           /*手机第二栏*/
 	padding-left: 80px;
 	display: none;
 }
-.content-middle2-input{                                  /* 网站，描述块 */
+.content-middle2-input{                                   /* 网站，描述块 */
 	margin-top: 24px;
 	background: #ffffff;
 	padding-left: 25px;	
@@ -120,4 +118,27 @@
 	margin-top: 24px;	
 	background: #ffffff;
 	padding-left: 25px;		
+}
+
+/* 微信背景 */
+.black{
+	width:100%;
+	height: 100%;
+	position: fixed;
+	top:0;
+	left:0;
+	display:none;
+	background:#000000;
+	opacity: 0.9;
+	z-index:100;      	    
+}
+/* 微信图片固定 */
+.wx-black{
+	position:fixed;
+	top:50%;
+	left:50%;
+	background:#ffffff;
+	z-index:1000;
+	display:none;
+	cursor:pointer;
 }

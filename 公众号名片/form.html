@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
 	<meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
     <meta http-equiv="Pragma" content="no-cache"/>
@@ -11,6 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" href="css/form.css">
+    <title>Document</title>
 </head>
 <body>
 	<div id="content">
@@ -41,7 +41,16 @@
              </div>
              <div class="content-middle2-input">
                      <span>网站:</span><input class="uofficial" type="text" placeholder="请输入官方网址"><br/>
-                     <span>主营:</span><input class="uindustry" type="text" placeholder="选择行业"><br/>
+                     <span>主营:</span>                    
+                     <select name="run" class="run" placeholder="选择行业">
+                        <option value=""></option>
+                        <option value="建筑业">建筑业</option>
+                        <option value="工程业">工程业</option>
+                        <option value="计算机">计算机</option>
+                        <option value="建筑业2">建筑业2</option>
+                        <option value="工程业2">工程业2</option>
+                        <option value="计算机2">计算机2</option>
+                     </select><!--<input class="uindustry" type="text" placeholder="选择行业"><br/>--><br/>
                      <span>地址:</span><input class="usite" type="text" placeholder="请输入公司所在地址"><br/>
                      <span>描述:</span><input class="udescribe" type="text" placeholder="请用一句话描述公司">
              </div>
@@ -54,5 +63,18 @@
     </div>
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/form.js"></script>
+    <link rel="stylesheet" href="css/mobiscroll/mobiscroll.min.css">
+    <script src="js/mobiscroll/mobiscroll.min.js"></script>
+    <script type="text/javascript">
+    $('.run').mobiscroll().select({
+        width: 750,
+        height: 80,
+        theme: 'mobiscroll',
+        lang: 'zh',
+        display: 'bottom',
+        placeholder: '选择行业',
+        headerText: '请选择行业'
+      })
+    </script>
 </body>
 </html>
