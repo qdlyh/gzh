@@ -15,7 +15,6 @@
               }else if ($('.'+cl).length>1) {
                    $('.selected-color').unbind(prepend)
               }     
-              console.log(div)
         }
             //点击已选标签项
         $('.skillbar div').click(function (){

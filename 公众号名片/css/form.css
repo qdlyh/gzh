@@ -1,27 +1,17 @@
-*{padding: 0;margin: 0;list-style-type:none; text-decoration:none;}
-#content{	
-	max-width: 750px;
-	margin: 0 auto;
-	background: #ffffff;
-}
-.content-box{                       
-	margin: 28px;
-}
-
-/* ¸÷¸ö°å¿éÒõÓ° */
+/* å„ä¸ªæ¿å—é˜´å½± */
 .content-top,.content-middle1-input,.content-middle2-input,.content-bottom-input{
     box-shadow:8px 8px 16px #cccccc;
     border-radius: 10px;
     border: 1px solid #cccccc;
 }
-.ucorporation-p{                             /* ±à¼­Íê³ÉÒ³Ãæ¹«Ë¾Ãû³Æ  */
+.ucorporation-p{                              /* ç¼–è¾‘å®Œæˆé¡µé¢å…¬å¸åç§°  */
 	height: 100px;
 	line-height: 100px;
 	font-size: 36px;
 	text-align: center;
 	color: #464646;
 }
-.content-top-wx{                              /* ±à¼­Íê³ÉÒ³Ãæ±à¼­ºÍÎ¢ĞÅ  */
+.content-top-wx{                              /* ç¼–è¾‘å®Œæˆé¡µé¢ç¼–è¾‘å’Œå¾®ä¿¡  */
    width: 250px;
    display: flex;
    flex-direction: column;
@@ -30,21 +20,25 @@
 }
 .content-top-wx img{
     width: 64px;
+}	
+.wx-img{                                    
+	cursor: pointer;
 }
-.content-top{                               /* Í·²¿¿é */
+.content-top{                               /* å¤´éƒ¨å— */
 	height: 356px;
 	border: 1px solid #cccccc;
-	background: #ffffff;
+	background: #f3f3f3;
 }
-.corporation input{                           /* Í·²¿¹«Ë¾ÊäÈë¿ò */
-	width: 690px;
+.corporation input{                          /* å¤´éƒ¨å…¬å¸è¾“å…¥æ¡† */
+	width: 697px;
 	height: 90px;
+	border-radius: 10px 10px 0 0;
 	border: 0;
 	font-size: 32px;
 	margin-bottom: 4px;
 	outline:none;
 }
-.corporation ::-webkit-input-placeholder{   /*¹«Ë¾Ãû×ÖplaceholderÑÕÉ«*/
+.corporation ::-webkit-input-placeholder{     /*å…¬å¸åå­—placeholderé¢œè‰²*/
 	color: #aaa9a9; 
 	padding-left: 99px;
 } 
@@ -62,39 +56,43 @@
 	display: flex;
 	padding-left: 24px;
 }
-.content-top-img{                         /*  ±à¼­Ïà²á*/
-	width: 180px;
-	height: 180px;
-	background: #cccccc;
+.content-top-img{                         /*  ç¼–è¾‘ç›¸å†Œ*/
 	float: left;
+	cursor: pointer;
 }
-.content-top-input input{               
+.content-top-img img{                       /*  ç¼–è¾‘ç›¸å†Œå¤§å°*/
+	white-space: 180px;
+	height: 180px;
+}
+.content-top-input input{               /* å…¬å¸å¤´éƒ¨è¾“å…¥æ¡† */
 	height: 60px;
+	background: #f3f3f3;
 	margin:0 24px;
 	border: 0;
 }
-.content-middle1-input{                   /* ÊÖ»ú¹Ì»°¿é */
+.content-middle1-input{                   /* æ‰‹æœºå›ºè¯å— */
 	margin-top: 24px;
-	background: #ffffff;
+	background: #f3f3f3;
 	padding-left: 25px;
 	position: relative;
 }
-.content-middle1-input span,.content-middle2-input span,.content-bottom-input span{     /*ÎÄ×Ö±ÈÈçÊÖ»ú£¬¹Ì»°*/
+.content-middle1-input span,.content-middle2-input span,.content-bottom-input span{       /*æ–‡å­—æ¯”å¦‚æ‰‹æœºï¼Œå›ºè¯*/
 	padding-right: 13px;
 	font-size: 28px;
 	color: #464646;
 }
-.content-middle1-input input,.content-middle2-input input,.content-bottom-input input{         /* ÊäÈë¿ò */
+.content-middle1-input input,.content-middle2-input input,.content-bottom-input input{        /* è¾“å…¥æ¡† */
 	width: 578px;
 	height: 62px;
 	margin: 24px 0;
 	border: 0;
 	font-size: 24px;
 	color: #464646;
+	background: #f3f3f3;
 	border-bottom: 1px solid #000000;
 	outline:none;
 }
-.btn-uname{	                        /* ÊÖ»úÌí¼Ó°´Å¥ */
+.btn-phone{	                       /* æ‰‹æœºæ·»åŠ æŒ‰é’® */
 	width: 100px;
 	height: 42px;
 	cursor:pointer;
@@ -105,23 +103,23 @@
 	right: 20px;
 	top: 35px;
 }
-.uname-none{                           /*ÊÖ»úµÚ¶şÀ¸*/
+.phone-none{                          /*æ‰‹æœºç¬¬äºŒæ */
 	padding-left: 80px;
 	display: none;
 }
-.content-middle2-input{                                   /* ÍøÕ¾£¬ÃèÊö¿é */
+.content-middle2-input{                                  /* ç½‘ç«™ï¼Œæè¿°å— */
 	margin-top: 24px;
 	background: #ffffff;
 	padding-left: 25px;	
+	background: #f3f3f3;
 }
-.content-bottom-input{                          /* Î¢ĞÅ£¬QQ¿é */
+.content-bottom-input{                          /* å¾®ä¿¡ï¼ŒQQå— */
 	margin-top: 24px;	
 	background: #ffffff;
 	padding-left: 25px;		
+	background: #f3f3f3;
 }
-
-/* Î¢ĞÅ±³¾° */
-.black{
+.black{                                       /* å¾®ä¿¡é˜´å½±èƒŒæ™¯ */
 	width:100%;
 	height: 100%;
 	position: fixed;
@@ -132,8 +130,7 @@
 	opacity: 0.9;
 	z-index:100;      	    
 }
-/* Î¢ĞÅÍ¼Æ¬¹Ì¶¨ */
-.wx-black{
+.wx-black{                               /* å¾®ä¿¡å¼¹å‡ºä½ç½® */
 	position:fixed;
 	top:50%;
 	left:50%;

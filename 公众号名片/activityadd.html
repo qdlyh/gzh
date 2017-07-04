@@ -10,48 +10,72 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" href="css/communal.css">	
 	<link rel="stylesheet" href="css/activity.css">
+	<link rel="stylesheet" href="css/swiper/swiper.min.css">
 </head>
 <body>
-	<div id="content">
-		<div class="seek-list">
-	    	<a class="add-list" href="javascript:;"><img src="images/1654156156.png" alt=""></a>
-		</div>
-		<div class="content-box">
+	<div id="scroll">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<div class="content">
+					<div class="seek-list">
+						<a class="add-list" href="javascript:;"><img src="images/1654156156.png" alt=""></a>
+					</div>
+					<div class="content-box">
 
-		 <div class="activity-box">
-				<div class="activity-top"></div>
-				<div class="activity-gray">
-					<div class="activity-yellow"></div>
-				</div>
-				<div class="activity-input">
-					<input type="text" placeholder="(尚未添加活动)">
-				</div>
+					<div class="activity-box">
+							<div class="activity-top"></div>
+							<div class="activity-gray">
+								<div class="activity-yellow"></div>
+							</div>
+							<div class="activity-input">
+								<input type="text" placeholder="(尚未添加活动)">
+							</div>
 
-				<div class="activity-gray">
-					<div class="activity-yellow"></div>
-				</div>
-				<div class="activity-input">
-					<input type="text" placeholder="尚未存在活动时间">
-				</div>
+							<div class="activity-gray">
+								<div class="activity-yellow"></div>
+							</div>
+							<div class="activity-input">
+								<input type="text" placeholder="尚未存在活动时间">
+							</div>
 
-				<div class="activity-gray">
-					<div class="activity-yellow"></div>
-				</div>
-				<div class="activity-input">
-					<input type="text" placeholder="尚未存在二维码,无法获取扫码数">
-				</div>
-				<div class="activity-hr"></div>
-				<div class="activity-ul">
-					<ul>
-						<li><a href="javascript:;"><img src="images/12341324.png" alt=""></a></li>
-						<li><a href="javascript:;"><img src="images/156165165.png" alt=""></a></li>
-						<li><a href="javascript:;"><img src="images/453453453.png" alt=""></a></li>
-						<li><a href="javascript:;"><img src="images/35434533.png" alt=""></a></li>
-					</ul>
+							<div class="activity-gray">
+								<div class="activity-yellow"></div>
+							</div>
+							<div class="activity-input">
+								<input type="text" placeholder="尚未存在二维码,无法获取扫码数">
+							</div>
+							<div class="activity-hr"></div>
+							<div class="activity-ul">
+								<ul>
+									<li><a href="javascript:;"><img src="images/12341324.png" alt=""></a></li>
+									<li><a href="javascript:;"><img src="images/156165165.png" alt=""></a></li>
+									<li><a href="javascript:;"><img src="images/453453453.png" alt=""></a></li>
+									<li><a href="javascript:;"><img src="images/35434533.png" alt=""></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script src="js/jquery.js"></script>
+	<script src="js/swiper/swiper.jquery.min.js"></script>
+	<script>
+		window.myScroll = null;
+
+		$(function () {
+			window.myScroll = new Swiper('#scroll', {
+				direction: 'vertical',
+				slidesPerView: 'auto',
+				autoHeight: true,
+				freeMode: true,
+				onSliderMove:function(swiper, event){
+				}
+			})
+		})
+	</script>
 </body>
 </html>

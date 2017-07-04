@@ -1,13 +1,4 @@
-*{padding: 0;margin: 0;list-style-type:none; text-decoration:none;}
-#content{	
-	max-width: 750px;
-	margin: 0 auto;
-	background: #ffffff;
-}
-.content-box{                       
-	margin: 24px;
-}
-.content-box h4{   
+﻿.content-box h4{   
    margin: 24px;                      
    color: #ADACAC;
 }
@@ -23,7 +14,7 @@
 	margin-left: 30px;
 	border-radius: 10px;
 	background: #dfdfdf;
-	padding-left: 12px;
+	margin-left: 12px;
 	border: 0;
 	font-size: 18px;
 	outline:none;
@@ -31,7 +22,7 @@
 .add-list img{                                 /* 添加列表图片 */
 	width: 64px;
 	float: right;
-	padding:22px 24px 0 0;
+	margin:22px 24px 0 0;
 }
 .activity-box{                                /* 内容模块*/
 	width: 702px;
@@ -91,11 +82,81 @@
 	height: 8px;
 	background: #DBE4F9;
 }
-.activity-ul{
+.activity-ul{                                 /*底部图标 */
     height: 84px;
     line-height: 84px;
 }
 .activity-ul ul li{
 	float: left;
-	padding:0 70px;
+	margin:10px 70px;
+}
+.delete-box{                                    /* 删除窗口和弹出层*/
+    position:fixed;
+	width: 560px;
+	height: 420px;
+	top:50%;
+	left:50%;
+	z-index:1000;
+	display:none;
+	cursor:pointer;
+	margin: 0 auto;
+}
+.delete-top{                                  /* 删除窗口提示 */
+	height: 56px;
+	border-radius:10px 10px 0 0;
+	background: #f86060;
+	color: #ffffff;
+	line-height: 56px;
+	font-size: 32px;
+	text-align: center;
+}
+.delete-hint{                                /* 删除窗口内容 */
+	height: 280px;
+	text-align: center;
+	color: #555555;
+	background: #f3f3f3;
+	font-size: 32px;
+}
+.off,.on{	                                  /* 删除窗口按钮 */
+	width: 280px;
+	height: 84px;
+	float: left;
+	display: inline-block;
+	font-size: 36px;
+	text-align: center;
+	line-height: 84px;
+}
+.off{                                        /* 删除窗口取消 */
+	color: #464646;
+	background: #C3C3C3;
+	border-radius:0 0 0 10px;
+}
+.on{
+	border-radius:0 0 10px 0;                /* 删除窗口确认 */
+	background: #f86060;
+	color: #ffffff;
+}
+.black{                                       /* 删除窗口阴影背景 */
+	width:100%;
+	height: 100%;
+	position: fixed;
+	top:0;
+	left:0;
+	display:none;
+	background:#000000;
+	opacity: 0.7;
+	z-index:100;      	    
+}
+
+.wx-black{                               /* 微信弹出位置 */
+	position:fixed;
+	top:50%;
+	left:50%;
+	background:#ffffff;
+	z-index:1000;
+	display:none;
+	cursor:pointer;
+}
+.list-delete input[type="checkbox"]{     /* 原始选框消失 */
+    display: none;
 }

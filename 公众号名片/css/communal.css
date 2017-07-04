@@ -1,0 +1,29 @@
+*{box-sizing: border-box;padding: 0;margin: 0;list-style-type:none; text-decoration:none;}
+body{
+		overflow: hidden;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		background: #f3f3f3;
+}
+#scroll{
+		width: 100%;
+		height: 100%;
+		position: absolute; 
+}
+.select-box{
+		margin-top: 10px;
+}
+.retreat{
+    margin-left: 24px;
+}
+.affirm{
+	  float: right;
+		margin-right: 24px;
+}
+.content{	
+		max-width: 750px;
+		margin: 0 auto;
+		background: #f3f3f3;
+}
+.content-box{                       
+	  margin: 24px;
+}

@@ -1,10 +1,4 @@
-*{padding: 0;margin: 0;list-style-type:none; text-decoration:none;}
-#content{	
-	max-width: 750px;
-	margin: 0 auto;
-	background: #ffffff;
-}
-.content-top{
+﻿.content-top{
 	max-width: 750px;
 	height: 88px;
 	margin-top: 10px;
@@ -14,10 +8,10 @@
    float: left;
 }
 .retreat{
-	padding:0 57px 0 24px;
+	margin:0 57px 0 24px;
 }
 .delete-list{
-	padding-left: 57px;
+	margin-left: 57px;
 	cursor: pointer;
 }
 .content-top input{
@@ -36,7 +30,7 @@
 	margin: 28px;
 }
 .list-content{                                   	
-	height: 204px;
+	height: 228px;
 	margin-top: 24px;
 	padding-left: 24px;
 	padding-top: 24px;
@@ -52,6 +46,7 @@
 }
 .list-input input{               
 	height: 60px;
+	background: #f3f3f3;
 	margin:0 24px;
 	border: 0;
 }
@@ -70,7 +65,7 @@
 	width:40px;
 	text-align:center;
 	line-height:40px;
-	color:#ffffff;
+	color:#f3f3f3;
 	vertical-align:middle;
 	margin:-2px 2px 1px 0px;
 	border:#cccccc 1px solid;
