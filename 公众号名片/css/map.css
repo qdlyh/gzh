@@ -1,0 +1,54 @@
+.active{
+   background: #2AAFF1;
+   color: #ffffff;
+}
+.map-top{
+    text-align: center;
+}
+.title-p{
+    width: 153px;
+    height: 48px;
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    font-size: 28px;
+    line-height: 48px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 24px;
+}
+.map-top p{
+    font-size: 36px;
+    color: #464646;
+}
+.map-tab{
+    width: 330px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    margin: 0 auto;
+    margin-bottom: 24px;
+}
+.region,.time{
+    width: 161px;
+    display: inline-block;
+    border-radius: 10px 0 0 10px;
+    font-size: 28px;
+    cursor: pointer;
+}
+.time{
+    border-radius: 0 10px 10px 0;
+}
+.map-table{
+    width: 702px;
+    text-align: center;
+    color: #292929;
+    border-collapse: inherit;
+    border-radius: 7px;
+    border:1px solid #cccccc;
+    background: #ffffff;
+}
+.map-table tr td{
+    width: 351px;
+    height: 62px;
+    font-size: 28px; 
+    border:1px solid #cccccc;
+}

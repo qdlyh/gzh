@@ -13,6 +13,7 @@
 	<meta name="format-detection" content="telephone=no" />
 	<link rel="stylesheet" href="css/communal.css">
 	<link rel="stylesheet" href="css/activity.css">
+    <link rel="stylesheet" href="css/map.css">
 	<link rel="stylesheet" href="css/swiper/swiper.min.css">
 </head>
 
@@ -59,89 +60,54 @@
 									<li><a href="javascript:;"><img src="images/12341324.png" alt=""></a></li>
 									<li><a href="javascript:;"><img src="images/156165165.png" alt=""></a></li>
 									<li class="list-delete">
-										<label><input type="checkbox"><img src="images/453453453.png" alt=""></label>
+										<img src="images/453453453.png" alt="">
 									</li>
-									<li class="wx-alert"><img src="images/35434533.png" alt=""></li>
+									<li class="wx-alert"><a href="javascript:;"><img src="images/35434533.png" alt=""></a></li>
 								</ul>
 							</div>
 						</div>
-
-						<div class="activity-box">
-							<div class="activity-top"></div>
-							<div class="activity-gray">
-								<div class="activity-yellow"></div>
-							</div>
-							<div class="activity-input">
-								<input type="text" placeholder="请输入活动标题　(限20字)">
-								<span class="inpit-border"></span>
-							</div>
-
-							<div class="activity-gray">
-								<div class="activity-yellow"></div>
-							</div>
-							<div class="activity-input">
-								<input type="text" placeholder="请输入扫码后转跳的网址">
-								<span class="inpit-border"></span>
-							</div>
-
-							<div class="activity-gray">
-								<div class="activity-yellow"></div>
-							</div>
-							<div class="activity-input">
-								<input type="text" placeholder="请输入活动起始时间　(2017-6-2)">
-								<span class="inpit-border"></span>
-							</div>
-							<div class="activity-hr"></div>
-							<div class="activity-ul">
-								<ul>
-									<li><a href="javascript:;"><img src="images/12341324.png" alt=""></a></li>
-									<li><a href="javascript:;"><img src="images/156165165.png" alt=""></a></li>
-									<li class="list-delete">
-											<label><input type="checkbox"><img src="images/453453453.png" alt=""></label>
-									</li>
-									<li class="wx-alert"><img src="images/35434533.png" alt=""></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="activity-box">
-							<div class="activity-top"></div>
-							<div class="activity-gray">
-								<div class="activity-yellow"></div>
-							</div>
-							<div class="activity-input">
-								<input type="text" placeholder="请输入活动标题　(限20字)">
-								<span class="inpit-border"></span>
-							</div>
-
-							<div class="activity-gray">
-								<div class="activity-yellow"></div>
-							</div>
-							<div class="activity-input">
-								<input type="text" placeholder="请输入扫码后转跳的网址">
-								<span class="inpit-border"></span>
-							</div>
-
-							<div class="activity-gray">
-								<div class="activity-yellow"></div>
-							</div>
-							<div class="activity-input">
-								<input type="text" placeholder="请输入活动起始时间　(2017-6-3)">
-								<span class="inpit-border"></span>
-							</div>
-							<div class="activity-hr"></div>
-							<div class="activity-ul">
-								<ul>
-									<li><a href="javascript:;"><img src="images/12341324.png" alt=""></a></li>
-									<li><a href="javascript:;"><img src="images/156165165.png" alt=""></a></li>
-									<li class="list-delete">
-											<label><input type="checkbox"><img src="images/453453453.png" alt=""><label>
-									</li>
-									<li class="wx-alert"><img src="images/35434533.png" alt=""></li>
-								</ul>
-							</div>
-						</div>
-
+						<br/>
+                     <div class="map-top">
+						 <p>数据分析表</p><br/>
+							<div class="map-tab">
+								<span class="region active">
+									地区
+								</span>
+								<span class="time">
+									时间
+								</span>
+						    </div>
+					 </div>
+                        <!--地图-->
+                     <div id="map" style="min-width:702px;height: 550px;"></div>
+					 <br/>
+					 <p class="title-p"></p>
+					 <table class="map-table" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td>地区</td>
+							<td>扫码数</td>
+						</tr>
+						<tr>
+							<td>广州</td>
+							<td>100000</td>
+						</tr>
+						<tr>
+							<td>深圳</td>
+							<td>100001</td>
+						</tr>
+						<tr>
+							<td>佛山</td>
+							<td>100002</td>
+						</tr>
+						<tr>
+							<td>珠海</td>
+							<td>100003</td>
+						</tr>
+						<tr>
+							<td>汕头</td>
+							<td>100004</td>
+						</tr>
+					</table>
 					</div>
 				</div> 
 			</div>
@@ -150,9 +116,7 @@
 
 
 	<!--删除列表弹窗确认-->
-
-	<div class="black"></div>   <!--微信阴影层-->
-	<div class="black2"></div>  <!--删除按钮背景隐藏-->
+	<div class="black"></div>   <!--black阴影层-->
 	<div class="delete-box">
 		<div class="delete-top">提示</div>
 		<div class="delete-hint">
@@ -162,15 +126,17 @@
 		<a href="javasript:;"><span class="off">取消</span></a>
 		<a href="javasript:;"><span class="on">确认</span></a>
 	</div>
-	
    <!--微信弹出图-->
     <div class="wx-black"><img src="" /></div>
     <!--<div class="close"><img src="img/close.png"></div>-->
     <img class="wx-img" src="images/wx.png" alt="" style="display: none;">
 
 	<script src="js/jquery.js"></script>
+    <script src="https://img.hcharts.cn/highmaps/highmaps.js"></script>
+    <script src="https://img.hcharts.cn/mapdata/geochina/china.js"></script>
 	<script src="js/swiper/swiper.jquery.min.js"></script>
 	<script src="js/activity.js"></script>
+    <script src="js/map.js"></script>
 	
 	<script>
 		window.myScroll = null;

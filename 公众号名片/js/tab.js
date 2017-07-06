@@ -1,5 +1,5 @@
     //标签数量转换成数字
-    var selected = parseInt($('.selectednum').text());
+    var selected_tab = parseInt($('.selectednum').text());
 
         //点击已选标签项
         function createCho(cho){
@@ -20,13 +20,13 @@
         $('.skillbar div').click(function (){
               createCho(this);
              //判断标签数目++有多少
-               selected+=1;            
-            $('.selectednum').text(selected);
+               selected_tab+=1;            
+            $('.selectednum').text(selected_tab);
 
             if($('.selectednum').text()>3) {
               //防止超过3个标记添加后计算数字出错
-                    selected-=1;
-            $('.selectednum').text(selected); 
+                    selected_tab-=1;
+            $('.selectednum').text(selected_tab); 
                 alert('最多只能添加三个标签')              
              }
 
@@ -38,8 +38,8 @@
             var cl =$(obtn).attr('sign');
             $("."+cl).removeClass('active2').addClass('active3');      
            //判断标签数目--有多少
-                selected-=1;
-            $('.selectednum').text(selected);            
+                selected_tab-=1;
+            $('.selectednum').text(selected_tab);            
         }
 
        //选项卡
