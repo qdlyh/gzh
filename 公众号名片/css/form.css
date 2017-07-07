@@ -103,9 +103,19 @@
 	right: 20px;
 	top: 35px;
 }
-.phone-none{                          /*手机第二栏*/
+.phones{                      /* 手机第二栏  */
+	width: 578px;
+	height: 62px;
+	background: #000000;
+}
+.phone-div{                      /* 手机第二栏  */
+	position: relative;
 	padding-left: 80px;
-	display: none;
+}
+.delete-phone{                    /* 手机第二栏删除X  */
+	position: absolute;
+	top: 30px;
+	right: 50px;
 }
 .content-middle2-input{                                  /* 网站，描述块 */
 	margin-top: 24px;
@@ -139,3 +149,4 @@
 	display:none;
 	cursor:pointer;
 }
+

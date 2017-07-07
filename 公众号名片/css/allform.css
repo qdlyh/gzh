@@ -52,6 +52,7 @@
 }
 .list-check{                     /* 选框相对定位 */
 	position: relative;
+	display: none;
 }
 .list-check label{             /* 选框位置绝对定位 */
 	position: absolute;

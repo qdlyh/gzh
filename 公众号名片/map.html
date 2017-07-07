@@ -13,14 +13,14 @@
 	<meta name="format-detection" content="telephone=no" />
 	<link rel="stylesheet" href="css/communal.css">
 	<link rel="stylesheet" href="css/activity.css">
-    <link rel="stylesheet" href="css/map.css">
+	<link rel="stylesheet" href="css/map.css">
 	<link rel="stylesheet" href="css/swiper/swiper.min.css">
 </head>
 
 <body>
 	<div id="scroll">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide">
+			<div class="swiper-slide swiper-slide-active">
 				<div class="content">
 					<div class="seek-list">
 						<input type="text" placeholder="　请输入关键字">
@@ -67,8 +67,8 @@
 							</div>
 						</div>
 						<br/>
-                     <div class="map-top">
-						 <p>数据分析表</p><br/>
+						<div class="map-top">
+							<p>数据分析表</p><br/>
 							<div class="map-tab">
 								<span class="region active">
 									地区
@@ -76,47 +76,145 @@
 								<span class="time">
 									时间
 								</span>
-						    </div>
-					 </div>
-                        <!--地图-->
-                     <div id="map" style="min-width:702px;height: 550px;"></div>
-					 <br/>
-					 <p class="title-p"></p>
-					 <table class="map-table" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td>地区</td>
-							<td>扫码数</td>
-						</tr>
-						<tr>
-							<td>广州</td>
-							<td>100000</td>
-						</tr>
-						<tr>
-							<td>深圳</td>
-							<td>100001</td>
-						</tr>
-						<tr>
-							<td>佛山</td>
-							<td>100002</td>
-						</tr>
-						<tr>
-							<td>珠海</td>
-							<td>100003</td>
-						</tr>
-						<tr>
-							<td>汕头</td>
-							<td>100004</td>
-						</tr>
-					</table>
+							</div>
+						</div>
+						<!--地图-->
+						<div id="map" style="min-width:702px;height: 550px;"></div>
+						<br/>
+						<p class="title-p"></p>
+
+						<div class="tab-2">
+							<div style="display:block;">
+								<table class="map-table" cellspacing="0">
+									<tr>
+										<td>地区</td>
+										<td>扫码数</td>
+									</tr>
+									<tr>
+										<td>广州</td>
+										<td>100000</td>
+									</tr>
+									<tr>
+										<td>深圳</td>
+										<td>100001</td>
+									</tr>
+									<tr>
+										<td>佛山</td>
+										<td>100002</td>
+									</tr>
+									<tr>
+										<td>珠海</td>
+										<td>100003</td>
+									</tr>
+									<tr>
+										<td>汕头</td>
+										<td>100004</td>
+									</tr>
+								</table>
+							</div>
+							<div>
+								<p>注:天数</p>
+								<table class="map-table" cellspacing="0">
+									<tr>
+										<td>天数</td>
+										<td>扫码数</td>
+									</tr>
+									<tr>
+										<td>1天</td>
+										<td>100000</td>
+									</tr>
+									<tr>
+										<td>2天</td>
+										<td>100001</td>
+									</tr>
+									<tr>
+										<td>3天</td>
+										<td>100002</td>
+									</tr>
+									<tr>
+										<td>4天</td>
+										<td>100003</td>
+									</tr>
+									<tr>
+										<td>5天</td>
+										<td>100004</td>
+									</tr>
+									<tr>
+										<td>6天</td>
+										<td>100004</td>
+									</tr>
+									<tr>
+										<td>7天</td>
+										<td>100004</td>
+									</tr>
+								</table>
+								<p>注:月份</p>
+								<table class="map-table" cellspacing="0">
+									<tr>
+										<td>月份</td>
+										<td>扫码数</td>
+									</tr>
+									<tr>
+										<td>1月</td>
+										<td>100000</td>
+									</tr>
+									<tr>
+										<td>2月</td>
+										<td>100001</td>
+									</tr>
+									<tr>
+										<td>3月</td>
+										<td>100002</td>
+									</tr>
+									<tr>
+										<td>4月</td>
+										<td>100003</td>
+									</tr>
+									<tr>
+										<td>5月</td>
+										<td>100004</td>
+									</tr>
+									<tr>
+										<td>6月</td>
+										<td>100004</td>
+									</tr>
+									<tr>
+										<td>7月</td>
+										<td>100004</td>
+									</tr>
+									<tr>
+										<td>8月</td>
+										<td>100004</td>
+									</tr>
+									<tr>
+										<td>9月</td>
+										<td>100004</td>
+									</tr>
+									<tr>
+										<td>10月</td>
+										<td>100004</td>
+									</tr>
+									<tr>
+										<td>11月</td>
+										<td>100004</td>
+									</tr>
+									<tr>
+										<td>12月</td>
+										<td>100004</td>
+									</tr>
+								</table>
+							</div>
+						</div>
 					</div>
-				</div> 
+				</div>
 			</div>
 		</div>
-	</div>		
+	</div>
 
 
 	<!--删除列表弹窗确认-->
-	<div class="black"></div>   <!--black阴影层-->
+	<div class="black"></div>
+	<!--black阴影层-->
 	<div class="delete-box">
 		<div class="delete-top">提示</div>
 		<div class="delete-hint">
@@ -126,31 +224,43 @@
 		<a href="javasript:;"><span class="off">取消</span></a>
 		<a href="javasript:;"><span class="on">确认</span></a>
 	</div>
-   <!--微信弹出图-->
-    <div class="wx-black"><img src="" /></div>
-    <!--<div class="close"><img src="img/close.png"></div>-->
-    <img class="wx-img" src="images/wx.png" alt="" style="display: none;">
-
+	<!--微信弹出图-->
+	<div class="wx-black"><img src="" /></div>
+	<!--<div class="close"><img src="img/close.png"></div>-->
+	<img class="wx-img" src="images/wx.png" alt="" style="display: none;">
 	<script src="js/jquery.js"></script>
-    <script src="https://img.hcharts.cn/highmaps/highmaps.js"></script>
-    <script src="https://img.hcharts.cn/mapdata/geochina/china.js"></script>
+	<script src="js/highcharts/highmaps.js"></script>
+	<script src="https://img.hcharts.cn/mapdata/geochina/china.js"></script>
 	<script src="js/swiper/swiper.jquery.min.js"></script>
 	<script src="js/activity.js"></script>
-    <script src="js/map.js"></script>
-	
+	<script src="js/map.js"></script>
+
 	<script>
 		window.myScroll = null;
-
+/*
 		$(function () {
 			window.myScroll = new Swiper('#scroll', {
 				direction: 'vertical',
 				slidesPerView: 'auto',
 				autoHeight: true,
 				freeMode: true,
-				onSliderMove: function (swiper, event) {
+				onSlideChangeEnd: function (swiper) {
+					swiper.update(); //swiper更新
 				}
 			})
-		})
+		})*/
+
+		var mySwiper = new Swiper('#scroll', {
+			direction: 'vertical',
+				slidesPerView: 'auto',
+				autoHeight: true,
+				freeMode: true,
+				observer:true,//修改swiper自己或子元素时，自动初始化swiper 
+				observeParents:true,//修改swiper的父元素时，自动初始化swiper 
+				onSlideChangeEnd: function(swiper){ 
+				swiper.update(); //swiper更新
+			} 
+      });
 	</script>
 </body>
 

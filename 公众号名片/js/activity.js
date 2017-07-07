@@ -1,18 +1,15 @@
 	/*//删除弹出层 */            
     $('.list-delete').click(function(){                      
-        $('.black2,.close').css('display','block');          
-        $('.delete-box').fadeIn();  
+        $('.black,.close').css('display','block');          
+        $('.delete-box').show();  
             $('.delete-box').css({
                 'marginTop':-$('.delete-box').outerHeight()/2,
                 'marginLeft':-$('.delete-box').outerWidth()/2,                 
       })       
   }) 
     $('.black,.off,.on').click(function(){
-        //微信背景隐藏
+        //背景隐藏
          $('.black').css('display','none');
-         //删除按钮背景隐藏
-         $('.black2').css('display','none');
-         //微信隐藏
          $('.wx-black').css('display','none');
          //删除窗口隐藏
          $('.delete-box').css('display','none');
@@ -39,7 +36,7 @@
     });
 
     //按取消checkbox取消
-    $('.off').click(function(){
+    $('.off,.black').click(function(){
         $('.list-delete input:checkbox').each(function(){
                 this.checked=false;
         });
@@ -57,4 +54,5 @@
     $('.map-tab span').click(function(){
         var index = $(this).index()
         $(this).addClass('active').siblings().removeClass('active');
+        $('.tab-2 div').eq(index).show().siblings().hide();
     })
