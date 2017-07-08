@@ -37,6 +37,10 @@
             alert('公司名字不能为空');
             return false;
         }
+        else if($('.file').val()==''){
+            alert('相册不能为空');
+            return false;
+        }
         else if($('.uname').val()==''){
             alert('姓名不能为空');
             return false;
@@ -63,8 +67,8 @@
             alert('副手机号码不正确');
             return false;
         }
-
         }
+
         else if($('.uemail').val()==''){
             alert('邮箱不能为空');
             return false;
