@@ -20,6 +20,7 @@
 	$('.btn-phone').click(function(){
         var div  ="<div class='phone-div'><input class='phones'><span class='delete-phone' onclick='p_delete(this)'>X</span></div>"
 		$('.phone-box').prepend(div);
+        mySwiper.update(); //swiper更新高度
 	})
     
     //删除添加的手机栏

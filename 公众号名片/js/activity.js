@@ -55,4 +55,6 @@
         var index = $(this).index()
         $(this).addClass('active').siblings().removeClass('active');
         $('.tab-2 div').eq(index).show().siblings().hide();
+
+        mySwiper.update(); //swiper更新高度
     })

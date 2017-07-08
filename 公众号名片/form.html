@@ -82,6 +82,7 @@
     <script src="js/form.js"></script>
     <script src="js/swiper/swiper.jquery.min.js"></script>
     <script src="js/mobiscroll/mobiscroll.min.js"></script>
+    <script src="js/communal.js"></script>
     <script type="text/javascript">
     $('.run').mobiscroll().select({
         width: 750,
@@ -93,19 +94,5 @@
         headerText: '请选择行业'
       })
     </script>
-    <script>
-		window.myScroll = null;
-
-		$(function () {
-			window.myScroll = new Swiper('#scroll', {
-				direction: 'vertical',
-				slidesPerView: 'auto',
-				autoHeight: true,
-				freeMode: true,
-				onSliderMove:function(swiper, event){
-				}
-			})
-		})
-	</script>
 </body>
 </html>
