@@ -3,8 +3,7 @@
         <div class="box">
             标签
             <div class="industry">
-                <span class="active">{{ tabBox }}</span>
-                <button class="destroy" @click='deleteTab(item)'>X</button>
+                <span class="active" v-for="goods in tabBox">{{ goods.tabname }}</span>
                 <i>{{tabNum}}</i>
             </div>
         </div>
@@ -41,9 +40,9 @@ export default {
 
             }],
             tabData: [
-                [{ tabId: 1, tabname: '岛上书店1' }, { tabId: 2, tabname: '孤独深处12' }, { tabId: 3, tabname: '好吗好的15' }, { tabId: 4, tabname: '大叔大婶多' }, { tabId: 5, tabname: '啊啊撒1啊撒' }, { tabId: 6, tabname: '啊啊撒啊2撒' }],
-                [{ tabId: 1, tabname: '岛上书店31' }, { tabId: 2, tabname: '孤独深处121' }, { tabId: 3, tabname: '好吗好的125' }, { tabId: 4, tabname: '大叔大婶2多' }, { tabId: 5, tabname: '啊啊5撒啊撒' }, { tabId: 1, tabname: '啊啊3撒啊撒' }],
-                [{ tabId: 1, tabname: '岛上书店41' }, { tabId: 2, tabname: '孤独深处121' }, { tabId: 3, tabname: '好吗好的153' }, { tabId: 4, tabname: '大叔大婶4多' }, { tabId: 5, tabname: '啊啊撒56啊撒' }, { tabId: 1, tabname: '啊啊5撒啊撒' }],
+                [{ tabname: '标签1' }, { tabname: '标签12' }, {  tabname: '好吗好的15' }, {  tabname: '大叔大婶多' }, { tabname: '啊啊撒1啊撒' }], 
+                [{ tabname: '标签2' }, { tabname: '标签13' }, { tabname: '好吗好的125' }, { tabname: '大叔大婶2多' }, { tabname: '啊啊5撒啊撒' }], 
+                [{ tabname: '标签3' }, { tabname: '标签14' }, {  tabname: '好吗好的153' }, { tabname: '大叔大婶4多' }, { tabname: '啊啊撒56啊撒' }], 
             ],
         }
     },
