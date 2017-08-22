@@ -75,16 +75,14 @@ export default {
                 this.tabBox.push(newName);
             }
             //this.tabBox[$index].checked = true;
-
         },
         deleteTab(i) {
             var index = this.tabBox.indexOf(i)
             this.tabBox.splice(index, 1);
         },
-
         affirm() {
             this.formTab = [];
-            for (let i = 0, j = this.tabBox.length; i < j; i++) {
+            for (let i = 0; i < this.tabBox.length; i++) {
                 let newName = { tabname: this.tabBox[i].tabname }
                 this.formTab.push(newName);
             }
