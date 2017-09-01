@@ -5,7 +5,7 @@
         <!-- <button class="icon iconfont icon-ic_menu" @click="toggle()">菜单</button> -->
         <div class="letfNav" :class="{open,block}">
           <ul>
-            <div class="file-top">
+            <div class="file-box">
               <img id="file-img" src="../images/logo.png">
               <input id="file" type="file">
             </div>
@@ -80,17 +80,17 @@ export default {
   left: 30px;
 }
 
-.file-top {
+.file-box {
   width: 160px;
   height: 160px;
   margin: 0 auto;
   border-radius: 50%;
   img {
-    @extend .file-top;
+    @extend .file-box;
     position: absolute;
   }
   input {
-    @extend .file-top;
+    @extend .file-box;
     opacity: 0;
   }
 }

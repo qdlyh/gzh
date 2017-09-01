@@ -1,8 +1,129 @@
-.myform {
-  background: #F3F3F3;
+$input-color:#b1b1b1;
+$text-color:#5c5c5c;
+.edit-form {
+  padding: 36px 24px;
+  background: #fff;
+  input {
+    text-overflow: ellipsis;
+    border: none;
+    outline: none;
+  }
 }
 
-.myform-top {
+.company {
+  text-align: center;
+  input {
+    width: 702px;
+    height: 72px;
+    font-size: 24px;
+    border-bottom: 1px solid #b4b4b4;
+    &::-webkit-input-placeholder {
+      text-align: center;
+      font-size: 32px;
+      color: $input-color;
+    }
+  }
+}
+
+.file-box {
+  width: 120px;
+  height: 120px;
+  float: left;
+  margin-top: 12px;
+  img {
+    @extend .file-box;
+    position: absolute;
+  }
+  input {
+    @extend .file-box;
+    opacity: 0;
+  }
+}
+
+.user-name {
+  margin-top: 24px;
+  input {
+    width: 500px;
+    height: 72px;
+    font-size: 24px;
+    border-bottom: 1px solid #b4b4b4;
+    margin-left: 24px;
+    color: $text-color;
+    &::-webkit-input-placeholder {
+      font-size: 24px;
+      color: $input-color;
+    }
+  }
+  span {
+    margin: 0 12px;
+    font-size: 24px;
+    float: right;
+    line-height: 72px;
+  }
+}
+
+.user-sex {
+  margin-top: 24px;
+  label {
+    padding-left: 24px;
+    color: $text-color;
+    font-size: 24px;
+  }
+}
+
+
+/*  .user-sex input[type="radio"]{    
+	display:none;
+}
+.user-sex input[type="radio"]:checked + i:after{      
+  content: '\f00c';
+  background:#41C22F;
+  border-radius: 50%;
+}   */
+
+.user-message {
+  div {
+    height: 72px;
+    line-height: 72px;
+    width: 680px;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    border-bottom: 1px solid #b4b4b4;
+    i {
+      width: 48px;
+      height: 48px;
+      text-align: center;
+      margin-right: 24px;
+    }
+    span {
+      margin: 0 12px;
+      float: right;
+    }
+    input {
+      width: 100%;
+      height: 72px;
+      font-size: 24px;
+      color: $text-color;
+    }
+     ::-webkit-input-placeholder {
+      color: $input-color;
+    }
+  }
+}
+
+.edit-industry {
+  display: inline-block;
+  font-size: 24px;
+  margin-right: 10px;
+  color: $text-color;
+}
+
+
+/* 营业选择 */
+
+
+/* .content-top {
   width: 100%;
   height: 88px;
   text-align: center;
@@ -14,15 +135,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    .cancel-warn {
-        input{
-            width: 36px;
-            height: 32px;
-            position: absolute;
-            top: 26px;
-            opacity: 0;
-        }
-    }
+  }
+} */
+
+#industry-page {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.cancel-warn {
+  input {
+    width: 36px;
+    height: 32px;
+    position: absolute;
+    top: 26px;
+    opacity: 0;
+  }
+}
+
+.cancel-msg {
+  p {
+    font-size: 20px;
   }
 }
 
@@ -63,9 +196,10 @@
   }
 }
 
-::-webkit-scrollbar {
+
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .tab-box {
   font-size: 24px;
@@ -76,8 +210,7 @@
     float: left;
     position: fixed;
     height: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: scroll;
     li {
       height: 84px;
       padding-left: 24px;
@@ -87,13 +220,15 @@
     }
   }
   .tab-item {
-    width: 414px;
+    width: 420px;
     display: inline-block;
     float: right;
     position: fixed;
     height: 100%;
-    overflow: auto;
+    overflow: scroll;
     right: 0;
+    padding-left: 18px;
+    background: #fff;
     -webkit-overflow-scrolling: touch;
     li {
       height: 84px;
