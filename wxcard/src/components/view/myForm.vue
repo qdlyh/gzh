@@ -9,29 +9,35 @@
                 </div>
                 <div class="edit-form">
                     <div class="company">
-                        <input type="text" placeholder="请输入您的公司名字">
+                        <input @blur="onLeast1()" type="text" ref="Least1" placeholder="请输入您的公司名字">
+                        <span v-show="inputLeast1"><img src="../../images/45561651.png" alt=""></span>
                     </div>
                     <div class="file-box">
                         <img id="file-img" src="../../images/logo.png">
                         <input id="file" type="file">
                     </div>
                     <div class="user-name">
-                        <input v-model="Xinput1" type="text" placeholder="请输入您的名字">
-                        <span v-show="inputWarn1"><img src="../../images/45561651.png" alt=""></span><br/>
-                        <input type="text" placeholder="请输入您的职位">
+                        <div>
+                            <input @blur="onLeast2()" type="text" ref="Least2" placeholder="请输入您的名字">
+                            <span v-show="inputLeast2"><img src="../../images/45561651.png" alt=""></span>
+                        </div>
+                        <div>
+                            <input @blur="onLeast3()" type="text" ref="Least3" placeholder="请输入您的职位">
+                            <span v-show="inputLeast3"><img src="../../images/45561651.png" alt=""></span>
+                        </div>
                     </div>
                     <div class="user-sex" @click="chooseSex()">
-                        <i><img src="../../images/141615616.png" alt=""></i>
-                        <i><img src="../../images/1651651.png" alt=""></i>
-                        <label><input class="nam" type="radio" name="sex" checked="checked">
+                        <i v-show="SexMan"><img src="../../images/141615616.png" alt=""></i>
+                        <i v-show="SexWoman"><img src="../../images/1651651.png" alt=""></i>
+                        <label><input class="nam" ref="man" type="radio" name="sex" checked="checked">
                             <i></i>男</label>
-                        <label><input class="woman" type="radio" name="sex">
+                        <label><input class="woman" ref="woman" type="radio" name="sex">
                             <i></i>女</label>
                     </div>
                     <div class="user-message">
                         <div>
                             <i><img src="../../images/1561561651.png" alt=""></i>
-                            <input @blur="submit()" v-model="Xinput2" type="text" placeholder="请输入您的手机号码">
+                            <input @blur="onPhone()" ref="Phone" type="text" placeholder="请输入您的手机号码">
                             <span v-show="inputWarn2"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
@@ -40,7 +46,7 @@
                         </div>
                         <div>
                             <i><img src="../../images/561561651.png" alt=""></i>
-                            <input @blur="submit()" v-model="Xinput3" type="text" placeholder="请输入您的邮箱">
+                            <input @blur="onEmail()" ref="Email" type="text" placeholder="请输入您的邮箱">
                             <span v-show="inputWarn3"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
@@ -50,17 +56,17 @@
                         </div>
                         <div @click="goIndustry()">
                             <i><img src="../../images/165165165.png" alt=""></i>
-                            <!-- <span>x</span> -->
                             <div>
-                                <ul class="edit-industry" v-for="(item,index) in formTab" :key="index">
-                                    <li>{{ item.tabname }};</li>
-                                </ul>
+                                <!-- v-model="industryValue" -->
+                                <!-- <ul v-for="item in formTab">{{item.tabname}}</ul> -->
+                                <input class="edit-industry" @blur="onLeast4()" ref="Least4" v-model="formTab" type="text" placeholder="点击选择公司主营业务">
+                                <span v-show="inputLeast4"><img src="../../images/45561651.png" alt=""></span>
                             </div>
                         </div>
                         <div>
                             <i><img src="../../images/15165161.png" alt=""></i>
-                            <input @blur="submit()" v-model="Xinput4" type="text" placeholder="请输入公司地址">
-                            <span v-show="inputWarn4"><img src="../../images/45561651.png" alt=""></span>
+                            <input @blur="onLeast5()" ref="Least5" type="text" placeholder="请输入公司地址">
+                            <span v-show="inputLeast5"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                     </div>
                 </div>
@@ -113,13 +119,11 @@
     </div>
 </template>
 <script>
-import { Confirm, XButton, Group, XInput } from 'vux'
+import { Confirm, XButton } from 'vux'
 export default {
     components: {
         Confirm,
         XButton,
-        Group,
-        XInput
     },
     data() {
         return {
@@ -127,20 +131,22 @@ export default {
             tabIndex: 0,
             editForm: true,
             industry: false,
+            SexMan: true,
+            SexWoman: false,
             inputWarn1: false,
             inputWarn2: false,
             inputWarn3: false,
-            inputWarn4: false,
-            Xinput1: '',
-            Xinput2: '',
-            Xinput3: '',
-            Xinput4: '',
+            inputLeast1: false,
+            inputLeast2: false,
+            inputLeast3: false,
+            inputLeast4: false,
+            inputLeast5: false,
             show: false,   //弹出框
-            tabBox: [],
-            formTab: [],
+            formTab: [],   //input选中的标签
+            tabBox: [],    //tab页选中的标签
             option: [{ name: '选项1' }, { name: '选项2' }, { name: '选项3' }, { name: '选项4' }, { name: '选项5' }, { name: '选项6' }, { name: '选项2' }, { name: '选项3' }, { name: '选项4' }, { name: '选项5' }],
             tabData: [
-                [{ tabname: '标签1', }, { tabname: '标签12', }, { tabname: '好吗好的15', }, { tabname: '大叔大婶多', }, { tabname: '啊啊撒1啊撒', }, { tabname: '标签1', }, { tabname: '标签12', }, { tabname: '好吗好的15', }, { tabname: '大叔大婶多', }, { tabname: '啊啊撒1啊撒', }],
+                [{ tabname: '标签1', }, { tabname: '标签12', }, { tabname: '好吗好的15', }, { tabname: '大叔大婶多', }, { tabname: '啊啊撒1啊撒', }, { tabname: '标签1', }, { tabname: '标签12', }, { tabname: '好吗好的15', }, { tabname: '大叔大婶多', }, { tabname: '啊啊撒1啊撒', },],
                 [{ tabname: '标签2', }, { tabname: '标签13', }, { tabname: '好吗好的125', }, { tabname: '大叔大婶2多', }, { tabname: '啊啊5撒啊撒', }],
                 [{ tabname: '标签33', }, { tabname: '标签314', }, { tabname: '好吗好的15223', }, { tabname: '大叔大婶45多', }, { tabname: '大叔大婶s423多', }],
                 [{ tabname: '标签13', }, { tabname: '标签134', }, { tabname: '好吗好的15323', }, { tabname: '大叔大婶46多', }, { tabname: '大叔大婶s42多', }],
@@ -149,49 +155,144 @@ export default {
             ],
         }
     },
-    methods: {
-        submit() {
-            /* 手机 */
-            /*  var Xinput = document.getElementsByClassName('Xinput') */
-            if (this.Xinput2 === '') {
-                this.inputWarn2 = !false;
-                console.log('手机为空')
+    mounted() {
+        var $file = document.getElementById('file')
+        var $fileImg = document.getElementById('file-img')
+
+        function readFile() {
+            var file = this.files[0];
+            if (!/image\/\w+/.test(file.type)) {
+                //alert("请选择图片类型");
                 return false;
             }
-            if (!this.Xinput2.match(/(^1[3|5|8][0-9]{9}$)/)) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e) {
+                $fileImg.src = this.result;
+
+            }
+        }
+        $file.onchange = readFile;
+
+    },
+
+    methods: {
+        onPhone() {
+            /* 手机 */
+            /*  var Xinput = document.getElementsByClassName('Xinput') */
+            if (this.$refs.Phone.value === '') {
                 this.inputWarn2 = !false;
-                console.log('手机号码错误')
+                //console.log('手机为空')
+                return false;
+            }
+            if (!this.$refs.Phone.value.match(/(^1[3|5|8][0-9]{9}$)/)) {
+                this.inputWarn2 = !false;
+                //console.log('手机号码错误')
                 return false;
             } else {
                 this.inputWarn2 = false;
-                console.log('手机号码正确')
+                //console.log('手机号码正确')
                 return false
             }
         },
-        Xinput3() {
-            if (this.Xinput3 === '') {
+        onEmail() {
+            if (this.$refs.Email.value === '') {
                 this.inputWarn3 = !false;
-                console.log('邮箱为空')
+                //console.log('邮箱为空')
                 return false;
             }
-            if (!this.Xinput3.match(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/)) {
+            if (!this.$refs.Email.value.match(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/)) {
                 this.inputWarn3 = !false;
-                console.log('邮箱号码错误')
+                //console.log('邮箱号码错误')
                 return false;
             } else {
                 this.inputWarn3 = false;
-                console.log('邮箱号码正确')
+                //console.log('邮箱号码正确')
+                return false;
+            }
+        },
+        onLeast1() {
+            if (this.$refs.Least1.value === '') {
+                this.inputLeast1 = !false;
+                return false;
+            } else {
+                this.inputLeast1 = false;
+                return false;
+            }
+        },
+        onLeast2() {
+            if (this.$refs.Least2.value === '') {
+                this.inputLeast2 = !false;
+                return false;
+            } else {
+                this.inputLeast2 = false;
+                return false;
+            }
+        },
+        onLeast3() {
+            if (this.$refs.Least3.value === '') {
+                this.inputLeast3 = !false;
+                return false;
+            } else {
+                this.inputLeast3 = false;
+                return false;
+            }
+        },
+        onLeast4() {
+            if (this.$refs.Least4.value === '') {
+                this.inputLeast4 = !false;
+                //console.log('空')
+                return false;
+            } else {
+                this.inputLeast4 = false;
+                //console.log('不空')
+                return false;
+            }
+        },
+        onLeast5() {
+            if (this.$refs.Least5.value === '') {
+                this.inputLeast5 = !false;
+                //console.log('空')
+                return false;
+            } else {
+                this.inputLeast5 = false;
+                //console.log('不空')
+                return false;
             }
         },
 
         goIndustry() {
-            if (this.editForm == true) {
+            if (this.editForm === true) {
                 this.editForm = false
                 this.industry = !false;
             }
         },
         chooseSex() {
+            if (this.$refs.man.checked === true) {
+                this.SexMan = !false;
+                this.SexWoman = false;
+            }
+            if (this.$refs.woman.checked === true) {
+                this.SexMan = false;
+                this.SexWoman = !false;
+            }
+        },
 
+        submit() {
+            this.onPhone();
+            this.onEmail();
+            this.onLeast1();
+            this.onLeast2();
+            this.onLeast3();
+            this.onLeast4();
+            this.onLeast5();
+            if (this.inputWarn2 === !false || this.inputWarn3 === !false || this.inputLeast1 === !false || this.inputLeast2 === !false || this.inputLeast3 === !false || this.inputLeast4 === !false || this.inputLeast5 === !false) {
+                alert('请检查输入是否正确')
+                return false;
+            } else {
+                alert('成功')
+                return false;
+            }
         },
 
         /* 主营选择 */
@@ -211,7 +312,7 @@ export default {
                 return false;
             }
             if (!ifHave) {
-                let newName = { tabname: item.tabname, }
+                let newName = { tabname: item.tabname }
                 this.tabBox.push(newName);
             }
             this.tabIndex = item
@@ -221,15 +322,25 @@ export default {
             this.tabBox.splice(index, 1);
         },
         affirm() {
-            this.formTab = [];
+        /*  this.formTab = [];
             for (let i = 0; i < this.tabBox.length; i++) {
                 let newName = { tabname: this.tabBox[i].tabname }
                 this.formTab.push(newName);
+            }  */
+            this.formTab = [];
+            let formTab = [];
+            let str = '';
+            for (let i = 0; i < this.tabBox.length; i++) {
+                let newName = (this.tabBox[i].tabname)
+                this.formTab.push(newName);
+                console.log(formTab)
             }
+            str = formTab.join(' ');
+            this.onLeast4()
             this.onCancel()
         },
         onCancel() {
-            //console.log('on cancel')
+            console.log('on cancel')
             if (this.industry == true) {
                 this.industry = false;
                 this.editForm = !false;
@@ -246,7 +357,18 @@ export default {
                 return !num.tabs
             }).length
         },
-    }
+        /*  industryValue() {
+            let arr = [];
+            let str = '';
+            for (let i = 0; i < this.tabBox.length; i++) {
+                let newName = (this.tabBox[i].tabname)
+                arr.push(newName + ';')
+                //console.log(arr)
+            }
+            str = arr.join(' ');
+            return str;
+         } */
+    },
 }
 </script>
 <style lang="scss" scoped>
