@@ -13,7 +13,7 @@ $text-color:#5c5c5c;
 .company {
   text-align: center;
   input {
-    width: 702px;
+    width: 660px;
     height: 72px;
     font-size: 24px;
     border-bottom: 1px solid #b4b4b4;
@@ -29,7 +29,7 @@ $text-color:#5c5c5c;
   width: 120px;
   height: 120px;
   float: left;
-  margin-top: 12px;
+  margin-top: 23px;
   img {
     @extend .file-box;
     position: absolute;
@@ -64,6 +64,10 @@ $text-color:#5c5c5c;
 
 .user-sex {
   margin-top: 24px;
+  padding-bottom: 24px;
+  img{
+    vertical-align: middle;
+  }
   label {
     padding-left: 24px;
     color: $text-color;
@@ -72,14 +76,33 @@ $text-color:#5c5c5c;
 }
 
 
-/*  .user-sex input[type="radio"]{    
+.user-sex input[type="radio"]{    
 	display:none;
 }
-.user-sex input[type="radio"]:checked + i:after{      
-  content: '\f00c';
-  background:#41C22F;
-  border-radius: 50%;
-}   */
+.user-sex input[type="radio"] + i{      
+  font-size: 40px;
+  display: inline-block;
+  line-height: 40px;
+  padding: 10px;
+  vertical-align: middle;
+  margin-right: 12px;
+  border: #b4b4b4 1px solid;
+  border-radius: 20px;
+}   
+.user-sex input[type="radio"]:checked + i{      
+  font-size: 40px;
+  display: inline-block;
+  line-height: 40px;
+  padding: 10px;
+  vertical-align: middle;
+  border: #b4b4b4 1px solid;
+  border-radius: 20px;
+  background: #57cd33;
+  transition: .2s; 
+  -webkit-transition: .2s;
+}   
+
+
 
 .user-message {
   div {
@@ -140,6 +163,7 @@ $text-color:#5c5c5c;
 
 #industry-page {
   max-width: 750px;
+  height: 100%;
   margin: 0 auto;
 }
 
@@ -197,9 +221,9 @@ $text-color:#5c5c5c;
 }
 
 
-/* ::-webkit-scrollbar {
+  ::-webkit-scrollbar {
   display: none;
-} */
+} 
 
 .tab-box {
   font-size: 24px;
@@ -209,8 +233,9 @@ $text-color:#5c5c5c;
     background: #EDEDED;
     float: left;
     position: fixed;
-    height: 100%;
-    overflow: scroll;
+    height: 700px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     li {
       height: 84px;
       padding-left: 24px;
@@ -224,8 +249,8 @@ $text-color:#5c5c5c;
     display: inline-block;
     float: right;
     position: fixed;
-    height: 100%;
-    overflow: scroll;
+    height: 700px;
+    overflow: auto;
     right: 0;
     padding-left: 18px;
     background: #fff;
