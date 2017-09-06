@@ -65,7 +65,7 @@ $text-color:#5c5c5c;
 .user-sex {
   margin-top: 24px;
   padding-bottom: 24px;
-  img{
+  img {
     vertical-align: middle;
   }
   label {
@@ -75,11 +75,11 @@ $text-color:#5c5c5c;
   }
 }
 
-
-.user-sex input[type="radio"]{    
-	display:none;
+.user-sex input[type="radio"] {
+  display: none;
 }
-.user-sex input[type="radio"] + i{      
+
+.user-sex input[type="radio"]+i {
   font-size: 40px;
   display: inline-block;
   line-height: 40px;
@@ -88,8 +88,9 @@ $text-color:#5c5c5c;
   margin-right: 12px;
   border: #b4b4b4 1px solid;
   border-radius: 20px;
-}   
-.user-sex input[type="radio"]:checked + i{      
+}
+
+.user-sex input[type="radio"]:checked+i {
   font-size: 40px;
   display: inline-block;
   line-height: 40px;
@@ -98,11 +99,9 @@ $text-color:#5c5c5c;
   border: #b4b4b4 1px solid;
   border-radius: 20px;
   background: #57cd33;
-  transition: .2s; 
+  transition: .2s;
   -webkit-transition: .2s;
-}   
-
-
+}
 
 .user-message {
   div {
@@ -138,9 +137,30 @@ $text-color:#5c5c5c;
 .edit-industry {
   display: inline-block;
   font-size: 24px;
-  margin-right: 10px;
+  margin: 0 10px;
   color: $text-color;
 }
+
+
+/* .wxuiWarn{
+  position: fixed;
+  z-index: 5000;
+  width: 80%;
+  max-width: 300px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #FFFFFF;
+  text-align: center;
+  border-radius: 3px;
+  overflow: hidden;
+  .weui-title{
+    font-weight: 400;
+    font-size: 18px;
+  }
+} */
+
 
 
 /* 营业选择 */
@@ -220,10 +240,9 @@ $text-color:#5c5c5c;
   }
 }
 
-
-  ::-webkit-scrollbar {
+ ::-webkit-scrollbar {
   display: none;
-} 
+}
 
 .tab-box {
   font-size: 24px;
