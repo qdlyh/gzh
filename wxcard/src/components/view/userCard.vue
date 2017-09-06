@@ -6,6 +6,9 @@
                     <a href="#"><img src="../../images/631561651.png" alt=""></a>
                 </letfNav>
                 <div class="icon-right">
+                    <span>
+                        <a href="#"><img src="../../images/161616515.png" alt=""></a>
+                    </span>
                     <div class="icon-line"></div>
                     <span @click="onwxImg()">
                         <a href="#"><img src="../../images/15616516.png" alt=""></a>
@@ -64,6 +67,9 @@
                     <i><img src="../../images/15165161.png" alt=""></i>
                     <p>啊啊啊啊啊啊啊啊啊啊啊啊</p>
                 </div>
+            </div>
+            <div class="btn-blue">
+                <button link='/#'>前往企业官网</button>
             </div>
         </div>
     </div>

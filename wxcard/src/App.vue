@@ -31,6 +31,12 @@ body {
 
 
 
+
+
+
+
+
+
 /* 返回 */
 
 .page-top {
@@ -41,19 +47,48 @@ body {
   display: flex;
   justify-content: space-between;
   span {
-    padding: 0 24px;
+    width: 88px;
     display: flex;
     justify-content: center;
     align-items: center;
+    &:active {
+      background: #43464C;
+    }
+  }
+  .menu {
+    height: 88px;
+    @extend span;
+    &:active {
+      background: #43464C;
+    }
+  }
+  .icon-right {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .icon-line {
+    height: 36px;
+    background: #87888a;
+    width: 1px;
+    margin-top: 23px;
   }
 }
+
+
+
+
+
+
+
+
+
 
 
 /* 单选 */
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .3s
+  transition: opacity .4s
 }
 
 .fade-enter,
@@ -70,6 +105,8 @@ body {
   left: 0;
   bottom: 0;
   transition: opacity .5s;
+  background: #000;
+  opacity: 0.6;
 }
 
 .weui-dialog {
@@ -110,20 +147,57 @@ body {
 }
 
 
+
+/* 微信弹出 */
+
+.weui-Wx {
+  position: fixed;
+  transition: opacity .5s;
+  z-index: 5000;
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  overflow: hidden;
+}
+
+
+
 .btn-green {
   /*  <x-button type="primary">primary</x-button> */
-  margin: 100px 24px 50px;
-  a {
+  margin: 100px 24px;
+   a {
     color: #fff;
   }
 }
 
 .btn-red {
   /*  <x-button type="warn">Delete</x-button> */
-  margin: 100px 24px 50px;
+  margin: 100px 24px;
   a {
     color: #fff;
   }
 }
-</style>
 
+.btn-blue {
+  margin: 100px 0;
+  text-align: center;
+  button {
+    height: 70px;
+    width: 90%;
+    background: #17B4EE;
+    border-radius: 10px;
+    font-size: 24px;
+    color: #fff;
+    text-overflow: ellipsis;
+    border: none;
+    outline: none;
+    &:active {
+      background: #78b4ed;
+    }
+  }
+}
+</style>
