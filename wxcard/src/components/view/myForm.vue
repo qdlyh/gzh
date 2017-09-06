@@ -75,6 +75,24 @@
                         <a href="#">完成</a>
                     </x-button>
                 </div>
+
+                <transition name="fade">
+                    <div class="weui-box" v-show="weuiDialog">
+                        <div class="weui-mask"></div>
+                        <div class="weui-dialog">
+                            <div class="weui-dialog__hd">
+                                <strong>输入错误</strong>
+                            </div>
+                            <div class="weui-dialog__bd">
+                                <p>请检查输入是否有误</p>
+                            </div>
+                            <div class="weui-dialog__ft">
+                                <p class="weui-dialog__btn" @click="weuiWarn">确认</p>
+                            </div>
+                        </div>
+                    </div>
+                </transition>
+                
             </div>
             <div id="industry-page" v-show="industry">
                 <div class="page-top">
@@ -141,7 +159,8 @@ export default {
             inputLeast3: false,
             inputLeast4: false,
             inputLeast5: false,
-            show: false,   //弹出框
+            weuiDialog: false,  //单选框
+            show: false,   //多选弹出框
             formTab: [],   //input选中的标签
             tabBox: [],    //tab页选中的标签
             option: [{ name: '选项1' }, { name: '选项2' }, { name: '选项3' }, { name: '选项4' }, { name: '选项5' }, { name: '选项6' }, { name: '选项2' }, { name: '选项3' }, { name: '选项4' }, { name: '选项5' }],
@@ -239,12 +258,14 @@ export default {
             }
         },
         onLeast4() {
-            if (this.$refs.Least4.value === '') {
+            if (this.formTab.length === 0) {
                 this.inputLeast4 = !false;
                 //console.log('空')
+                console.log(this.formTab.length)
                 return false;
             } else {
                 this.inputLeast4 = false;
+                console.log(this.formTab.length)
                 //console.log('不空')
                 return false;
             }
@@ -287,12 +308,16 @@ export default {
             this.onLeast4();
             this.onLeast5();
             if (this.inputWarn2 === !false || this.inputWarn3 === !false || this.inputLeast1 === !false || this.inputLeast2 === !false || this.inputLeast3 === !false || this.inputLeast4 === !false || this.inputLeast5 === !false) {
-                alert('请检查输入是否正确')
+                //alert('请检查输入是否正确')
+                this.weuiDialog = !false;
                 return false;
-            } else {
+            }/*  else {
                 alert('成功')
                 return false;
-            }
+            } */
+        },
+        weuiWarn() {
+            this.weuiDialog = false;
         },
 
         /* 主营选择 */
@@ -322,25 +347,19 @@ export default {
             this.tabBox.splice(index, 1);
         },
         affirm() {
-        /*  this.formTab = [];
-            for (let i = 0; i < this.tabBox.length; i++) {
-                let newName = { tabname: this.tabBox[i].tabname }
-                this.formTab.push(newName);
-            }  */
             this.formTab = [];
-            let formTab = [];
-            let str = '';
             for (let i = 0; i < this.tabBox.length; i++) {
                 let newName = (this.tabBox[i].tabname)
                 this.formTab.push(newName);
-                console.log(formTab)
+                //console.log(this.formTab.length)
             }
-            str = formTab.join(' ');
+            this.formTab.join(' ');
+
             this.onLeast4()
             this.onCancel()
         },
         onCancel() {
-            console.log('on cancel')
+            //console.log('on cancel')
             if (this.industry == true) {
                 this.industry = false;
                 this.editForm = !false;
