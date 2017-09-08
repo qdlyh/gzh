@@ -78,8 +78,6 @@ export default {
     },
     data() {
         return {
-            open: false,
-            block: false,
             wxImg: false,
         }
     },

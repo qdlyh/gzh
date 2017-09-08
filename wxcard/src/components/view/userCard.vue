@@ -1,32 +1,40 @@
 <template>
     <div>
-        <div class="myCard">
+        <div class="userCard">
             <div class="page-top">
                 <letfNav>
                     <a href="#"><img src="../../images/631561651.png" alt=""></a>
                 </letfNav>
                 <div class="icon-right">
-                    <span>
-                        <a href="#"><img src="../../images/161616515.png" alt=""></a>
+                    <span class="deleteCard">
+                        <div class="checkbox-warn">
+                            <input type="checkbox" v-model="show"></input>
+                        </div>
+                        <div class="checkbox-msg">
+                            <confirm v-model="show" :title="('信息还没保存')" @on-cancel="onCancel" @on-confirm="onConfirm">
+                                <p>{{ ('是否需要保存信息') }}</p>
+                            </confirm>
+                        </div>
+                          <a href="#"><img src="../../images/161616515.png" alt=""></a>
                     </span>
                     <div class="icon-line"></div>
                     <span @click="onwxImg()">
                         <a href="#"><img src="../../images/15616516.png" alt=""></a>
                     </span>
-                    <div class="icon-line"></div>
-                    <span>
-                        <a href="#"><img src="../../images/156165165.png" alt=""></a>
-                    </span>
                 </div>
             </div>
-            <transition name="fade">
-                <div class="weui-box" v-show="wxImg">
-                    <div class="weui-mask"  @click="wxImg = false"></div>
-                    <div class="weui-Wx">
-                        <div><img src="../../images/wx.png" alt=""></div>
+            <!-- 单选 -->
+            <div class="weui-box">
+                <transition name="fade">
+                    <div v-show="wxImg">
+                        <div class="weui-mask" @click="wxImg = false"></div>
+                        <div class="weui-Wx">
+                            <div><img src="../../images/wx.png" alt=""></div>
+                        </div>
                     </div>
-                </div>
-            </transition>
+                </transition>
+            </div>
+
             <div class="company-name">
                 <p>求其有限公司</p>
             </div>
@@ -75,28 +83,53 @@
     </div>
 </template>
 <script>
-import { XButton } from 'vux'
+import { Confirm, XButton } from 'vux'
 import letfNav from '@/components/reuse/letfNav'
 export default {
     components: {
+        Confirm,
         XButton,
         letfNav
     },
     data() {
         return {
-            open: false,
-            block: false,
             wxImg: false,
+            show:false,
         }
     },
     methods: {
         onwxImg() {
-             this.wxImg = !false;
-        }
+            this.wxImg = !false;
+        },
+        onCancel() {
+            console.log('on cancel')
+
+        },
+        onConfirm() {
+            console.log('on confirm')
+        },
     }
 }
 </script>
 <style lang="scss" scoped>
+.deleteCard{
+    position: relative;
+}
+.checkbox-warn {
+  input {
+    width: 88px;
+    height: 88px;
+    position: absolute;
+    top: 0px;
+    left:0px;
+    opacity: 0;
+  }
+}
+.checkbox-msg {
+  p {
+    font-size: 20px;
+  }
+}
 @import '../../css/myCard'
 </style>
 

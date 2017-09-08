@@ -97,10 +97,10 @@
             <div id="industry-page" v-show="industry">
                 <div class="page-top">
                     <span class="industry-cancel">
-                        <div class="cancel-warn">
+                        <div class="industry-warn">
                             <input type="checkbox" v-model="show"></input>
                         </div>
-                        <div class="cancel-msg">
+                        <div class="industry-msg">
                             <confirm v-model="show" :title="('信息还没保存')" @on-cancel="onCancel" @on-confirm="onConfirm">
                                 <p>{{ ('是否需要保存信息') }}</p>
                             </confirm>
@@ -343,7 +343,7 @@ export default {
             this.tabIndex = item
         },
         deleteTab(tabs) {
-            var index = this.tabBox.indexOf(tabs)
+            let index = this.tabBox.indexOf(tabs)
             this.tabBox.splice(index, 1);
         },
         affirm() {

@@ -37,6 +37,8 @@ body {
 
 
 
+
+
 /* 返回 */
 
 .page-top {
@@ -73,12 +75,6 @@ body {
     margin-top: 23px;
   }
 }
-
-
-
-
-
-
 
 
 
@@ -148,6 +144,8 @@ body {
 
 
 
+
+
 /* 微信弹出 */
 
 .weui-Wx {
@@ -169,7 +167,7 @@ body {
 .btn-green {
   /*  <x-button type="primary">primary</x-button> */
   margin: 100px 24px;
-   a {
+  a {
     color: #fff;
   }
 }

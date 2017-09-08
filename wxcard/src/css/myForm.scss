@@ -186,18 +186,21 @@ $text-color:#5c5c5c;
   height: 100%;
   margin: 0 auto;
 }
-
-.cancel-warn {
+.industry-cancel{
+  position: relative;
+}
+.industry-warn {
   input {
-    width: 36px;
-    height: 32px;
+    width: 88px;
+    height: 88px;
     position: absolute;
-    top: 26px;
+    top: 0px;
+    left:0px;
     opacity: 0;
   }
 }
 
-.cancel-msg {
+.industry-msg {
   p {
     font-size: 20px;
   }
