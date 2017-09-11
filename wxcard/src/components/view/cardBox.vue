@@ -15,7 +15,7 @@
                 <span v-show="navIcon" @click="navSelect()">
                     <a href="#"><img src="../../images/165165651.png" alt=""></a>
                 </span>
-                <span v-show="deleteIcon" @click="deleteCard()">
+                <span v-show="!deleteIcon" @click="deleteCard(item,text)">
                     <a href="#"><img src="../../images/14151561.png" alt=""></a>
                 </span>
             </div>
@@ -27,112 +27,52 @@
             </div>
             <transition name="slide-fade">
                 <div class="right-menu" v-show="!rightMenu">
-                    <div class="right-menu-box">
-                        <a href="#">A</a>
-                        <a href="#">B</a>
-                        <a href="#">C</a>
-                        <a href="#">D</a>
-                        <a href="#">E</a>
-                        <a href="#">F</a>
-                        <a href="#">G</a>
-                        <a href="#">H</a>
-                        <a href="#">I</a>
-                        <a href="#">J</a>
-                        <a href="#">K</a>
-                        <a href="#">L</a>
-                        <a href="#">M</a>
-                        <a href="#">N</a>
-                        <a href="#">O</a>
-                        <a href="#">P</a>
-                        <a href="#">Q</a>
-                        <a href="#">R</a>
-                        <a href="#">S</a>
-                        <a href="#">T</a>
-                        <a href="#">U</a>
-                        <a href="#">V</a>
-                        <a href="#">W</a>
-                        <a href="#">S</a>
-                        <a href="#">Y</a>
-                        <a href="#">Z</a>
-                        <a href="#">#</a>
+                    <div class="right-menu-box" v-for="(text , index) in CarditemText" :key="index">
+                        <a href="javascript:;" @click="onLetter('#letter'+index)">{{text}}</a>
                     </div>
                 </div>
             </transition>
-            <div class="card-list">
-                <div class="item-wire" id="item-A">A</div>
-                <swipeout v-for="(item,index) in Carditem1" :key="index">
+            <div class="card-list" v-for="(items, text ,index) in Carditem" :key="text">
+                <!-- <div>{{CarditemText[activeIndex]}}</div> -->
+                <div class="item-wire" :id="'letter'+index">{{text}}</div>
+                <swipeout v-for="(item,index) in items" :key="index">
                     <swipeout-item underlay-color="#fff" @on-open="openDelete('open')" @on-close="closeDelete('close')" :right-menu-width="144" :disabled="disabled">
                         <div slot="right-menu">
-                            <swipeout-button @click.native="onDeleteCard(index)" :width="144" background-color="#383c43"><img src="../../images/14151561.png" alt=""></swipeout-button>
+                            <swipeout-button @click.native="onDeleteCard(index,text)" :width="144" background-color="#383c43"><img src="../../images/14151561.png" alt=""></swipeout-button>
                         </div>
                         <div slot="content" class="demo-content vux-1px-tb">
-                            <div class="card-item">
-                                <div class="card-item-box">
-                                    <div class="item-img">
-                                        <img src="../../images/logo.png" alt="">
-                                    </div>
-                                    <div class="item-msg">
-                                        <div class="item-name">
-                                            <span>{{item.name}}</span>
-                                            <img src="../../images/1165165.png" alt="">
+                            <a href="#">
+                                <div class="card-item">
+                                    <div class="card-item-box">
+                                        <div class="item-img">
+                                            <img src="../../images/logo.png" alt="">
                                         </div>
-                                        <div class="item-occupation">
-                                            <p>{{item.occupation}}</p>
+                                        <div class="item-msg">
+                                            <div class="item-name">
+                                                <span>{{item.name}}</span>
+                                                <img src="../../images/1165165.png" alt="">
+                                            </div>
+                                            <div class="item-occupation">
+                                                <p>{{item.occupation}}</p>
+                                            </div>
+                                            <div class="item-company">
+                                                <p>{{item.company}}</p>
+                                            </div>
                                         </div>
-                                        <div class="item-company">
-                                            <p>{{item.company}}</p>
+                                        <div class="item-checkbox" v-show="!checkbox">
+                                            <label>
+                                                <input type="checkbox" v-model="checkedx" @click="item.checkedx=!item.checkedx">
+                                                <i></i>
+                                            </label>
                                         </div>
-                                    </div>
-                                    <div class="item-checkbox" v-show="checkbox">
-                                        <label>
-                                            <input type="checkbox">
-                                            <i></i>
-                                        </label>
                                     </div>
                                 </div>
-                                <div class="small-wire"></div>
-                            </div>
+                            </a>
                         </div>
                     </swipeout-item>
                 </swipeout>
                 <x-button @click.native="disabled = false" type="primary" :disabled="!disabled" id="delete-false">{{('可操作') }}</x-button>
                 <x-button @click.native="disabled = true" type="warn" :disabled="disabled" id="delete-true">{{('不可操作') }}</x-button>
-                <div class="item-wire" id="item-B">B</div>
-                <swipeout>
-                    <swipeout-item :threshold="0" underlay-color="#ccc">
-                        <div slot="right-menu">
-                            <swipeout-button @click.native="onDeleteCard(index)" background-color="#D23934">{{('删除')}}</swipeout-button>
-                        </div>
-                        <div slot="content" class="demo-content vux-1px-tb">
-                            <div class="card-item">
-                                <div class="card-item-box">
-                                    <div class="item-img">
-                                        <img src="../../images/logo.png" alt="">
-                                    </div>
-                                    <div class="item-msg">
-                                        <div class="item-name">
-                                            <span>伊利丹</span>
-                                            <img src="../../images/1165165.png" alt="">
-                                        </div>
-                                        <div class="item-occupation">
-                                            <p>广告摄影师</p>
-                                        </div>
-                                        <div class="item-company">
-                                            <p>求其有限公司</p>
-                                        </div>
-                                    </div>
-                                    <div class="item-checkbox" v-show="checkbox">
-                                        <label>
-                                            <input type="checkbox">
-                                            <i></i>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="small-wire"></div>
-                            </div>
-                        </div>
-                    </swipeout-item>
-                </swipeout>
 
             </div>
         </div>
@@ -151,10 +91,21 @@ export default {
     },
     data() {
         return {
-            Carditem1: [
-                [{ name: '伊利丹', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹1', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' },],
-                [{ namea: '伊利丹', occupationa: '广告摄影师', company: '公司' }, { name: '伊利丹1', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' },]
-            ],
+            Carditem: {
+                A: [{ name: '伊利丹1', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹2', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹3', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹', occupation: '广告摄影师2', company: '公司2' }],
+                B: [{ name: '伊利丹2', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+                C: [{ name: '伊利丹3', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+                D: [{ name: '伊利丹4', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+                E: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+                F: [{ name: '伊利丹6', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+                G: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+                H: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+                I: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+                J: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+                K: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司' }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1' }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2' }],
+            },
+            activeIndex: 0,
+            checkedx: '',
             disabled: false,
             letNavIcon: true,
             navIcon: true,
@@ -192,20 +143,29 @@ export default {
             this.navIcon = !false;
             this.letNavIcon = !false;
         },
-        deleteCard() {
-
+        deleteCard(text,item) {
+            let list = Object.keys(this.Carditem);
+             /* this.items = this.items.filter(function(items) { return !item.checkedx }) */
+             let targetKey = keys.find( key => this.Carditem[key] === item )
+             
         },
-        onDeleteCard(index) {
-            this.Carditem1.splice(index, 1);
-            console.log(index)
+        onDeleteCard(index,text) {
+            this.Carditem[text].splice(index, 1);
         },
         openDelete(type) {
             this.rightMenu = !false;
-            //console.log('event: ', type)
         },
         closeDelete(type) {
             this.rightMenu = false;
-            //console.log('event: ', type)
+        },
+        onLetter(text) {
+            let letter = this.$el.querySelector(text)
+            document.body.scrollTop = letter.offsetTop
+        }
+    },
+    computed: {
+        CarditemText() {
+            return Object.keys(this.Carditem);
         }
     },
 
@@ -214,6 +174,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../css/cardBox'
 </style>
+
 
 
 
