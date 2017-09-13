@@ -72,7 +72,8 @@
                 </div>
                 <div class="btn-green" @click="submit()">
                     <x-button type="primary">
-                        <a href="#">完成</a>
+                          <a link="/cardBox">完成</a>
+                      <!--   <router-link to="myForm"></router-link> -->
                     </x-button>
                 </div>
 
@@ -92,7 +93,7 @@
                         </div>
                     </div>
                 </transition>
-                
+
             </div>
             <div id="industry-page" v-show="industry">
                 <div class="page-top">
@@ -261,11 +262,11 @@ export default {
             if (this.formTab.length === 0) {
                 this.inputLeast4 = !false;
                 //console.log('空')
-                console.log(this.formTab.length)
+                //console.log(this.formTab.length)
                 return false;
             } else {
                 this.inputLeast4 = false;
-                console.log(this.formTab.length)
+                //console.log(this.formTab.length)
                 //console.log('不空')
                 return false;
             }
@@ -281,7 +282,6 @@ export default {
                 return false;
             }
         },
-
         goIndustry() {
             if (this.editForm === true) {
                 this.editForm = false
@@ -345,6 +345,7 @@ export default {
         deleteTab(tabs) {
             let index = this.tabBox.indexOf(tabs)
             this.tabBox.splice(index, 1);
+            //console.log(index)
         },
         affirm() {
             this.formTab = [];

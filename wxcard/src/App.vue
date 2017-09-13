@@ -183,7 +183,9 @@ body {
 .btn-blue {
   margin: 100px 0;
   text-align: center;
-  button {
+  a{
+    display: inline-block;
+    line-height: 70px;
     height: 70px;
     width: 90%;
     background: #17B4EE;
