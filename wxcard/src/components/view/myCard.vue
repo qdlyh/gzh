@@ -16,26 +16,21 @@
                     </span>
                 </div>
             </div>
-            <transition name="fade">
-                <div class="weui-box" v-show="wxImg">
-                    <div class="weui-mask" @click="wxImg = false"></div>
-                    <div class="weui-Wx">
-                        <div><img src="../../images/wx.png" alt=""></div>
-                    </div>
-                </div>
-            </transition>
+
             <div v-for="(item , index) in listData" :key="index">
                 <div class="company-name">
                     <p>{{item.company}}</p>
                 </div>
                 <div class="company-logo">
-                    <img src="../../images/logo.png" alt="">
+                    <img :src="'http://hx.tunnel.qydev.com/image/'+item.picture" alt="">
                 </div>
                 <div class="message-name">
                     <ul>
                         <li>{{item.name}}</li>
-                        <li :src="item.picture"></li>
-                        <li class="sex"><img src="../../images/1651661.png" alt=""></li>
+                        <li class="sex">
+                            <i v-if="item.sex===1"><img src="../../images/141615616.png" alt=""></i>
+                            <i v-else><img src="../../images/1651651.png" alt=""></i>
+                        </li>
                         <li class="message-name-line"></li>
                         <li>{{item.department}}</li>
                     </ul>
@@ -43,30 +38,40 @@
                 <div class="message-form">
                     <div>
                         <i><img src="../../images/1561561651.png" alt=""></i>
-                        <p>1321321</p>
+                        <p>{{item.telephone}}</p>
                     </div>
                     <div>
                         <i><img src="../../images/41651651.png" alt=""></i>
-                        <p>啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                        <p>{{item.fixedLine}}</p>
                     </div>
                     <div>
                         <i><img src="../../images/561561651.png" alt=""></i>
-                        <p>啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                        <p>{{item.email}}</p>
                     </div>
                     <div>
                         <i><img src="../../images/11651651.png" alt=""></i>
-                        <p>啊啊啊啊啊啊啊啊啊啊啊啊</p>
-
+                        <p>{{item.net}}</p>
                     </div>
-                    <div @click="goIndustry()">
+                    <div>
                         <i><img src="../../images/165165165.png" alt=""></i>
-                        <p>啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                        <!-- <p>{{item.scopes[0].title}};{{item.scopes[1].title}};</p> -->
+                        <div class="industry-p">
+                            <span v-for="(t , index) in item.scopes" :key="index">{{t.title}}</span>
+                        </div>
                     </div>
                     <div>
                         <i><img src="../../images/15165161.png" alt=""></i>
-                        <p>啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                        <p>{{item.address}}</p>
                     </div>
                 </div>
+                <transition name="fade">
+                    <div class="weui-box" v-show="wxImg">
+                        <div class="weui-mask" @click="wxImg = false"></div>
+                        <div class="weui-Wx">
+                            <div><img :src="'http://hx.tunnel.qydev.com/qrcode/'+item.coreFileName" alt=""></div>
+                        </div>
+                    </div>
+                </transition>
             </div>
         </div>
     </div>
@@ -82,18 +87,11 @@ export default {
     },
     data() {
         return {
-            /*  listData: [{name:'哦哦哦',company:'求其公司',sex:'男',Phone:'110110110',Phone2:'132321123',email:'345745@qq.com',website:'www.baidu.com',industry:'杀猪,卖猪,吃素',site:'鸣泉居'}], */
             listData: [],
             wxImg: false,
         }
     },
     mounted() {
-        /* function GetQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return unescape(r[2]); return null;
-        }
-        console.log(GetQueryString("id")); */
         function UrlSearch() {
             var name, value;
             var str = location.href; //取得整个地址栏
@@ -110,10 +108,10 @@ export default {
                 }
             }
         }
-        var Request = new UrlSearch(); //实例化
-        //alert(Request.id);
+        var OpenId = new UrlSearch(); //实例化
+        //alert(OpenId.id);
 
-        axios.get('http://hx.tunnel.qydev.com/con/move?openId='+Request.id)
+        axios.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 console.log(response);
                 console.log(response.data);
@@ -129,7 +127,7 @@ export default {
         onwxImg() {
             this.wxImg = !false;
         },
-    }
+    },
 }
 </script>
 <style lang="scss" scoped>

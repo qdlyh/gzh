@@ -137,7 +137,6 @@ $text-color:#5c5c5c;
 .edit-industry {
   display: inline-block;
   font-size: 24px;
-  margin: 0 10px;
   color: $text-color;
 }
 
@@ -293,4 +292,16 @@ $text-color:#5c5c5c;
 
 .tabActive {
   color: #459bdd !important;
+}
+
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .4s
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
 }

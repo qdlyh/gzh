@@ -9,7 +9,7 @@
                 </div>
                 <div class="edit-form">
                     <div class="company">
-                        <input @blur="onLeast1()" type="text" ref="Least1" placeholder="请输入您的公司名字">
+                        <input @blur="onLeast1()" type="text" v-model="Least1" maxlength="20" placeholder="请输入您的公司名字">
                         <span v-show="inputLeast1"><img src="../../images/45561651.png" alt=""></span>
                     </div>
                     <div class="file-box">
@@ -18,11 +18,11 @@
                     </div>
                     <div class="user-name">
                         <div>
-                            <input @blur="onLeast2()" type="text" ref="Least2" placeholder="请输入您的名字">
+                            <input @blur="onLeast2()" type="text" v-model="Least2" maxlength="6" placeholder="请输入您的名字">
                             <span v-show="inputLeast2"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
-                            <input @blur="onLeast3()" type="text" ref="Least3" placeholder="请输入您的职位">
+                            <input @blur="onLeast3()" type="text" v-model="Least3" maxlength="10" placeholder="请输入您的职位">
                             <span v-show="inputLeast3"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                     </div>
@@ -37,43 +37,39 @@
                     <div class="user-message">
                         <div>
                             <i><img src="../../images/1561561651.png" alt=""></i>
-                            <input @blur="onPhone()" ref="Phone" type="text" placeholder="请输入您的手机号码">
+                            <input @blur="onPhone()" v-model="Phone" type="text" placeholder="请输入您的手机号码">
                             <span v-show="inputWarn2"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
-                            <i><img src="../../images/41651651.png" alt=""></i>
+                            <i><img src="../../images/41651651.png" alt="" maxlength="15"></i>
                             <input type="text" placeholder="请输入您的座机号码">
                         </div>
                         <div>
                             <i><img src="../../images/561561651.png" alt=""></i>
-                            <input @blur="onEmail()" ref="Email" type="text" placeholder="请输入您的邮箱">
+                            <input @blur="onEmail()" v-model="Email" type="text" placeholder="请输入您的邮箱">
                             <span v-show="inputWarn3"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
                             <i><img src="../../images/11651651.png" alt=""></i>
                             <input type="text" placeholder="请输入您的公司官方网址">
-
                         </div>
                         <div @click="goIndustry()">
                             <i><img src="../../images/165165165.png" alt=""></i>
-                            <div>
-                                <!-- v-model="industryValue" -->
-                                <!-- <ul v-for="item in formTab">{{item.tabname}}</ul> -->
-                                <input class="edit-industry" @blur="onLeast4()" ref="Least4" v-model="formTab" type="text" placeholder="点击选择公司主营业务">
-                                <span v-show="inputLeast4"><img src="../../images/45561651.png" alt=""></span>
-                            </div>
+                            <!-- v-model="industryValue" -->
+                            <!-- <ul v-for="item in formTab">{{item.tabname}}</ul> -->
+                            <input class="edit-industry" @blur="onLeast4()" v-model="formTab" type="text" placeholder="点击选择公司主营业务">
+                            <span v-show="inputLeast4"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
                             <i><img src="../../images/15165161.png" alt=""></i>
-                            <input @blur="onLeast5()" ref="Least5" type="text" placeholder="请输入公司地址">
+                            <input @blur="onLeast5()" v-model="Least5" type="text" maxlength="30" placeholder="请输入公司地址">
                             <span v-show="inputLeast5"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                     </div>
                 </div>
                 <div class="btn-green" @click="submit()">
                     <x-button type="primary">
-                          <a link="/cardBox">完成</a>
-                      <!--   <router-link to="myForm"></router-link> -->
+                        <a link="/cardBox">完成</a>
                     </x-button>
                 </div>
 
@@ -106,10 +102,10 @@
                                 <p>{{ ('是否需要保存信息') }}</p>
                             </confirm>
                         </div>
-                        <a href="#"><img src="../../images/1561651.png" alt=""></a>
+                        <a href="javascript:;"><img src="../../images/1561651.png" alt=""></a>
                     </span>
                     <span class="industry-affirm" @click="affirm()">
-                        <a href="#"><img src="../../images/21651561.png" alt=""></a>
+                        <a href="javascript:;"><img src="../../images/21651561.png" alt=""></a>
                     </span>
                 </div>
 
@@ -152,6 +148,13 @@ export default {
             industry: false,
             SexMan: true,
             SexWoman: false,
+            Phone: '',
+            Email: '',
+            Least1: '',
+            Least2: '',
+            Least3: '',
+            Least4: '',
+            Least5: '',
             inputWarn1: false,
             inputWarn2: false,
             inputWarn3: false,
@@ -200,12 +203,12 @@ export default {
         onPhone() {
             /* 手机 */
             /*  var Xinput = document.getElementsByClassName('Xinput') */
-            if (this.$refs.Phone.value === '') {
+            if (this.Phone === '') {
                 this.inputWarn2 = !false;
                 //console.log('手机为空')
                 return false;
             }
-            if (!this.$refs.Phone.value.match(/(^1[3|5|8][0-9]{9}$)/)) {
+            if (!this.Phone.match(/(^1[3|5|8][0-9]{9}$)/)) {
                 this.inputWarn2 = !false;
                 //console.log('手机号码错误')
                 return false;
@@ -216,12 +219,12 @@ export default {
             }
         },
         onEmail() {
-            if (this.$refs.Email.value === '') {
+            if (this.Email === '') {
                 this.inputWarn3 = !false;
                 //console.log('邮箱为空')
                 return false;
             }
-            if (!this.$refs.Email.value.match(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/)) {
+            if (!this.Email.match(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/)) {
                 this.inputWarn3 = !false;
                 //console.log('邮箱号码错误')
                 return false;
@@ -232,7 +235,7 @@ export default {
             }
         },
         onLeast1() {
-            if (this.$refs.Least1.value === '') {
+            if (this.Least1 === '') {
                 this.inputLeast1 = !false;
                 return false;
             } else {
@@ -241,7 +244,7 @@ export default {
             }
         },
         onLeast2() {
-            if (this.$refs.Least2.value === '') {
+            if (this.Least2 === '') {
                 this.inputLeast2 = !false;
                 return false;
             } else {
@@ -250,7 +253,7 @@ export default {
             }
         },
         onLeast3() {
-            if (this.$refs.Least3.value === '') {
+            if (this.Least3 === '') {
                 this.inputLeast3 = !false;
                 return false;
             } else {
@@ -272,7 +275,7 @@ export default {
             }
         },
         onLeast5() {
-            if (this.$refs.Least5.value === '') {
+            if (this.Least5 === '') {
                 this.inputLeast5 = !false;
                 //console.log('空')
                 return false;
@@ -361,7 +364,7 @@ export default {
         },
         onCancel() {
             //console.log('on cancel')
-            if (this.industry == true) {
+            if (this.industry === true) {
                 this.industry = false;
                 this.editForm = !false;
             }

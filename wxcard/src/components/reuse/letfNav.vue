@@ -29,6 +29,7 @@
           </div>
           <div class="menNav">
             <li @click="toggle()" v-for="(nav,index) in menuNav" :key="index">{{nav.name}}</li>
+            <li @click="scanQRCode()">扫二扫</li>
           </div>
         </ul>
         <div class="cover" @click="toggle()"></div>
@@ -38,14 +39,18 @@
 </template>
 
 <script>
+import { WechatPlugin } from 'vux'
 export default {
   data() {
     return {
-      menuMsg: [{ myname: '伊利丹',occupation: '广告摄影师',number: '123',numbers: '321',mycard: '我的名片',namea: '我的收藏',nameb: '名片夹',namec: '扫一扫' }],
-      menuNav: [{ name: '我的名片' }, { name: '我的收藏' }, { name: '名片夹' }, { name: '扫一扫' }], 
+      menuMsg: [{ myname: '伊利丹', occupation: '广告摄影师', number: '123', numbers: '321', mycard: '我的名片', namea: '我的收藏', nameb: '名片夹', namec: '扫一扫' }],
+      menuNav: [{ name: '我的名片' }, { name: '我的收藏' }, { name: '名片夹' }, { name: '扫一扫' }],
       open: false,
       block: false,
     }
+  },
+  created() {
+
   },
   methods: {
     toggle() {
@@ -53,6 +58,7 @@ export default {
         this.block = true;
         setTimeout(() => {
           this.open = true;
+          console.log(this.$wechat)
         }, 0);
       } else {
         this.open = false;
@@ -60,7 +66,7 @@ export default {
           this.block = false;
         }, 300)
       }
-    }
+    },
   }
 
 }
@@ -68,13 +74,14 @@ export default {
 
 
 <style lang="scss" scoped>
-.icon-btn{
+.icon-btn {
   width: 88px;
   height: 88px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .Message-box {
   background: #34363c;
   margin-bottom: 36px;
@@ -167,7 +174,7 @@ export default {
       text-align: left;
       padding-left: 100px;
       &:active {
-        background: #ccc; 
+        background: #ccc;
       }
     }
   }

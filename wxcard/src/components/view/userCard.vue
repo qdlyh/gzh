@@ -78,7 +78,6 @@
             </div>
             <div class="btn-blue">
                 <button link to='/myCard'>前往企业官网</button>
-                <router-link to="/myCard">Go to Foo</router-link>
             </div>
         </div>
     </div>

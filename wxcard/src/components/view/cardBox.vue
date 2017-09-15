@@ -16,7 +16,7 @@
                 <span v-show="navIcon" @click="navSelect()">
                     <a href="javascript:;"><img src="../../images/165165651.png" alt=""></a>
                 </span>
-                <span v-show="deleteIcon" @click="removeAll()">
+                <span v-show="deleteIcon" @click="cardWarn()">
                     <a href="javascript:;"><img src="../../images/14151561.png" alt=""></a>
                 </span>
             </div>
@@ -28,20 +28,37 @@
                     <li>选择更多</li>
                 </ul>
             </div>
+            <!-- 删除多选框 -->
+            <div class="weui-box" v-show="weuiDialog">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog">
+                    <div class="weui-dialog__hd">
+                        <strong>确认删除吗？</strong>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <p>删除后信息将不能找回</p>
+                    </div>
+                    <div class="weui-dialog__ft">
+                        <p class="weui-dialog__btn" @click="weuiDialog = !weuiDialog">取消</p>
+                        <p class="weui-dialog__btn" @click="removeAll()">确认</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 字母 -->
             <transition name="slide-fade">
                 <div class="right-menu" v-show="!rightMenu">
                     <div class="right-menu-box" v-for="(keys , index) in CarditemText" :key="index">
-                        <a href="javascript:;" @click="onLetter('#letter'+index)">{{keys}}</a>
+                        <a href="javascript:;" @click="onLetter('#letter'+ keys)">{{keys}}</a>
                     </div>
                 </div>
             </transition>
             <div class="card-list" v-for="(items, keys ,index) in Carditem" :key="keys">
                 <!-- <div>{{CarditemText[activeIndex]}}</div> -->
-                <div class="item-wire" :id="'letter'+index">{{keys}}</div>
+                <div class="item-wire" :id="'letter'+ keys">{{keys}}</div>
                 <swipeout v-for="(item,index) in items" :key="index">
                     <swipeout-item underlay-color="#fff" @on-open="openDelete('open')" @on-close="closeDelete('close')" :right-menu-width="144" :disabled="disabled">
                         <div slot="right-menu">
-                            <swipeout-button @click.native="onDeleteCard(index,keys)" :width="144" background-color="#383c43"><img src="../../images/14151561.png" alt=""></swipeout-button>
+                            <swipeout-button @click.native="onDeleteCard(index,keys)" :width="144" background-color="#383c43" id="button-right"><img src="../../images/14151561.png" alt=""></swipeout-button>
                         </div>
                         <div slot="content" class="demo-content vux-1px-tb">
                             <a href="javascript:;">
@@ -64,7 +81,7 @@
                                         </div>
                                         <div class="item-checkbox" v-show="checkbox">
                                             <label>
-                                                <input type="checkbox" ref="checkeds" v-model="item.val" />
+                                                <input type="checkbox" v-model="item.val" />
                                                 <i></i>
                                             </label>
                                         </div>
@@ -114,6 +131,7 @@ export default {
             navLi: false,
             deleteIcon: false,
             checkbox: false,
+            weuiDialog: false,
         }
     },
     methods: {
@@ -142,15 +160,26 @@ export default {
             this.navIcon = !false;
             this.letNavIcon = !false;
         },
+        cardWarn() {
+            for (let keys in this.Carditem) {
+                //this.weuiDialog = !false;
+                if (this.Carditem[keys]) {
+                    console.log(this.Carditem[keys].val)
+                    this.weuiDialog = !false
+                }
+            }
+        },
         removeAll() {
             for (let keys in this.Carditem) {
                 this.Carditem[keys] = this.Carditem[keys].filter((all) => {
+                    //console.log(all.val)
                     return all.val === false;
                 })
                 if (!this.Carditem[keys].length) {
                     delete this.Carditem[keys]
                 }
             }
+            this.weuiDialog = false
         },
         onDeleteCard(index, keys) {
             this.Carditem[keys].splice(index, 1);
@@ -158,6 +187,7 @@ export default {
             if (!this.Carditem[keys].length) {
                 delete this.Carditem[keys]
             }
+
         },
         openDelete(type) {
             this.rightMenu = !false;

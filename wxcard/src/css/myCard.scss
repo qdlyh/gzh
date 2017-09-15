@@ -48,10 +48,11 @@ $text-color:#555b5a;
 }
 
 .message-form {
-    margin-top: 36px;
-    background: #ffffff;
-    padding-bottom: 36px;
+  margin-top: 36px;
+  background: #ffffff;
+  padding-bottom: 36px;
   div {
+    display: flex;
     height: 72px;
     line-height: 72px;
     width: 702px;
@@ -71,6 +72,17 @@ $text-color:#555b5a;
       font-size: 24px;
       text-align: right;
       color: $text-color;
+    }
+    .industry-p {
+      display: flex;
+      justify-content: flex-end;
+      height: 72px;
+      font-size: 24px;
+      text-align: right;
+      color: $text-color;
+      span{
+        margin: 0 5px;
+      }
     }
   }
 }
