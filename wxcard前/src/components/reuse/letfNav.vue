@@ -29,6 +29,7 @@
           </div>
           <div class="menNav">
             <li @click="toggle()" v-for="(nav,index) in menuNav" :key="index">{{nav.name}}</li>
+            <li @click="scanQRCode()">扫二扫</li>
           </div>
         </ul>
         <div class="cover" @click="toggle()"></div>
@@ -47,6 +48,9 @@ export default {
       open: false,
       block: false,
     }
+  },
+  created() {
+
   },
   methods: {
     toggle() {

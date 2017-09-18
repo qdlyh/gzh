@@ -4,25 +4,25 @@
             <div id="edit-page" v-show="editForm">
                 <div class="page-top">
                     <span>
-                        <a href="javascript:;"><img src="../../images/1561651.png" alt=""></a>
+                        <a href="#"><img src="../../images/1561651.png" alt=""></a>
                     </span>
                 </div>
-                <div class="edit-form" v-for="(item, index) in listData" :key="index">
+                <div class="edit-form">
                     <div class="company">
-                        <input @blur="onLeast1()" type="text" name="company" ref="Least1" v-model="item.company" maxlength="20" placeholder="请输入您的公司名字">
+                        <input @blur="onLeast1()" type="text" v-model="Least1" maxlength="20" placeholder="请输入您的公司名字">
                         <span v-show="inputLeast1"><img src="../../images/45561651.png" alt=""></span>
                     </div>
                     <div class="file-box">
-                        <img id="file-img" src="../../images/logo.png" :src="'http://hx.tunnel.qydev.com/image/'+item.picture">
-                        <input id="file" name="picture" type="file">
+                        <img id="file-img" src="../../images/logo.png">
+                        <input id="file" type="file">
                     </div>
                     <div class="user-name">
                         <div>
-                            <input @blur="onLeast2()" type="text" name="name" ref="Least2" v-model="item.name" maxlength="6" placeholder="请输入您的名字">
+                            <input @blur="onLeast2()" type="text" v-model="Least2" maxlength="6" placeholder="请输入您的名字">
                             <span v-show="inputLeast2"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
-                            <input @blur="onLeast3()" type="text" name="department" ref="Least3" v-model="item.department" maxlength="10" placeholder="请输入您的职位">
+                            <input @blur="onLeast3()" type="text" v-model="Least3" maxlength="10" placeholder="请输入您的职位">
                             <span v-show="inputLeast3"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                     </div>
@@ -37,30 +37,32 @@
                     <div class="user-message">
                         <div>
                             <i><img src="../../images/1561561651.png" alt=""></i>
-                            <input @blur="onPhone()" ref="Phone" :value="item.telephone" name="telephone" type="text" placeholder="请输入您的手机号码">
+                            <input @blur="onPhone()" v-model="Phone" type="text" placeholder="请输入您的手机号码">
                             <span v-show="inputWarn2"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
                             <i><img src="../../images/41651651.png" alt="" maxlength="15"></i>
-                            <input type="text" v-model="item.fixedLine" name="fixedLine" placeholder="请输入您的座机号码">
+                            <input type="text" placeholder="请输入您的座机号码">
                         </div>
                         <div>
                             <i><img src="../../images/561561651.png" alt=""></i>
-                            <input @blur="onEmail()" ref="Email" :value="item.email" name="email" type="text" placeholder="请输入您的邮箱">
+                            <input @blur="onEmail()" v-model="Email" type="text" placeholder="请输入您的邮箱">
                             <span v-show="inputWarn3"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
                             <i><img src="../../images/11651651.png" alt=""></i>
-                            <input type="text" v-model="item.net" name="net" placeholder="请输入您的公司官方网址">
+                            <input type="text" placeholder="请输入您的公司官方网址">
                         </div>
                         <div @click="goIndustry()">
                             <i><img src="../../images/165165165.png" alt=""></i>
-                            <input @blur="onLeast4()" name="scope" v-model="formTab" type="text" placeholder="点击选择公司主营业务">
+                            <!-- v-model="industryValue" -->
+                            <!-- <ul v-for="item in formTab">{{item.tabname}}</ul> -->
+                            <input class="edit-industry" @blur="onLeast4()" v-model="formTab" type="text" placeholder="点击选择公司主营业务">
                             <span v-show="inputLeast4"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
                             <i><img src="../../images/15165161.png" alt=""></i>
-                            <input @blur="onLeast5()" ref="Least5" :value="item.address" name="address" type="text" maxlength="30" placeholder="请输入公司地址">
+                            <input @blur="onLeast5()" v-model="Least5" type="text" maxlength="30" placeholder="请输入公司地址">
                             <span v-show="inputLeast5"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                     </div>
@@ -92,7 +94,15 @@
             <div id="industry-page" v-show="industry">
                 <div class="page-top">
                     <span class="industry-cancel">
-                        <a href="javascript:;" @click="onCancel()"><img src="../../images/1561651.png" alt=""></a>
+                        <div class="industry-warn">
+                            <input type="checkbox" v-model="show"></input>
+                        </div>
+                        <div class="industry-msg">
+                            <confirm v-model="show" :title="('信息还没保存')" @on-cancel="onCancel" @on-confirm="onConfirm">
+                                <p>{{ ('是否需要保存信息') }}</p>
+                            </confirm>
+                        </div>
+                        <a href="javascript:;"><img src="../../images/1561651.png" alt=""></a>
                     </span>
                     <span class="industry-affirm" @click="affirm()">
                         <a href="javascript:;"><img src="../../images/21651561.png" alt=""></a>
@@ -102,7 +112,7 @@
                 <div class="industry-content">
                     <div class="industry-box">
                         <span v-for="(tabs,index) in tabBox" :key="index">
-                            <span class="industry-active">{{ tabs.title }}
+                            <span class="industry-active">{{ tabs.tabname }}
                                 <i class="delete-industry" @click="deleteTab(tabs)"><img src="../../images/15616161.png" alt=""></i>
                             </span>
                         </span>
@@ -111,11 +121,11 @@
                 </div>
                 <div class="tab-box">
                     <ul class="tab-list">
-                        <li v-for="(list, index) in option" :key="index" @click="changeIndex(index)" :class="{'switchClass':activeIndex === index}"> {{list.title}}</li>
+                        <li v-for="(list, index) in option" :key="index" @click="changeIndex(index)" :class="{'switchClass':activeIndex === index}"> {{list.name}}</li>
                     </ul>
                     <ul class="tab-item" v-for="(items, index) in tabData" :key="index" v-show="index===activeIndex">
                         <li v-for="(item, index) in items" :key="index" @click="addition(item,index)" :class="{'tabActive':tabIndex === item}">
-                            {{item.title}}
+                            {{item.tabname}}
                         </li>
                     </ul>
                 </div>
@@ -124,7 +134,6 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
 import { Confirm, XButton } from 'vux'
 export default {
     components: {
@@ -140,7 +149,7 @@ export default {
             SexMan: true,
             SexWoman: false,
             Phone: '',
-            Email: '', 
+            Email: '',
             Least1: '',
             Least2: '',
             Least3: '',
@@ -155,20 +164,21 @@ export default {
             inputLeast4: false,
             inputLeast5: false,
             weuiDialog: false,  //单选框
-            listData: [],
+            show: false,   //多选弹出框
             formTab: [],   //input选中的标签
             tabBox: [],    //tab页选中的标签
-            option: [],  //tab左边
-            tabData: [   //tab右边
-                [],
-                [],
-                [],
-                [],
-                [],
+            option: [{ name: '选项1' }, { name: '选项2' }, { name: '选项3' }, { name: '选项4' }, { name: '选项5' }, { name: '选项6' }, { name: '选项2' }, { name: '选项3' }, { name: '选项4' }, { name: '选项5' }],
+            tabData: [
+                [{ tabname: '标签1', }, { tabname: '标签12', }, { tabname: '好吗好的15', }, { tabname: '大叔大婶多', }, { tabname: '啊啊撒1啊撒', }, { tabname: '标签1', }, { tabname: '标签12', }, { tabname: '好吗好的15', }, { tabname: '大叔大婶多', }, { tabname: '啊啊撒1啊撒', },],
+                [{ tabname: '标签2', }, { tabname: '标签13', }, { tabname: '好吗好的125', }, { tabname: '大叔大婶2多', }, { tabname: '啊啊5撒啊撒', }],
+                [{ tabname: '标签33', }, { tabname: '标签314', }, { tabname: '好吗好的15223', }, { tabname: '大叔大婶45多', }, { tabname: '大叔大婶s423多', }],
+                [{ tabname: '标签13', }, { tabname: '标签134', }, { tabname: '好吗好的15323', }, { tabname: '大叔大婶46多', }, { tabname: '大叔大婶s42多', }],
+                [{ tabname: '标签23', }, { tabname: '标签414', }, { tabname: '好吗好的15343', }, { tabname: '大叔大婶47多', }, { tabname: '大叔大婶s344多', }],
+
             ],
         }
     },
-    updated() {
+    mounted() {
         var $file = document.getElementById('file')
         var $fileImg = document.getElementById('file-img')
 
@@ -186,38 +196,7 @@ export default {
             }
         }
         $file.onchange = readFile;
-    },
 
-    mounted() {
-        axios.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
-            .then(response => {
-                console.log(response.data);
-                console.log('form成功');
-                this.listData = response.data
-            })
-            .catch(error => {
-                console.log(error);
-                console.log('网络错误，不能访问');
-            })
-
-        axios.get('http://hx.tunnel.qydev.com/con/scope?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
-            .then(response => {
-                console.log('tab成功');
-                this.option = response.data
-            })
-            .catch(error => {
-                console.log(error);
-                console.log('网络错误，不能访问');
-            })
-        axios.get('http://hx.tunnel.qydev.com/con/scope/allChild?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
-            .then(response => {
-                console.log('tabs成功');
-                this.tabData = response.data
-            })
-            .catch(error => {
-                console.log(error);
-                console.log('网络错误，不能访问');
-            })
     },
 
     methods: {
@@ -351,8 +330,8 @@ export default {
         addition(item) {
             let ifHave = false;
             for (let i = 0; i < this.tabBox.length; i++) {
-                //console.log(this.tabBox[i].title)
-                if (this.tabBox[i].title === item.title) {
+                //console.log(this.tabBox[i].tabname)
+                if (this.tabBox[i].tabname === item.tabname) {
                     ifHave = true;
                 }
             }
@@ -361,7 +340,7 @@ export default {
                 return false;
             }
             if (!ifHave) {
-                let newName = { title: item.title }
+                let newName = { tabname: item.tabname }
                 this.tabBox.push(newName);
             }
             this.tabIndex = item
@@ -374,11 +353,11 @@ export default {
         affirm() {
             this.formTab = [];
             for (let i = 0; i < this.tabBox.length; i++) {
-                let newName = (this.tabBox[i].title)
+                let newName = (this.tabBox[i].tabname)
                 this.formTab.push(newName);
                 //console.log(this.formTab.length)
             }
-            //this.formTab.join(' ');
+            this.formTab.join(' ');
 
             this.onLeast4()
             this.onCancel()
@@ -390,6 +369,10 @@ export default {
                 this.editForm = !false;
             }
         },
+        onConfirm() {
+            //console.log('on confirm')
+            this.affirm()
+        },
     },
     computed: {
         tabCount(tabs) {
@@ -397,19 +380,17 @@ export default {
                 return !num.tabs
             }).length
         },
-
-        industryValue() {
+        /*  industryValue() {
             let arr = [];
             let str = '';
             for (let i = 0; i < this.tabBox.length; i++) {
-                let newName = (this.tabBox[i].title)
+                let newName = (this.tabBox[i].tabname)
                 arr.push(newName + ';')
                 //console.log(arr)
             }
             str = arr.join(' ');
             return str;
-        }
-
+         } */
     },
 }
 </script>

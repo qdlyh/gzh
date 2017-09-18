@@ -5,10 +5,8 @@
         </div>
         <div class="empty">
             <img src="../../images/41485156.png" alt="">
-            <p>尚未填写您的名片信息</p>
-            <div class="btn-blue">
-                <router-link to='/cardBox'>完善资料</router-link>
-            </div>
+            <p>您的名片夹是空的</p>
+            <p>感觉添加些名片吧</p>
         </div>
     </div>
 </template>

@@ -12,7 +12,7 @@
                     </span>
                     <div class="icon-line"></div>
                     <span>
-                        <router-link to='/myForm'><img src="../../images/156165165.png" alt=""></router-link>
+                        <router-link to='/cardBox'><img src="../../images/156165165.png" alt=""></router-link>
                     </span>
                 </div>
             </div>

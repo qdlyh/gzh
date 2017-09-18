@@ -8,7 +8,7 @@
 export default {
   name: 'app',
   components: {
-  },
+  }
 }
 </script>
 
@@ -26,7 +26,6 @@ body {
   background: #f3f3f3;
   -webkit-tap-highlight-color: transparent;
 }
-
 
 
 
@@ -86,7 +85,6 @@ body {
     margin-top: 23px;
   }
 }
-
 
 
 
@@ -185,7 +183,6 @@ body {
     }
   }
 }
-
 
 
 

@@ -10,7 +10,6 @@ $text-color:#5c5c5c;
   }
 }
 
-
 .company {
   text-align: center;
   input {
@@ -185,6 +184,19 @@ $text-color:#5c5c5c;
   max-width: 750px;
   height: 100%;
   margin: 0 auto;
+}
+.industry-cancel{
+  position: relative;
+}
+.industry-warn {
+  input {
+    width: 88px;
+    height: 88px;
+    position: absolute;
+    top: 0px;
+    left:0px;
+    opacity: 0;
+  }
 }
 
 .industry-msg {

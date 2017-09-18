@@ -47,13 +47,13 @@
             <!-- 字母 -->
             <transition name="slide-fade">
                 <div class="right-menu" v-show="!rightMenu">
-                    <div class="right-menu-box" v-for="(keys , index) in carditemText" :key="index">
+                    <div class="right-menu-box" v-for="(keys , index) in CarditemText" :key="index">
                         <a href="javascript:;" @click="onLetter('#letter'+ keys)">{{keys}}</a>
                     </div>
                 </div>
             </transition>
-            <div class="card-list" v-for="(items, keys ,index) in carditem" :key="keys">
-                <!-- <div>{{carditemText[activeIndex]}}</div> -->
+            <div class="card-list" v-for="(items, keys ,index) in Carditem" :key="keys">
+                <!-- <div>{{CarditemText[activeIndex]}}</div> -->
                 <div class="item-wire" :id="'letter'+ keys">{{keys}}</div>
                 <swipeout v-for="(item,index) in items" :key="index">
                     <swipeout-item underlay-color="#fff" @on-open="openDelete('open')" @on-close="closeDelete('close')" :right-menu-width="144" :disabled="disabled">
@@ -81,7 +81,7 @@
                                         </div>
                                         <div class="item-checkbox" v-show="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="item.val">
+                                                <input type="checkbox" v-model="item.val" />
                                                 <i></i>
                                             </label>
                                         </div>
@@ -96,7 +96,6 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
 import { Swipeout, SwipeoutItem, SwipeoutButton, XButton } from 'vux'
 import letfNav from '@/components/reuse/letfNav'
 export default {
@@ -109,23 +108,19 @@ export default {
     },
     data() {
         return {
-            carditem: {
-              A: [{ name: '伊利丹1', occupation: '广告摄影师', company: '公司', val: false },{ "name": '伊利丹1', occupation: '广告摄影师', company: '公司', val: false }, ],
-              B: [{ name: '伊利丹2', occupation: '广告摄影师', company: '公司', val: false }, ],
-              C: [{ name: '伊利丹3', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              D: [{ name: '伊利丹4', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              E: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              F: [{ name: '伊利丹6', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              G: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              H: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              I: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              J: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              K: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }], 
-           }, 
-            /* carditem: {}, */
-            {
-carditem: "{"#":[{"id":81,"openId":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c","company":"金革网络科技有限公司","picture":"","name":"79","department":"","sex":0,"telephone":null,"fixedLine":"86632888","email":"1316826290","net":"没有","address":"没有","coreFileName":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c.png","scopes":null}],"T":[{"id":78,"openId":"o03n2w0kfqEsUUJ6l72pTOPJulhE","company":"广州金革网络科技","picture":"1501722444927.jpg","name":"图图","department":"Java","sex":1,"telephone":"13288633065","fixedLine":"86788678","email":"1355157532@qq.com","net":"www.baidu.com","address":"广州白云区白云大道","coreFileName":"o03n2w0kfqEsUUJ6l72pTOPJulhE.png","scopes":null}]}"
-}
+            Carditem: {
+                A: [{ name: '伊利丹1', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹2', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹3', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹', occupation: '广告摄影师2', company: '公司2', val: false }],
+                B: [{ name: '伊利丹2', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                C: [{ name: '伊利丹3', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                D: [{ name: '伊利丹4', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                E: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                F: [{ name: '伊利丹6', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                G: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                H: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                I: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                J: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                K: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+            },
             activeIndex: 0,
             disabled: false,
             letNavIcon: true,
@@ -139,19 +134,6 @@ carditem: "{"#":[{"id":81,"openId":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c","company":"金
             weuiDialog: false,
         }
     },
-/*     mounted() {
-        axios.get('http://hx.tunnel.qydev.com/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
-            .then(response => {
-                console.log(response);
-                console.log(response.data);
-                console.log('成功');
-                this.carditem = response.data
-            })
-            .catch(error => {
-                console.log(error);
-                console.log('网络错误，不能访问');
-            })
-    }, */
     methods: {
         navSelect() {
             if (!this.navLi) {
@@ -179,25 +161,31 @@ carditem: "{"#":[{"id":81,"openId":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c","company":"金
             this.letNavIcon = !false;
         },
         cardWarn() {
-            this.weuiDialog = !false
+            for (let keys in this.Carditem) {
+                //this.weuiDialog = !false;
+                if (this.Carditem[keys]) {
+                    console.log(this.Carditem[keys].val)
+                    this.weuiDialog = !false
+                }
+            }
         },
         removeAll() {
-            for (let keys in this.carditem) {
-                this.carditem[keys] = this.carditem[keys].filter((all) => {
+            for (let keys in this.Carditem) {
+                this.Carditem[keys] = this.Carditem[keys].filter((all) => {
                     //console.log(all.val)
                     return all.val === false;
                 })
-                if (!this.carditem[keys].length) {
-                    delete this.carditem[keys]
+                if (!this.Carditem[keys].length) {
+                    delete this.Carditem[keys]
                 }
             }
             this.weuiDialog = false
         },
         onDeleteCard(index, keys) {
-            this.carditem[keys].splice(index, 1);
+            this.Carditem[keys].splice(index, 1);
 
-            if (!this.carditem[keys].length) {
-                delete this.carditem[keys]
+            if (!this.Carditem[keys].length) {
+                delete this.Carditem[keys]
             }
 
         },
@@ -213,8 +201,8 @@ carditem: "{"#":[{"id":81,"openId":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c","company":"金
         }
     },
     computed: {
-        carditemText() {
-            return Object.keys(this.carditem);
+        CarditemText() {
+            return Object.keys(this.Carditem);
         }
     },
 
