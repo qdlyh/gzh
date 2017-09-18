@@ -65,7 +65,7 @@
                                 <div class="card-item">
                                     <div class="card-item-box">
                                         <div class="item-img">
-                                            <img src="../../images/logo.png" alt="">
+                                            <img src="../../images/logo.png" alt="" :src="'http://hx.tunnel.qydev.com/image/'+item.picture">
                                         </div>
                                         <div class="item-msg">
                                             <div class="item-name">
@@ -109,23 +109,20 @@ export default {
     },
     data() {
         return {
-            carditem: {
-              A: [{ name: '伊利丹1', occupation: '广告摄影师', company: '公司', val: false },{ "name": '伊利丹1', occupation: '广告摄影师', company: '公司', val: false }, ],
-              B: [{ name: '伊利丹2', occupation: '广告摄影师', company: '公司', val: false }, ],
-              C: [{ name: '伊利丹3', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              D: [{ name: '伊利丹4', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              E: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              F: [{ name: '伊利丹6', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              G: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              H: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              I: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              J: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
-              K: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }], 
-           }, 
-            /* carditem: {}, */
-            {
-carditem: "{"#":[{"id":81,"openId":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c","company":"金革网络科技有限公司","picture":"","name":"79","department":"","sex":0,"telephone":null,"fixedLine":"86632888","email":"1316826290","net":"没有","address":"没有","coreFileName":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c.png","scopes":null}],"T":[{"id":78,"openId":"o03n2w0kfqEsUUJ6l72pTOPJulhE","company":"广州金革网络科技","picture":"1501722444927.jpg","name":"图图","department":"Java","sex":1,"telephone":"13288633065","fixedLine":"86788678","email":"1355157532@qq.com","net":"www.baidu.com","address":"广州白云区白云大道","coreFileName":"o03n2w0kfqEsUUJ6l72pTOPJulhE.png","scopes":null}]}"
-}
+            /*         carditem: {
+                        A: [{ name: '伊利丹1', occupation: '广告摄影师', company: '公司', val: false }, { "name": '伊利丹1', occupation: '广告摄影师', company: '公司', val: false },],
+                        B: [{ name: '伊利丹2', occupation: '广告摄影师', company: '公司', val: false },],
+                        C: [{ name: '伊利丹3', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                        D: [{ name: '伊利丹4', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                        E: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                        F: [{ name: '伊利丹6', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                        G: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                        H: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                        I: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                        J: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                        K: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', val: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', val: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', val: false }],
+                    }, */
+            carditem: {},
             activeIndex: 0,
             disabled: false,
             letNavIcon: true,
@@ -139,7 +136,7 @@ carditem: "{"#":[{"id":81,"openId":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c","company":"金
             weuiDialog: false,
         }
     },
-/*     mounted() {
+    mounted() {
         axios.get('http://hx.tunnel.qydev.com/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 console.log(response);
@@ -151,7 +148,7 @@ carditem: "{"#":[{"id":81,"openId":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c","company":"金
                 console.log(error);
                 console.log('网络错误，不能访问');
             })
-    }, */
+    },
     methods: {
         navSelect() {
             if (!this.navLi) {
@@ -223,6 +220,8 @@ carditem: "{"#":[{"id":81,"openId":"o03n2ww3Mv_xV14YjIPMkJH9ZL7c","company":"金
 <style lang="scss" scoped>
 @import '../../css/cardBox'
 </style>
+
+
 
 
 
