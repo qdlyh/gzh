@@ -11,18 +11,13 @@ $text-color:#5c5c5c;
 }
 
 
-/* x-input内边距 */
-
-.weui-cell {
-  padding: 10px 0;
-}
-
 .company {
   text-align: center;
-  border-bottom: 1px solid #b4b4b4;
-  font-size: 24px;
-  color: $text-color;
   input {
+    width: 660px;
+    height: 72px;
+    font-size: 24px;
+    border-bottom: 1px solid #b4b4b4;
     &::-webkit-input-placeholder {
       text-align: center;
       font-size: 32px;
@@ -46,24 +41,26 @@ $text-color:#5c5c5c;
   }
 }
 
-.user-name>div {
-  height: 72px;
-  line-height: 72px;
-  margin-left: 140px;
-  border-bottom: 1px solid #b4b4b4;
-  font-size: 24px;
-  color: $text-color;
+.user-name {
+  margin-top: 24px;
   input {
+    width: 500px;
+    height: 72px;
+    font-size: 24px;
+    border-bottom: 1px solid #b4b4b4;
+    margin-left: 24px;
+    color: $text-color;
     &::-webkit-input-placeholder {
+      font-size: 24px;
       color: $input-color;
     }
   }
-  /*   span {
+  span {
     margin: 0 12px;
     font-size: 24px;
     float: right;
     line-height: 72px;
-  } */
+  }
 }
 
 .user-sex {
@@ -107,43 +104,34 @@ $text-color:#5c5c5c;
   -webkit-transition: .2s;
 }
 
-.user-message>div {
-  height: 72px;
-  line-height: 72px;
-  width: 680px;
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  border-bottom: 1px solid #b4b4b4;
-  i {
-    width: 48px;
-    height: 48px;
-    text-align: center;
-    margin-right: 24px;
-  }
-  /*   span {
-    margin: 0 12px;
-    float: right;
-  } */
-  input {
-    width: 100%;
-    height: 72px;
-    font-size: 24px;
-    color: $text-color;
-  }
-   ::-webkit-input-placeholder {
-    color: $input-color;
-  }
+.user-message {
   div {
-    /* x-input样式 */
+    height: 72px;
+    line-height: 72px;
     width: 680px;
-    padding-left: 0px;
-    color: $text-color;
-  }
-  /* x-input上划线 */
-  .weui-cell:before {
-    height: 0px;
-    border-top: 0px solid #fff !important;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    border-bottom: 1px solid #b4b4b4;
+    i {
+      width: 48px;
+      height: 48px;
+      text-align: center;
+      margin-right: 24px;
+    }
+    span {
+      margin: 0 12px;
+      float: right;
+    }
+    input {
+      width: 100%;
+      height: 72px;
+      font-size: 24px;
+      color: $text-color;
+    }
+     ::-webkit-input-placeholder {
+      color: $input-color;
+    }
   }
 }
 
@@ -172,6 +160,7 @@ $text-color:#5c5c5c;
     font-size: 18px;
   }
 } */
+
 
 
 /* 营业选择 */
@@ -284,20 +273,6 @@ $text-color:#5c5c5c;
   }
 }
 
-
-
-
-/* 职业警告图标 */
-
-.WarnIcon {
-  font: normal normal normal 14px/1 "weui";
-  color: #F43530;
-  &::before {
-    content: "\EA0B";
-    font-size: 28px;
-  }
-}
-
 .switchClass {
   background: #fff !important;
   color: #fff;
@@ -306,6 +281,8 @@ $text-color:#5c5c5c;
 .tabActive {
   color: #459bdd !important;
 }
+
+
 
 .fade-enter-active,
 .fade-leave-active {

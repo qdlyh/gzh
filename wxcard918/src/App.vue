@@ -29,18 +29,10 @@ body {
 
 
 
-/* x-input红色警告伪类 */
 
-.vux-input-icon.weui-icon-warn:before,
-.vux-input-icon.weui-icon-success:before {
-  font-size: 28px !important;
-}
-/* 表单公司居中 */
-.company-center {
-  input {
-    text-align: center;
-  }
-}
+
+
+
 
 
 
@@ -94,8 +86,6 @@ body {
     margin-top: 23px;
   }
 }
-
-
 
 
 
@@ -195,8 +185,6 @@ body {
     }
   }
 }
-
-
 
 
 

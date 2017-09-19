@@ -7,7 +7,7 @@
             <img src="../../images/41485156.png" alt="">
             <p>尚未填写您的名片信息</p>
             <div class="btn-blue">
-                <router-link to='/myForm'>完善资料</router-link>
+                <router-link to='/cardBox'>完善资料</router-link>
             </div>
         </div>
     </div>

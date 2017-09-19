@@ -63,6 +63,7 @@ $text-name:#383838;
   opacity: 0;
   width: 88px;
   height: 88px;
+
 }
 
 #delete-true {
@@ -72,11 +73,9 @@ $text-name:#383838;
   width: 245px;
   height: 72px;
 }
-
-.vux-swipeout-button-box>div {
+.vux-swipeout-button-box > div{
   border: 1px solid #b4b4b4;
 }
-
 .right-menu {
   position: fixed;
   width: 50px;
@@ -119,11 +118,6 @@ $text-name:#383838;
       border-radius: 50%;
       float: left;
       text-align: center;
-      img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-      }
     }
     .item-msg {
       float: left;
@@ -199,6 +193,8 @@ $text-name:#383838;
   }
 }
 
+
+
 .slide-fade-enter-active {
   transition: all .2s ease;
 }
@@ -212,3 +208,7 @@ $text-name:#383838;
   transform: translateX(10px);
   opacity: 0;
 }
+
+
+
+

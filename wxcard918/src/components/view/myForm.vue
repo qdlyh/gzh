@@ -8,19 +8,22 @@
                     </span>
                 </div>
                 <div class="edit-form" v-for="(item, index) in listData" :key="index">
-                    <div class="company company-center">
-                        <x-input name="company" @click="onLeast1()" ref="Least1" v-model="item.company" placeholder="请输入您的公司名字" :show-clear="false" :required="true" :min="5" :max="20"></x-input>
+                    <div class="company">
+                        <input @blur="onLeast1()" type="text" name="company" ref="Least1" v-model="item.company" maxlength="20" placeholder="请输入您的公司名字">
+                        <span v-show="inputLeast1"><img src="../../images/45561651.png" alt=""></span>
                     </div>
                     <div class="file-box">
                         <img id="file-img" src="../../images/logo.png" :src="'http://hx.tunnel.qydev.com/image/'+item.picture">
                         <input id="file" name="picture" type="file">
                     </div>
                     <div class="user-name">
-                        <div style="margin-top:20px;">
-                            <x-input name="name" v-model="item.name" placeholder="请输入您的名字" :show-clear="false" :required="true" :min="2" :max="6"></x-input>
+                        <div>
+                            <input @blur="onLeast2()" type="text" name="name" ref="Least2" v-model="item.name" maxlength="6" placeholder="请输入您的名字">
+                            <span v-show="inputLeast2"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
-                            <x-input name="department" v-model="item.department" placeholder="请输入您的职位" :show-clear="false" :required="true" :min="2" :max="6"></x-input>
+                            <input @blur="onLeast3()" type="text" name="department" ref="Least3" v-model="item.department" maxlength="10" placeholder="请输入您的职位">
+                            <span v-show="inputLeast3"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                     </div>
                     <div class="user-sex" @click="chooseSex()">
@@ -34,17 +37,17 @@
                     <div class="user-message">
                         <div>
                             <i><img src="../../images/1561561651.png" alt=""></i>
-                            <x-input name="telephone" v-model="item.telephone" placeholder="请输入手机号码" :show-clear="false" :required="true" keyboard="number" is-type="china-mobile"></x-input>
-
+                            <input @blur="onPhone()" ref="Phone" :value="item.telephone" name="telephone" type="text" placeholder="请输入您的手机号码">
+                            <span v-show="inputWarn2"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
-                            <i><img src="../../images/41651651.png" alt=""></i>
+                            <i><img src="../../images/41651651.png" alt="" maxlength="15"></i>
                             <input type="text" v-model="item.fixedLine" name="fixedLine" placeholder="请输入您的座机号码">
                         </div>
                         <div>
                             <i><img src="../../images/561561651.png" alt=""></i>
-                            <x-input name="email" placeholder="请输入邮箱地址" :show-clear="false" :required="true" is-type="email"></x-input>
-
+                            <input @blur="onEmail()" ref="Email" :value="item.email" name="email" type="text" placeholder="请输入您的邮箱">
+                            <span v-show="inputWarn3"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
                             <i><img src="../../images/11651651.png" alt=""></i>
@@ -52,12 +55,13 @@
                         </div>
                         <div @click="goIndustry()">
                             <i><img src="../../images/165165165.png" alt=""></i>
-                            <input @blur="onLeast4()" name="scope" v-model="industryValue" :key="index" type="text" placeholder="点击选择公司主营业务">
-                            <span class="WarnIcon" v-show="inputLeast4"></span>
+                            <input @blur="onLeast4()" name="scope" v-model="formTab" type="text" placeholder="点击选择公司主营业务">
+                            <span v-show="inputLeast4"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                         <div>
                             <i><img src="../../images/15165161.png" alt=""></i>
-                            <x-input v-model="item.address" placeholder="请输入公司地址" :show-clear="false" :required="true" :min="4" :max="30"></x-input>
+                            <input @blur="onLeast5()" ref="Least5" :value="item.address" name="address" type="text" maxlength="30" placeholder="请输入公司地址">
+                            <span v-show="inputLeast5"><img src="../../images/45561651.png" alt=""></span>
                         </div>
                     </div>
                 </div>
@@ -87,10 +91,10 @@
             </div>
             <div id="industry-page" v-show="industry">
                 <div class="page-top">
-                    <div>
-                        <!--    <a href="javascript:;" @click="onCancel()"><img src="../../images/1561651.png" alt=""></a> -->
-                    </div>
-                    <span @click="affirm()">
+                    <span class="industry-cancel">
+                        <a href="javascript:;" @click="onCancel()"><img src="../../images/1561651.png" alt=""></a>
+                    </span>
+                    <span class="industry-affirm" @click="affirm()">
                         <a href="javascript:;"><img src="../../images/21651561.png" alt=""></a>
                     </span>
                 </div>
@@ -121,12 +125,11 @@
 </template>
 <script>
 import axios from 'axios'
-import { Group, XInput, XButton } from 'vux'
+import { Confirm, XButton } from 'vux'
 export default {
     components: {
+        Confirm,
         XButton,
-        Group,
-        XInput
     },
     data() {
         return {
@@ -136,32 +139,25 @@ export default {
             industry: false,
             SexMan: true,
             SexWoman: false,
-            /*             Phone: '',
-                        Email: '',
-                        Least1: '',
-                        Least2: '',
-                        Least3: '',
-                        Least4: '',
-                        Least5: '', */
-            /*             inputWarn1: false,
-                        inputWarn2: false,
-                        inputWarn3: false,
-                        inputLeast1: false,
-                        inputLeast2: false,
-                        inputLeast3: false, 
-                        inputLeast5: false, */
+            Phone: '',
+            Email: '', 
+            Least1: '',
+            Least2: '',
+            Least3: '',
+            Least4: '',
+            Least5: '',
+            inputWarn1: false,
+            inputWarn2: false,
+            inputWarn3: false,
+            inputLeast1: false,
+            inputLeast2: false,
+            inputLeast3: false,
             inputLeast4: false,
+            inputLeast5: false,
             weuiDialog: false,  //单选框
             listData: [],
             formTab: [],   //input选中的标签
-            tabBox: [
-                {
-                    title: "电脑",
-                },
-                {
-                    title: "房地产",
-                }
-            ],    //tab页选中的标签
+            tabBox: [],    //tab页选中的标签
             option: [],  //tab左边
             tabData: [   //tab右边
                 [],
@@ -195,7 +191,7 @@ export default {
     mounted() {
         axios.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
-                //console.log(response.data);
+                console.log(response.data);
                 console.log('form成功');
                 this.listData = response.data
             })
@@ -225,75 +221,72 @@ export default {
     },
 
     methods: {
-        /*         onPhone() {
-                    //  var Xinput = document.getElementsByClassName('Xinput') 
-                    if (this.Phone === '') {
-                        this.inputWarn2 = !false;
-                        //console.log('手机为空')
-                        return false;
-                    }
-                    if (!this.Phone.match(/(^1[3|5|8][0-9]{9}$)/)) {
-                        this.inputWarn2 = !false;
-                        //console.log('手机号码错误')
-                        return false;
-                    } else {
-                        this.inputWarn2 = false;
-                        //console.log('手机号码正确')
-                        return false
-                    }
-                },
-                onEmail() {
-                    if (this.Email === '') {
-                        this.inputWarn3 = !false;
-                        //console.log('邮箱为空')
-                        return false;
-                    }
-                    if (!this.Email.match(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/)) {
-                        this.inputWarn3 = !false;
-                        //console.log('邮箱号码错误')
-                        return false;
-                    } else {
-                        this.inputWarn3 = false;
-                        //console.log('邮箱号码正确')
-                        return false;
-                    }
-                }, */
-        onLeast1() {
-            if (this.$refs.Least1.value === '') {
-                console.log('不空')
-                console.log(this.$refs.Least1.value)
+        onPhone() {
+            /* 手机 */
+            /*  var Xinput = document.getElementsByClassName('Xinput') */
+            if (this.Phone === '') {
+                this.inputWarn2 = !false;
+                //console.log('手机为空')
+                return false;
+            }
+            if (!this.Phone.match(/(^1[3|5|8][0-9]{9}$)/)) {
+                this.inputWarn2 = !false;
+                //console.log('手机号码错误')
                 return false;
             } else {
-                console.log('空')
-                 console.log(this.$refs.Least1.value)
+                this.inputWarn2 = false;
+                //console.log('手机号码正确')
+                return false
+            }
+        },
+        onEmail() {
+            if (this.Email === '') {
+                this.inputWarn3 = !false;
+                //console.log('邮箱为空')
+                return false;
+            }
+            if (!this.Email.match(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/)) {
+                this.inputWarn3 = !false;
+                //console.log('邮箱号码错误')
+                return false;
+            } else {
+                this.inputWarn3 = false;
+                //console.log('邮箱号码正确')
                 return false;
             }
         },
-        /*  onLeast2() {
-             if (this.$refs.Least2.value === '') {
-                 this.inputLeast2 = !false;
-                 return false;
-             } else {
-                 console.log(this.$refs.Least2.value + '2')
-                 this.inputLeast2 = false;
-                 return false;
-             }
-         },
-         onLeast3() {
-             if (this.$refs.Least3.value === '') {
-                 this.inputLeast3 = !false;
-                 return false;
-             } else {
-                 console.log(this.$refs.Least3.value + '3')
-                 this.inputLeast3 = false;
-                 return false;
-             }
-         },*/
+        onLeast1() {
+            if (this.Least1 === '') {
+                this.inputLeast1 = !false;
+                return false;
+            } else {
+                this.inputLeast1 = false;
+                return false;
+            }
+        },
+        onLeast2() {
+            if (this.Least2 === '') {
+                this.inputLeast2 = !false;
+                return false;
+            } else {
+                this.inputLeast2 = false;
+                return false;
+            }
+        },
+        onLeast3() {
+            if (this.Least3 === '') {
+                this.inputLeast3 = !false;
+                return false;
+            } else {
+                this.inputLeast3 = false;
+                return false;
+            }
+        },
         onLeast4() {
-            if (this.industryValue.length === 0) {
+            if (this.formTab.length === 0) {
                 this.inputLeast4 = !false;
                 //console.log('空')
-                //console.log(this.industryValue.length)
+                //console.log(this.formTab.length)
                 return false;
             } else {
                 this.inputLeast4 = false;
@@ -302,18 +295,17 @@ export default {
                 return false;
             }
         },
-        /*         onLeast5() {
-                    if (this.$refs.Least5.value === '') {
-                        this.inputLeast5 = !false;
-                        //console.log('空')
-                        return false;
-                    } else {
-                        console.log(this.$refs.Least5.value + '5')
-                        this.inputLeast5 = false;
-                        //console.log('不空')
-                        return false;
-                    }
-                }, */
+        onLeast5() {
+            if (this.Least5 === '') {
+                this.inputLeast5 = !false;
+                //console.log('空')
+                return false;
+            } else {
+                this.inputLeast5 = false;
+                //console.log('不空')
+                return false;
+            }
+        },
         goIndustry() {
             if (this.editForm === true) {
                 this.editForm = false
@@ -332,8 +324,21 @@ export default {
         },
 
         submit() {
-            this.onLeast1()
+            this.onPhone();
+            this.onEmail();
+            this.onLeast1();
+            this.onLeast2();
+            this.onLeast3();
             this.onLeast4();
+            this.onLeast5();
+            if (this.inputWarn2 === !false || this.inputWarn3 === !false || this.inputLeast1 === !false || this.inputLeast2 === !false || this.inputLeast3 === !false || this.inputLeast4 === !false || this.inputLeast5 === !false) {
+                //alert('请检查输入是否正确')
+                this.weuiDialog = !false;
+                return false;
+            }/*  else {
+                alert('成功')
+                return false;
+            } */
         },
         weuiWarn() {
             this.weuiDialog = false;
@@ -373,22 +378,18 @@ export default {
                 this.formTab.push(newName);
                 //console.log(this.formTab.length)
             }
+            //this.formTab.join(' ');
+
+            this.onLeast4()
+            this.onCancel()
+        },
+        onCancel() {
+            //console.log('on cancel')
             if (this.industry === true) {
                 this.industry = false;
                 this.editForm = !false;
             }
-            //this.formTab.join(' ');
-
-            this.onLeast4()
-            /*  this.onCancel() */
         },
-        /*         onCancel() {
-                    //console.log('on cancel')
-                    if (this.industry === true) {
-                        this.industry = false;
-                        this.editForm = !false;
-                    }
-                }, */
     },
     computed: {
         tabCount(tabs) {
@@ -396,20 +397,16 @@ export default {
                 return !num.tabs
             }).length
         },
-        /* formTabs() {
-            let str = '';
-            return this.str = this.formTab.join('; ');
-        } */
 
         industryValue() {
             let arr = [];
             let str = '';
             for (let i = 0; i < this.tabBox.length; i++) {
                 let newName = (this.tabBox[i].title)
-                arr.push(newName)
+                arr.push(newName + ';')
                 //console.log(arr)
             }
-            str = arr.join('; ');
+            str = arr.join(' ');
             return str;
         }
 

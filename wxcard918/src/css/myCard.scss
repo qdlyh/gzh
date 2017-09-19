@@ -1,0 +1,88 @@
+$text-color:#555b5a;
+.company-name {
+  margin-top: 36px;
+  height: 48px;
+  p {
+    font-size: 32px;
+    text-align: center;
+    color: #383838;
+  }
+}
+
+.company-logo {
+  margin-top: 24px;
+  text-align: center;
+  img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    /* background: #000; */
+  }
+}
+
+.message-name {
+  text-align: center;
+  ul {
+    display: inline-block;
+    padding: 0 42px;
+    margin: 24px auto;
+    height: 48px;
+    line-height: 48px;
+    li {
+      float: left;
+      font-size: 24px;
+      color: $text-color;
+    }
+    .sex {
+      margin-left: 12px;
+      margin-top: 3px;
+    }
+    .message-name-line {
+      display: inline-block;
+      height: 24px;
+      width: 1px;
+      background: $text-color;
+      margin: 13px 25px;
+    }
+  }
+}
+
+.message-form {
+  margin-top: 36px;
+  background: #ffffff;
+  padding-bottom: 36px;
+  div {
+    display: flex;
+    height: 72px;
+    line-height: 72px;
+    width: 702px;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    border-bottom: 1px solid #b4b4b4;
+    margin-left: 24px;
+    i {
+      width: 48px;
+      height: 48px;
+      text-align: center;
+    }
+    p {
+      width: 100%;
+      height: 72px;
+      font-size: 24px;
+      text-align: right;
+      color: $text-color;
+    }
+    .industry-p {
+      display: flex;
+      justify-content: flex-end;
+      height: 72px;
+      font-size: 24px;
+      text-align: right;
+      color: $text-color;
+      span{
+        margin: 0 5px;
+      }
+    }
+  }
+}

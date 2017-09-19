@@ -70,11 +70,10 @@
                                         <div class="item-msg">
                                             <div class="item-name">
                                                 <span>{{item.name}}</span>
-                                                <img v-if="item.sex===1" src="../../images/1165165.png" alt="">
-                                                <img v-else src="../../images/1651651.png" alt="">
+                                                <img src="../../images/1165165.png" alt="">
                                             </div>
                                             <div class="item-occupation">
-                                                <p>{{item.department}}</p>
+                                                <p>{{item.occupation}}</p>
                                             </div>
                                             <div class="item-company">
                                                 <p>{{item.company}}</p>
@@ -221,6 +220,8 @@ export default {
 <style lang="scss" scoped>
 @import '../../css/cardBox'
 </style>
+
+
 
 
 
