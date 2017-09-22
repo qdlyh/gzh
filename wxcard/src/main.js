@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import { WechatPlugin } from 'vux'
+import axios from 'axios'
+Vue.prototype.$http = axios
 Vue.use(WechatPlugin)
 
 Vue.config.productionTip = false

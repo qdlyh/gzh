@@ -154,43 +154,6 @@ $text-color:#5c5c5c;
 }
 
 
-/* .wxuiWarn{
-  position: fixed;
-  z-index: 5000;
-  width: 80%;
-  max-width: 300px;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  background-color: #FFFFFF;
-  text-align: center;
-  border-radius: 3px;
-  overflow: hidden;
-  .weui-title{
-    font-weight: 400;
-    font-size: 18px;
-  }
-} */
-
-
-/* 营业选择 */
-
-
-/* .content-top {
-  width: 100%;
-  height: 88px;
-  text-align: center;
-  background: #383C43;
-  display: flex;
-  justify-content: space-between;
-  span {
-    padding: 0 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-} */
 
 #industry-page {
   max-width: 750px;
@@ -284,10 +247,11 @@ $text-color:#5c5c5c;
   }
 }
 
+.input-none{
+  display: none;
+}
 
-
-
-/* 职业警告图标 */
+/* 自定义职业警告图标 */
 
 .WarnIcon {
   font: normal normal normal 14px/1 "weui";
@@ -297,6 +261,22 @@ $text-color:#5c5c5c;
     font-size: 28px;
   }
 }
+
+/* .form-hint {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 72px;
+  background: #1F1F1F;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 10px;
+  &::before {
+    position: absolute;
+    content: '\25e4';
+    bottom: 0px;
+  }
+} */
 
 .switchClass {
   background: #fff !important;

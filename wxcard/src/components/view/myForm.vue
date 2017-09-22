@@ -4,64 +4,67 @@
             <div id="edit-page" v-show="editForm">
                 <div class="page-top">
                     <span>
-                        <a href="javascript:;"><img src="../../images/1561651.png" alt=""></a>
+                        <router-link to="/cardBox"><img src="../../images/1561651.png" alt=""></router-link>
                     </span>
                 </div>
-                <div class="edit-form" v-for="(item, index) in listData" :key="index">
-                    <div class="company company-center">
-                        <x-input name="company" @click="onLeast1()" ref="Least1" v-model="item.company" placeholder="请输入您的公司名字" :show-clear="false" :required="true" :min="5" :max="20"></x-input>
-                    </div>
-                    <div class="file-box">
-                        <img id="file-img" src="../../images/logo.png" :src="'http://hx.tunnel.qydev.com/image/'+item.picture">
-                        <input id="file" name="picture" type="file">
-                    </div>
-                    <div class="user-name">
-                        <div style="margin-top:20px;">
-                            <x-input name="name" v-model="item.name" placeholder="请输入您的名字" :show-clear="false" :required="true" :min="2" :max="6"></x-input>
+                <form action="http://hx.tunnel.qydev.com/con/move/update" enctype="multipart/form-data" method="post">
+                    <div class="edit-form" v-for="(item, index) in listData" :key="index">
+                        <input type="text" name="id" v-model="item.id" class="input-none">
+                        <div class="company company-center">
+                            <x-input name="company" @on-blur="onLeast()" ref="Least" v-model="item.company" placeholder="请输入您的公司名字" :show-clear="false" :required="true" :min="5" :max="20"></x-input>
+                            <!-- <i class="form-hint">啊啊啊啊啊啊啊啊啊啊</i> -->
                         </div>
-                        <div>
-                            <x-input name="department" v-model="item.department" placeholder="请输入您的职位" :show-clear="false" :required="true" :min="2" :max="6"></x-input>
+                        <div class="file-box">
+                            <img id="file-img" src="../../images/logo.png" :src="'http://hx.tunnel.qydev.com/image/'+item.picture">
+                            <input id="file" name="picture" type="file" @change="getFile($event)">
                         </div>
-                    </div>
-                    <div class="user-sex" @click="chooseSex()">
-                        <i v-show="SexMan"><img src="../../images/141615616.png" alt=""></i>
-                        <i v-show="SexWoman"><img src="../../images/1651651.png" alt=""></i>
-                        <label><input class="nam" ref="man" type="radio" name="sex" checked="checked">
-                            <i></i>男</label>
-                        <label><input class="woman" ref="woman" type="radio" name="sex">
-                            <i></i>女</label>
-                    </div>
-                    <div class="user-message">
-                        <div>
-                            <i><img src="../../images/1561561651.png" alt=""></i>
-                            <x-input name="telephone" v-model="item.telephone" placeholder="请输入手机号码" :show-clear="false" :required="true" keyboard="number" is-type="china-mobile"></x-input>
+                        <div class="user-name">
+                            <div style="margin-top:20px;">
+                                <x-input name="name" v-model="item.name" @on-blur="onLeast2()" ref="Least2" placeholder="请输入您的名字" :show-clear="false" :required="true" :min="2" :max="6"></x-input>
+                            </div>
+                            <div>
+                                <x-input name="department" v-model="item.department" @on-blur="onLeast3()" ref="Least3" placeholder="请输入您的职位" :show-clear="false" :required="true" :min="2" :max="6"></x-input>
+                            </div>
+                        </div>
+                        <div class="user-sex">
+                            <i v-show="SexMan"><img src="../../images/141615616.png" alt=""></i>
+                            <i v-show="SexWoman"><img src="../../images/1651651.png" alt=""></i>
+                            <label @click="chooseMan()"><input ref="man" type="radio" name="sex" checked="checked">
+                                <i></i>男</label>
+                            <label @click="chooseWoman()"><input ref="woman" type="radio" name="sex">
+                                <i></i>女</label>
+                        </div>
+                        <div class="user-message">
+                            <div>
+                                <i><img src="../../images/1561561651.png" alt=""></i>
+                                <x-input name="telephone" v-model="item.telephone" @on-blur="onLeast4()" ref="Least4" placeholder="请输入手机号码" :show-clear="false" :required="true" keyboard="number" is-type="china-mobile"></x-input>
+                            </div>
+                            <div>
+                                <i><img src="../../images/41651651.png" alt=""></i>
+                                <x-input v-model="item.fixedLine" name="fixedLine" :show-clear="false" :min="7" :max="15" placeholder="请输入您的座机号码"></x-input>
+                            </div>
+                            <div>
+                                <i><img src="../../images/561561651.png" alt=""></i>
+                                <x-input name="email" placeholder="请输入邮箱地址" @on-blur="onLeast5()" ref="Least5" :show-clear="false" :required="true" is-type="email"></x-input>
 
-                        </div>
-                        <div>
-                            <i><img src="../../images/41651651.png" alt=""></i>
-                            <input type="text" v-model="item.fixedLine" name="fixedLine" placeholder="请输入您的座机号码">
-                        </div>
-                        <div>
-                            <i><img src="../../images/561561651.png" alt=""></i>
-                            <x-input name="email" placeholder="请输入邮箱地址" :show-clear="false" :required="true" is-type="email"></x-input>
-
-                        </div>
-                        <div>
-                            <i><img src="../../images/11651651.png" alt=""></i>
-                            <input type="text" v-model="item.net" name="net" placeholder="请输入您的公司官方网址">
-                        </div>
-                        <div @click="goIndustry()">
-                            <i><img src="../../images/165165165.png" alt=""></i>
-                            <input @blur="onLeast4()" name="scope" v-model="industryValue" :key="index" type="text" placeholder="点击选择公司主营业务">
-                            <span class="WarnIcon" v-show="inputLeast4"></span>
-                        </div>
-                        <div>
-                            <i><img src="../../images/15165161.png" alt=""></i>
-                            <x-input v-model="item.address" placeholder="请输入公司地址" :show-clear="false" :required="true" :min="4" :max="30"></x-input>
+                            </div>
+                            <div>
+                                <i><img src="../../images/11651651.png" alt=""></i>
+                                <x-input v-model="item.net" name="net" :show-clear="false" placeholder="请输入您的公司官方网址"></x-input>
+                            </div>
+                            <div @click="goIndustry()">
+                                <i><img src="../../images/165165165.png" alt=""></i>
+                                <input @blur="industryLeast()" name="scope" v-model="industryValue" type="text" placeholder="点击选择公司主营业务">
+                                <span class="WarnIcon" v-show="inputLeast"></span>
+                            </div>
+                            <div>
+                                <i><img src="../../images/15165161.png" alt=""></i>
+                                <x-input v-model="item.address" placeholder="请输入公司地址" @on-blur="onLeast6()" ref="Least6" :show-clear="false" :required="true" :min="4" :max="30"></x-input>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="btn-green" @click="submit()">
+                </form>
+                <div class="btn-green" @click="submit($event)">
                     <x-button type="primary">
                         <a link="/cardBox">完成</a>
                     </x-button>
@@ -120,7 +123,6 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
 import { Group, XInput, XButton } from 'vux'
 export default {
     components: {
@@ -130,28 +132,24 @@ export default {
     },
     data() {
         return {
+            name: '',
+            department: '',
+            file: '',
             activeIndex: 0,
+            scopes: '',
             tabIndex: 0,
             editForm: true,
             industry: false,
             SexMan: true,
             SexWoman: false,
-            /*             Phone: '',
-                        Email: '',
-                        Least1: '',
-                        Least2: '',
-                        Least3: '',
-                        Least4: '',
-                        Least5: '', */
-            /*             inputWarn1: false,
-                        inputWarn2: false,
-                        inputWarn3: false,
-                        inputLeast1: false,
-                        inputLeast2: false,
-                        inputLeast3: false, 
-                        inputLeast5: false, */
-            inputLeast4: false,
+            inputLeast: false,
             weuiDialog: false,  //单选框
+            succeed: false,
+            succeed2: false,
+            succeed3: false,
+            succeed4: false,
+            succeed5: false,
+            succeed6: false,
             listData: [],
             formTab: [],   //input选中的标签
             tabBox: [
@@ -174,9 +172,8 @@ export default {
     },
     updated() {
         var $file = document.getElementById('file')
-        var $fileImg = document.getElementById('file-img')
-
         function readFile() {
+            var $fileImg = document.getElementById('file-img')
             var file = this.files[0];
             if (!/image\/\w+/.test(file.type)) {
                 //alert("请选择图片类型");
@@ -192,11 +189,27 @@ export default {
         $file.onchange = readFile;
     },
 
+
     mounted() {
-        axios.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+/*        axios({
+            method: 'post',
+            url: 'http://hx.tunnel.qydev.com/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+            data: {//参数
+                firstName: 'Fred',
+                lastName: 'Flintstone'
+            }
+        }).then(response => {
+            console.log('post成功');
+        })
+            .catch(error => {
+                //console.log(error);
+                console.log('网络错误，不能访问');
+                
+        }) */
+        this.$http.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 //console.log(response.data);
-                console.log('form成功');
+                //console.log('form成功');
                 this.listData = response.data
             })
             .catch(error => {
@@ -204,137 +217,223 @@ export default {
                 console.log('网络错误，不能访问');
             })
 
-        axios.get('http://hx.tunnel.qydev.com/con/scope?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http.get('http://hx.tunnel.qydev.com/con/scope?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
-                console.log('tab成功');
+                //console.log('tab成功');
                 this.option = response.data
             })
             .catch(error => {
                 console.log(error);
                 console.log('网络错误，不能访问');
             })
-        axios.get('http://hx.tunnel.qydev.com/con/scope/allChild?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http.get('http://hx.tunnel.qydev.com/con/scope/allChild?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
-                console.log('tabs成功');
+                //console.log('tabs成功');
                 this.tabData = response.data
             })
             .catch(error => {
                 console.log(error);
                 console.log('网络错误，不能访问');
             })
+
+        axios.interceptors.request.use(function(config) {
+            // 发送请求之前做一些处理
+            return config;
+        }, function(error) {
+            // 当请求异常时做一些处理
+            return Promise.reject(error);
+        });
+
+        // 响应时拦截
+        axios.interceptors.response.use(function(response) {
+            // 返回响应时做一些处理
+            return response;
+        }, function(error) {
+            // 当响应异常时做一些处理
+            return Promise.reject(error);
+        });
     },
 
     methods: {
-        /*         onPhone() {
-                    //  var Xinput = document.getElementsByClassName('Xinput') 
-                    if (this.Phone === '') {
-                        this.inputWarn2 = !false;
-                        //console.log('手机为空')
-                        return false;
-                    }
-                    if (!this.Phone.match(/(^1[3|5|8][0-9]{9}$)/)) {
-                        this.inputWarn2 = !false;
-                        //console.log('手机号码错误')
-                        return false;
-                    } else {
-                        this.inputWarn2 = false;
-                        //console.log('手机号码正确')
-                        return false
-                    }
+        getFile(event) {
+            this.file = event.target.files[0];
+            console.log(this.file);
+        },
+        /*      var myform = document.querySelector("form");
+                    let formData = new FormData(myform);
+                    //formData.append('file', this.file);
+                    formData.append('file','event.target.files[0]');
+                    formData.append('name', this.name);
+                    formData.append('department', this.department); */
+        submit(event) {
+            var params = new URLSearchParams();
+            params.append('name', '1321');
+            params.append('department', '321231');
+
+            this.$http.post('http://hx.tunnel.qydev.com/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0', {
+                params,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
                 },
-                onEmail() {
-                    if (this.Email === '') {
-                        this.inputWarn3 = !false;
-                        //console.log('邮箱为空')
-                        return false;
-                    }
-                    if (!this.Email.match(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/)) {
-                        this.inputWarn3 = !false;
-                        //console.log('邮箱号码错误')
-                        return false;
-                    } else {
-                        this.inputWarn3 = false;
-                        //console.log('邮箱号码正确')
-                        return false;
-                    }
-                }, */
-        onLeast1() {
-            if (this.$refs.Least1.value === '') {
-                console.log('不空')
-                console.log(this.$refs.Least1.value)
-                return false;
-            } else {
-                console.log('空')
-                 console.log(this.$refs.Least1.value)
-                return false;
-            }
+            })
+                .then(response => {
+                    console.log('post成功');
+                })
+                .catch(error => {
+                    //console.log(error);
+                    console.log('网络错误，不能访问');
+                })
         },
-        /*  onLeast2() {
-             if (this.$refs.Least2.value === '') {
-                 this.inputLeast2 = !false;
-                 return false;
-             } else {
-                 console.log(this.$refs.Least2.value + '2')
-                 this.inputLeast2 = false;
-                 return false;
-             }
-         },
-         onLeast3() {
-             if (this.$refs.Least3.value === '') {
-                 this.inputLeast3 = !false;
-                 return false;
-             } else {
-                 console.log(this.$refs.Least3.value + '3')
-                 this.inputLeast3 = false;
-                 return false;
-             }
-         },*/
-        onLeast4() {
-            if (this.industryValue.length === 0) {
-                this.inputLeast4 = !false;
-                //console.log('空')
-                //console.log(this.industryValue.length)
-                return false;
-            } else {
-                this.inputLeast4 = false;
-                //console.log(this.formTab.length)
-                //console.log('不空')
-                return false;
-            }
-        },
-        /*         onLeast5() {
-                    if (this.$refs.Least5.value === '') {
-                        this.inputLeast5 = !false;
-                        //console.log('空')
-                        return false;
-                    } else {
-                        console.log(this.$refs.Least5.value + '5')
-                        this.inputLeast5 = false;
-                        //console.log('不空')
-                        return false;
-                    }
-                }, */
-        goIndustry() {
+
+         goIndustry() {
             if (this.editForm === true) {
                 this.editForm = false
                 this.industry = !false;
             }
         },
-        chooseSex() {
-            if (this.$refs.man.checked === true) {
-                this.SexMan = !false;
-                this.SexWoman = false;
+
+
+        onLeast() {
+            for (let i = 0; i < this.$refs.Least.length; i++) {
+                if (!this.$refs.Least[i].valid) {
+                    //console.log('公司错误')
+                    //console.log(this.$refs.Least[i].valid)
+                    this.succeed = false;
+                    return false;
+                } else {
+                    //console.log('公司正确')
+                    //console.log(this.$refs.Least[i].valid)
+                    this.succeed = !false;
+                    return false;
+                }
             }
-            if (this.$refs.woman.checked === true) {
-                this.SexMan = false;
-                this.SexWoman = !false;
+        },
+        onLeast2() {
+            for (let i = 0; i < this.$refs.Least2.length; i++) {
+                if (!this.$refs.Least[i].valid) {
+                    //console.log('名字错误')
+                    //console.log(this.$refs.Least2[i].valid)
+                    this.succeed2 = false;
+                    return false;
+                } else {
+                    //console.log('名字正确')
+                    //console.log(this.$refs.Least2[i].valid)
+                    this.succeed2 = !false;
+                    return false;
+                }
+            }
+        },
+        onLeast3() {
+            for (let i = 0; i < this.$refs.Least3.length; i++) {
+                if (!this.$refs.Least3[i].valid) {
+                    //console.log('职业错误')
+                    //console.log(this.$refs.Least3[i].valid)
+                    this.succeed3 = false;
+                    return false;
+                } else {
+                    //console.log('职业正确')
+                    //console.log(this.$refs.Least3[i].valid)
+                    this.succeed3 = !false;
+                    return false;
+                }
+            }
+        },
+        onLeast4() {
+            for (let i = 0; i < this.$refs.Least4.length; i++) {
+                if (!this.$refs.Least4[i].valid) {
+                    //console.log('手机错误')
+                    //console.log(this.$refs.Least4[i].valid)
+                    this.succeed4 = false;
+                    return false;
+                } else {
+                    //console.log('手机正确')
+                    //console.log(this.$refs.Least4[i].valid)
+                    this.succeed4 = !false;
+                    return false;
+                }
+            }
+        },
+        onLeast5() {
+            for (let i = 0; i < this.$refs.Least5.length; i++) {
+                if (!this.$refs.Least5[i].valid) {
+                    //console.log('邮箱错误')
+                    //console.log(this.$refs.Least5[i].valid)
+                    this.succeed5 = false;
+                    return false;
+                } else {
+                    //console.log('邮箱正确')
+                    //console.log(this.$refs.Least5[i].valid)
+                    this.succeed5 = !false;
+                    return false;
+                }
+            }
+        },
+        onLeast6() {
+            for (let i = 0; i < this.$refs.Least6.length; i++) {
+                if (!this.$refs.Least6[i].valid) {
+                    //console.log('地址错误')
+                    //console.log(this.$refs.Least6[i].valid)
+                    this.succeed6 = false;
+                    return false;
+                } else {
+                    //console.log('地址正确')
+                    //console.log(this.$refs.Least6[i].valid)
+                    this.succeed6 = !false;
+                    return false;
+                }
+            }
+        },
+        industryLeast() {
+            if (this.industryValue.length === 0) {
+                this.inputLeast = !false;
+                //console.log('空')
+                //console.log(this.industryValue.length)
+                return false;
+            } else {
+                this.inputLeast = false;
+                //console.log(this.industryValue.length)
+                //console.log('不空')
+                return false;
             }
         },
 
-        submit() {
-            this.onLeast1()
-            this.onLeast4();
+        chooseMan() {
+            for (let i = 0; i < this.$refs.man.length; i++) {
+                //console.log(this.$refs.man[i])
+                if (this.$refs.man[i].checked === true) {
+                    //console.log(this.$refs.man[i])
+                    this.SexMan = !false;
+                    this.SexWoman = false;
+                }
+            }
         },
+        chooseWoman() {
+            for (let i = 0; i < this.$refs.woman.length; i++) {
+                //console.log(this.$refs.woman[i])
+                if (this.$refs.woman[i].checked === true) {
+                    //console.log(this.$refs.woman[i])
+                    this.SexMan = false;
+                    this.SexWoman = !false;
+                }
+            }
+        },
+
+        /*         submit() {
+                    this.onLeast();
+                    this.onLeast2();
+                    this.onLeast3();
+                    this.onLeast4();
+                    this.onLeast5();
+                    this.onLeast6();
+                    this.industryLeast();
+                    if (this.succeed === false || this.succeed2 === false || this.succeed3 === false || this.succeed4 === false || this.succeed5 === false || this.succeed6 === false || this.inputLeast === !false) {
+                        alert('失败')
+                        return false;
+                    } else {
+                        alert('成功')
+                        return false;
+                    }
+                }, */
         weuiWarn() {
             this.weuiDialog = false;
         },
@@ -377,9 +476,7 @@ export default {
                 this.industry = false;
                 this.editForm = !false;
             }
-            //this.formTab.join(' ');
-
-            this.onLeast4()
+            this.industryLeast();
             /*  this.onCancel() */
         },
         /*         onCancel() {

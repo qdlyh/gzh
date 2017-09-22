@@ -8,6 +8,7 @@ import userCard from '@/components/view/userCard'
 import cardBox from '@/components/view/cardBox'
 import empty from '@/components/view/empty'
 import cardEmpty from '@/components/view/cardEmpty'
+import cardForm from '@/components/view/cardForm'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/cardBox',
       name: 'cardBox',
       component: cardBox
-    }
+    },
+    {
+      path: '/cardForm',
+      name: 'cardForm',
+      component: cardForm
+    },
   ]
 })

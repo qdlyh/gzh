@@ -8,24 +8,24 @@
         <ul>
           <div class="Message-box">
             <div class="menu-img">
-              <img src="../../images/logo.png">
+              <img src="../../images/logo.png" :src="'http://hx.tunnel.qydev.com/image/'+msg.picture">
             </div>
             <div class="menuMsg">
-              <span>{{msg.myname}}</span>
+              <span>{{msg.name}}</span>
               <i><img src="../../images/1165165.png" alt=""></i>
-              <p class="occupation">{{msg.occupation}}</p>
+              <p class="occupation">{{msg.department}}</p>
             </div>
-            <div class="menuMsg-number" @click="toggle()">
-              <div>
-                <p>收藏量</p>
-                <p>{{msg.number}}</p>
-              </div>
-              <div class="line"></div>
-              <div>
-                <p>名片量</p>
-                <p>{{msg.numbers}}</p>
-              </div>
-            </div>
+            <!--          <div class="menuMsg-number" @click="toggle()">
+                <div>
+                  <p>收藏量</p>
+                  <p>{{msg.number}}</p>
+                </div>
+                <div class="line"></div>
+                <div>
+                  <p>名片量</p>
+                  <p>{{msg.numbers}}</p>
+                </div>
+              </div> -->
           </div>
           <div class="menNav">
             <li @click="toggle()" v-for="(nav,index) in menuNav" :key="index">{{nav.name}}</li>
@@ -42,11 +42,25 @@ import { WechatPlugin } from 'vux'
 export default {
   data() {
     return {
-      menuMsg: [{ myname: '伊利丹', occupation: '广告摄影师', number: '123', numbers: '321', mycard: '我的名片', namea: '我的收藏', nameb: '名片夹', namec: '扫一扫' }],
+      /* menuMsg: [{ myname: '伊利丹', occupation: '广告摄影师', number: '123', numbers: '321', mycard: '我的名片', namea: '我的收藏', nameb: '名片夹', namec: '扫一扫' }], */
+      menuMsg:[],
       menuNav: [{ name: '我的名片' }, { name: '我的收藏' }, { name: '名片夹' }, { name: '扫一扫' }],
       open: false,
       block: false,
     }
+  },
+  mounted() {
+    this.$http.get('http://hx.tunnel.qydev.com/con/move/?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+      .then(response => {
+        //console.log(response);
+        //console.log(response.data);
+        console.log('菜单栏成功');
+        this.menuMsg = response.data
+      })
+      .catch(error => {
+        console.log(error);
+        console.log('网络错误，不能访问');
+      })
   },
   methods: {
     toggle() {
@@ -81,7 +95,7 @@ export default {
 .Message-box {
   background: #34363c;
   margin-bottom: 36px;
-  height: 392px;
+  height: 320px;
 }
 
 .menu-img {

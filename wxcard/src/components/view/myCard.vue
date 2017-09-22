@@ -77,7 +77,6 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
 import { XButton } from 'vux'
 import letfNav from '@/components/reuse/letfNav'
 export default {
@@ -109,9 +108,9 @@ export default {
             }
         }
         var OpenId = new UrlSearch(); //实例化
-        //alert(OpenId.id);
+        alert(OpenId.id);
 
-        axios.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 console.log(response);
                 console.log(response.data);
