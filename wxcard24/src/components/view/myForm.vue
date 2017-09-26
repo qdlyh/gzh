@@ -1,21 +1,21 @@
 <template>
     <div>
-        <div class="myform" v-for="(item, index) in listData" :key="index">
+        <div class="myform">
             <div id="edit-page" v-show="editForm">
                 <div class="page-top">
                     <span>
                         <router-link to="/cardBox"><img src="../../images/1561651.png" alt=""></router-link>
                     </span>
                 </div>
-                <form action="http://192.168.112.104/con/move/update" enctype="multipart/form-data" method="post">
-                    <div class="edit-form">
+                <form action="http://hx.tunnel.qydev.com/con/move/update" enctype="multipart/form-data" method="post">
+                    <div class="edit-form" v-for="(item, index) in listData" :key="index">
                         <input type="text" name="id" v-model="item.id" class="input-none">
                         <div class="company company-center">
                             <x-input name="company" @on-blur="onLeast()" ref="Least" v-model="item.company" placeholder="请输入您的公司名字" :show-clear="false" :required="true" :min="5" :max="20"></x-input>
                             <!-- <i class="form-hint">啊啊啊啊啊啊啊啊啊啊</i> -->
                         </div>
                         <div class="file-box">
-                            <img id="file-img" src="../../images/logo.png" :src="'http://192.168.112.104/image/'+item.picture">
+                            <img id="file-img" src="../../images/logo.png" :src="'http://hx.tunnel.qydev.com/image/'+item.picture">
                             <input id="file" name="picture" type="file" @change="getFile($event)">
                         </div>
                         <div class="user-name">
@@ -29,9 +29,9 @@
                         <div class="user-sex">
                             <i v-show="SexMan"><img src="../../images/141615616.png" alt=""></i>
                             <i v-show="SexWoman"><img src="../../images/1651651.png" alt=""></i>
-                            <label><input ref="man" type="radio" name="sex" :checked='item.sex'>
+                            <label @click="chooseMan()"><input ref="man" type="radio" name="sex" checked="checked">
                                 <i></i>男</label>
-                            <label><input ref="woman" type="radio" name="sex">
+                            <label @click="chooseWoman()"><input ref="woman" type="radio" name="sex">
                                 <i></i>女</label>
                         </div>
                         <div class="user-message">
@@ -132,11 +132,11 @@ export default {
     },
     data() {
         return {
-            picked:'',
             name: '',
             department: '',
             file: '',
             activeIndex: 0,
+            scopes: '',
             tabIndex: 0,
             editForm: true,
             industry: false,
@@ -152,6 +152,14 @@ export default {
             succeed6: false,
             listData: [],
             formTab: [],   //input选中的标签
+            tabBox: [
+                {
+                    title: "电脑",
+                },
+                {
+                    title: "房地产",
+                }
+            ],    //tab页选中的标签
             option: [],  //tab左边
             tabData: [   //tab右边
                 [],
@@ -178,27 +186,27 @@ export default {
 
             }
         }
-        //$file.onchange = readFile;
+        $file.onchange = readFile;
     },
 
 
     mounted() {
-        /*        axios({
-                    method: 'post',
-                    url: 'http://hx.tunnel.qydev.com/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
-                    data: {//参数
-                        firstName: 'Fred',
-                        lastName: 'Flintstone'
-                    }
-                }).then(response => {
-                    console.log('post成功');
-                })
-                    .catch(error => {
-                        //console.log(error);
-                        console.log('网络错误，不能访问');
-                        
-                }) */
-        this.$http.get('http://192.168.112.104/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+/*        axios({
+            method: 'post',
+            url: 'http://hx.tunnel.qydev.com/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+            data: {//参数
+                firstName: 'Fred',
+                lastName: 'Flintstone'
+            }
+        }).then(response => {
+            console.log('post成功');
+        })
+            .catch(error => {
+                //console.log(error);
+                console.log('网络错误，不能访问');
+                
+        }) */
+        this.$http.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 //console.log(response.data);
                 //console.log('form成功');
@@ -209,7 +217,7 @@ export default {
                 console.log('网络错误，不能访问');
             })
 
-        this.$http.get('http://192.168.112.104/con/scope?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http.get('http://hx.tunnel.qydev.com/con/scope?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 //console.log('tab成功');
                 this.option = response.data
@@ -218,7 +226,7 @@ export default {
                 console.log(error);
                 console.log('网络错误，不能访问');
             })
-        this.$http.get('http://192.168.112.104/con/scope/allChild?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http.get('http://hx.tunnel.qydev.com/con/scope/allChild?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 //console.log('tabs成功');
                 this.tabData = response.data
@@ -227,6 +235,23 @@ export default {
                 console.log(error);
                 console.log('网络错误，不能访问');
             })
+
+        axios.interceptors.request.use(function(config) {
+            // 发送请求之前做一些处理
+            return config;
+        }, function(error) {
+            // 当请求异常时做一些处理
+            return Promise.reject(error);
+        });
+
+        // 响应时拦截
+        axios.interceptors.response.use(function(response) {
+            // 返回响应时做一些处理
+            return response;
+        }, function(error) {
+            // 当响应异常时做一些处理
+            return Promise.reject(error);
+        });
     },
 
     methods: {
@@ -245,7 +270,7 @@ export default {
             params.append('name', '1321');
             params.append('department', '321231');
 
-            this.$http.post('http://192.168.112.104/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0', {
+            this.$http.post('http://hx.tunnel.qydev.com/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0', {
                 params,
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -260,7 +285,7 @@ export default {
                 })
         },
 
-        goIndustry() {
+         goIndustry() {
             if (this.editForm === true) {
                 this.editForm = false
                 this.industry = !false;
@@ -375,7 +400,7 @@ export default {
         chooseMan() {
             for (let i = 0; i < this.$refs.man.length; i++) {
                 //console.log(this.$refs.man[i])
-                if (this.$refs.man[i].checked) {
+                if (this.$refs.man[i].checked === true) {
                     //console.log(this.$refs.man[i])
                     this.SexMan = !false;
                     this.SexWoman = false;
@@ -385,7 +410,7 @@ export default {
         chooseWoman() {
             for (let i = 0; i < this.$refs.woman.length; i++) {
                 //console.log(this.$refs.woman[i])
-                if (this.$refs.woman[i].checked) {
+                if (this.$refs.woman[i].checked === true) {
                     //console.log(this.$refs.woman[i])
                     this.SexMan = false;
                     this.SexWoman = !false;
@@ -483,14 +508,9 @@ export default {
             }
             str = arr.join('; ');
             return str;
-        },
-        /* 计算tabBox=scopes */
-        tabBox() {
-            if (!this.listData) return []
-            return this.listData[0].scopes
         }
-    },
 
+    },
 }
 </script>
 <style lang="scss" scoped>

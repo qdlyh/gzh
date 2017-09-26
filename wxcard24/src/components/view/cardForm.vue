@@ -6,6 +6,9 @@
                     <a href="javascript:;"><img src="../../images/631561651.png" alt=""></a>
                 </letfNav>
                 <div class="icon-right">
+                    <span>
+                        <a href="javascript:;"><img src="../../images/14151561.png" alt=""></a>
+                    </span>
                     <div class="icon-line"></div>
                     <span @click="onwxImg()">
                         <a href="javascript:;"><img src="../../images/15616516.png" alt=""></a>
@@ -77,6 +80,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 import { XButton } from 'vux'
 import letfNav from '@/components/reuse/letfNav'
 export default {
@@ -91,7 +95,7 @@ export default {
         }
     },
     mounted() {
-/*         function UrlSearch() {
+        function UrlSearch() {
             var name, value;
             var str = location.href; //取得整个地址栏
             var num = str.indexOf("?")
@@ -108,7 +112,7 @@ export default {
             }
         }
         var OpenId = new UrlSearch(); //实例化
-        alert(OpenId.id); */
+        //alert(OpenId.id);
 
         this.$http.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {

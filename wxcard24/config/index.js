@@ -29,9 +29,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        //target: 'http://hx.tunnel.qydev.com/con/move',
-        //target: 'http://hx.tunnel.qydev.com/con/',
-        target: 'http://192.168.112.110/con',
+        /* target: 'http://hx.tunnel.qydev.com/con/move', */
+        target: 'http://hx.tunnel.qydev.com/con/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/api'

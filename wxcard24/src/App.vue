@@ -9,32 +9,6 @@ export default {
   name: 'app',
   components: {
   },
-  data() {
-    return {
-  
-    }
-  },
-   mounted() {
-         function UrlSearch() {
-            var name, value;
-            var str = location.href; //取得整个地址栏
-            var num = str.indexOf("?")
-            str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
-
-            var arr = str.split("&"); //各个参数放到数组里
-            for (var i = 0; i < arr.length; i++) {
-                num = arr[i].indexOf("=");
-                if (num > 0) {
-                    name = arr[i].substring(0, num);
-                    value = arr[i].substr(num + 1);
-                    this[name] = value;
-                }
-            }
-        }
-        var OpenId = new UrlSearch(); //实例化
-        //alert(OpenId.id); 
-
-   }
 }
 </script>
 
@@ -55,23 +29,18 @@ body {
 
 
 
-
 /* x-input红色警告伪类 */
 
 .vux-input-icon.weui-icon-warn:before,
 .vux-input-icon.weui-icon-success:before {
   font-size: 28px !important;
 }
-
-
 /* 表单公司居中 */
-
 .company-center {
   input {
     text-align: center;
   }
 }
-
 
 
 
@@ -125,7 +94,6 @@ body {
     margin-top: 23px;
   }
 }
-
 
 
 
@@ -227,7 +195,6 @@ body {
     }
   }
 }
-
 
 
 

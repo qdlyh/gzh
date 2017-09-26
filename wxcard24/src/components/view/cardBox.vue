@@ -65,7 +65,7 @@
                                 <router-link to="/cardForm">
                                     <div class="card-item-box">
                                         <div class="item-img">
-                                            <img :src="'http://192.168.112.110/image/'+item.picture" alt="">
+                                            <img src="../../images/logo.png" alt="" :src="'http://hx.tunnel.qydev.com/image/'+item.picture">
                                         </div>
                                         <div class="item-msg">
                                             <div class="item-name">
@@ -109,29 +109,30 @@ export default {
     },
     data() {
         return {
-            /* carditem: {
-                    A: [{ name: '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false }, { "name": '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false },],
-                    B: [{ name: '伊利丹2', occupation: '广告摄影师', company: '公司', flag: false },],
-                    C: [{ name: '伊利丹3', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    D: [{ name: '伊利丹4', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    E: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    F: [{ name: '伊利丹6', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    G: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    H: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    I: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    J: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    K: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    L: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    M: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    N: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    O:[],
-                    P:[],
-                    Q:[],
-                    Z:[],
-                    '#':[],
-                },  */
+        /* carditem: {
+                A: [{ name: '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false }, { "name": '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false },],
+                B: [{ name: '伊利丹2', occupation: '广告摄影师', company: '公司', flag: false },],
+                C: [{ name: '伊利丹3', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                D: [{ name: '伊利丹4', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                E: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                F: [{ name: '伊利丹6', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                G: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                H: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                I: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                J: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                K: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                L: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                M: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                N: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                O:[],
+                P:[],
+                Q:[],
+                Z:[],
+                '#':[],
+            },  */
             carditem: {},
             copycarditem: {},
+/*             carditems: {}, */
             searlist: {},
             activeIndex: 0,
             disabled: false,
@@ -148,39 +149,19 @@ export default {
         }
     },
     mounted() {
-        this.$http.get('http://192.168.112.110/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http.get('http://hx.tunnel.qydev.com/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 //console.log(response);
                 //console.log(response.data); 
                 //console.log('成功');
                 this.carditem = response.data;
-                console.log(this.carditem)
                 this.copycarditem = this.carditem;
-                //console.log(this.copycarditem)
+                //console.log(this.copycarditem) 
             })
             .catch(error => {
                 console.log(error);
                 console.log('网络错误，不能访问');
-            })
-        this.$http({
-            method: 'post',
-            url: 'http://192.168.112.110/con/move/delete?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
-            data: {
-                userId: "78",
-            },
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        })
-            .then(response => {
-                //console.log(response);
-                //console.log(response.data); 
-                console.log('成功');
-            })
-            .catch(error => {
-                console.log(error);
-                console.log('网络错误，不能访问');
-            })
+            }) 
     },
     methods: {
         navSelect() {
@@ -245,11 +226,16 @@ export default {
                     delete this.carditem[keys]
                 }
             }
+            /* return this.carditems = this.carditem */
             return this.carditem
         }
     },
     watch: {
         seartext(cur) {
+            //console.log(this.copycarditem);
+            //console.log(this, carditem);
+            let keys = Object.keys(this.carditem);
+            //console.log(keys)
             if (cur == '') {
                 this.carditem = this.copycarditem;
                 //console.log(this.copycarditem)
@@ -257,10 +243,9 @@ export default {
             else {
                 this.searlist = [];
                 for (let i = 0; i < this.carditem.length; i++) {
-                    //console.log(this.carditem[i])
+                    console.log(this.carditem[i])
                     if (this.carditem[i].indexOf(cur) >= 0) {
                         this.searlist.push(this.carditem[i]);
-                        //console.log(this.carditem[i])
                     }
                 }
                 this.carditem = this.searlist;

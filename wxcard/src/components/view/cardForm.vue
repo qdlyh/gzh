@@ -95,25 +95,6 @@ export default {
         }
     },
     mounted() {
-        function UrlSearch() {
-            var name, value;
-            var str = location.href; //取得整个地址栏
-            var num = str.indexOf("?")
-            str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
-
-            var arr = str.split("&"); //各个参数放到数组里
-            for (var i = 0; i < arr.length; i++) {
-                num = arr[i].indexOf("=");
-                if (num > 0) {
-                    name = arr[i].substring(0, num);
-                    value = arr[i].substr(num + 1);
-                    this[name] = value;
-                }
-            }
-        }
-        var OpenId = new UrlSearch(); //实例化
-        //alert(OpenId.id);
-
         this.$http.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 console.log(response);

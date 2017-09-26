@@ -91,7 +91,7 @@ export default {
         }
     },
     mounted() {
-/*         function UrlSearch() {
+        function UrlSearch() {
             var name, value;
             var str = location.href; //取得整个地址栏
             var num = str.indexOf("?")
@@ -108,7 +108,7 @@ export default {
             }
         }
         var OpenId = new UrlSearch(); //实例化
-        alert(OpenId.id); */
+        alert(OpenId.id);
 
         this.$http.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
