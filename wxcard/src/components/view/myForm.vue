@@ -7,16 +7,18 @@
                         <router-link to="/cardBox"><img src="../../images/1561651.png" alt=""></router-link>
                     </span>
                 </div>
-                <form action="http://192.168.112.104/con/move/update" enctype="multipart/form-data" method="post">
+                <form action="http://192.168.112.104/con/move/update" method="post" enctype="multipart/form-data">
                     <div class="edit-form">
                         <input type="text" name="id" v-model="item.id" class="input-none">
+                        <input type="text" name="openId" v-model="item.openId" class="input-none">
                         <div class="company company-center">
                             <x-input name="company" @on-blur="onLeast()" ref="Least" v-model="item.company" placeholder="请输入您的公司名字" :show-clear="false" :required="true" :min="5" :max="20"></x-input>
                             <!-- <i class="form-hint">啊啊啊啊啊啊啊啊啊啊</i> -->
                         </div>
                         <div class="file-box">
-                            <img id="file-img" src="../../images/logo.png" :src="'http://192.168.112.104/image/'+item.picture">
-                            <input id="file" name="picture" type="file" @change="getFile($event)">
+                            <img id="file-img" name="picture" :src="'http://192.168.112.104/image/'+item.picture">
+                            <input id="file" name="file" type="file" @change="getFile($event)">
+                            <input type="text" name="oldImg" :value="item.picture" class="input-none">
                         </div>
                         <div class="user-name">
                             <div style="margin-top:20px;">
@@ -27,11 +29,11 @@
                             </div>
                         </div>
                         <div class="user-sex">
-                            <i v-show="SexMan"><img src="../../images/141615616.png" alt=""></i>
-                            <i v-show="SexWoman"><img src="../../images/1651651.png" alt=""></i>
-                            <label><input ref="man" type="radio" name="sex" :checked='item.sex'>
+                            <i v-if="item.sex===1"><img src="../../images/141615616.png" alt=""></i>
+                            <i v-else><img src="../../images/1651651.png" alt=""></i>
+                            <label><input ref="man" type="radio" name="sex" value="1" :checked="item.sex" @change="chooseSex">
                                 <i></i>男</label>
-                            <label><input ref="woman" type="radio" name="sex">
+                            <label><input ref="woman" type="radio" name="sex" value="0" :checked="!item.sex" @change="chooseSex">
                                 <i></i>女</label>
                         </div>
                         <div class="user-message">
@@ -54,21 +56,22 @@
                             </div>
                             <div @click="goIndustry()">
                                 <i><img src="../../images/165165165.png" alt=""></i>
-                                <input @blur="industryLeast()" name="scope" v-model="industryValue" type="text" placeholder="点击选择公司主营业务">
+                                <input @blur="industryLeast()" v-model="industryValue" type="text" placeholder="点击选择公司主营业务">
                                 <span class="WarnIcon" v-show="inputLeast"></span>
                             </div>
+                            <input name="scope" v-for="(i , index) in item.scopes" :key="index" v-model="i.id" class="input-none">
                             <div>
                                 <i><img src="../../images/15165161.png" alt=""></i>
-                                <x-input v-model="item.address" placeholder="请输入公司地址" @on-blur="onLeast6()" ref="Least6" :show-clear="false" :required="true" :min="4" :max="30"></x-input>
+                                <x-input name="address" v-model="item.address" placeholder="请输入公司地址" @on-blur="onLeast6()" ref="Least6" :show-clear="false" :required="true" :min="4" :max="30"></x-input>
                             </div>
                         </div>
                     </div>
+                    <div class="btn-green" @click="submit()">
+                        <x-button type="primary">
+                            <a link="/cardBox">完成</a>
+                        </x-button>
+                    </div>
                 </form>
-                <div class="btn-green" @click="submit($event)">
-                    <x-button type="primary">
-                        <a link="/cardBox">完成</a>
-                    </x-button>
-                </div>
 
                 <transition name="fade">
                     <div class="weui-box" v-show="weuiDialog">
@@ -132,16 +135,10 @@ export default {
     },
     data() {
         return {
-            picked:'',
-            name: '',
-            department: '',
-            file: '',
             activeIndex: 0,
             tabIndex: 0,
             editForm: true,
             industry: false,
-            SexMan: true,
-            SexWoman: false,
             inputLeast: false,
             weuiDialog: false,  //单选框
             succeed: false,
@@ -151,7 +148,8 @@ export default {
             succeed5: false,
             succeed6: false,
             listData: [],
-            formTab: [],   //input选中的标签
+            //tabBox: [],
+            //formTab: [],   //input选中的标签
             option: [],  //tab左边
             tabData: [   //tab右边
                 [],
@@ -178,11 +176,12 @@ export default {
 
             }
         }
-        //$file.onchange = readFile;
+        $file.onchange = readFile;
     },
 
 
     mounted() {
+
         /*        axios({
                     method: 'post',
                     url: 'http://hx.tunnel.qydev.com/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
@@ -197,7 +196,7 @@ export default {
                         //console.log(error);
                         console.log('网络错误，不能访问');
                         
-                }) */
+              }) */
         this.$http.get('http://192.168.112.104/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 //console.log(response.data);
@@ -240,18 +239,21 @@ export default {
                     formData.append('file','event.target.files[0]');
                     formData.append('name', this.name);
                     formData.append('department', this.department); */
-        submit(event) {
-            var params = new URLSearchParams();
-            params.append('name', '1321');
-            params.append('department', '321231');
-
-            this.$http.post('http://192.168.112.104/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0', {
-                params,
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+        submit() {
+            var myform = document.querySelector("form");
+            let formData = new FormData(myform);
+            formData.append('file', this.file);
+            formData.append('sex', this.sex);
+            this.$http({
+                method: 'post',
+                url: 'http://192.168.112.104/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+                data: {
+                    myform
                 },
+
             })
                 .then(response => {
+                    console.log(response)
                     console.log('post成功');
                 })
                 .catch(error => {
@@ -267,6 +269,15 @@ export default {
             }
         },
 
+        chooseSex() {
+            if (!this.listData[0].sex === true) {
+                this.listData[0].sex = 1;
+                //console.log(this.listData[0].sex)
+            } else {
+                this.listData[0].sex = 0;
+                //console.log(this.listData[0].sex)
+            }
+        },
 
         onLeast() {
             for (let i = 0; i < this.$refs.Least.length; i++) {
@@ -372,27 +383,6 @@ export default {
             }
         },
 
-        chooseMan() {
-            for (let i = 0; i < this.$refs.man.length; i++) {
-                //console.log(this.$refs.man[i])
-                if (this.$refs.man[i].checked) {
-                    //console.log(this.$refs.man[i])
-                    this.SexMan = !false;
-                    this.SexWoman = false;
-                }
-            }
-        },
-        chooseWoman() {
-            for (let i = 0; i < this.$refs.woman.length; i++) {
-                //console.log(this.$refs.woman[i])
-                if (this.$refs.woman[i].checked) {
-                    //console.log(this.$refs.woman[i])
-                    this.SexMan = false;
-                    this.SexWoman = !false;
-                }
-            }
-        },
-
         /*         submit() {
                     this.onLeast();
                     this.onLeast2();
@@ -441,12 +431,12 @@ export default {
             //console.log(index)
         },
         affirm() {
-            this.formTab = [];
-            for (let i = 0; i < this.tabBox.length; i++) {
-                let newName = (this.tabBox[i].title)
-                this.formTab.push(newName);
-                //console.log(this.formTab.length)
-            }
+            /*          this.formTab = [];
+                     for (let i = 0; i < this.tabBox.length; i++) {
+                         let newName = (this.tabBox[i].title)
+                         this.formTab.push(newName);
+                         //console.log(this.formTab.length)
+                     } */
             if (this.industry === true) {
                 this.industry = false;
                 this.editForm = !false;
@@ -468,10 +458,10 @@ export default {
                 return !num.tabs
             }).length
         },
-        /* formTabs() {
-            let str = '';
-            return this.str = this.formTab.join('; ');
-        } */
+        //formTabs() {
+        // let str = '';
+        // return this.str = this.formTab.join('; ');
+        //} 
 
         industryValue() {
             let arr = [];
@@ -484,15 +474,15 @@ export default {
             str = arr.join('; ');
             return str;
         },
-        /* 计算tabBox=scopes */
+        //计算tabBox=scopes 
         tabBox() {
-            if (!this.listData) return []
-            return this.listData[0].scopes
+            if (!this.listData) return;
+            return this.listData[0].scopes;
         }
     },
-
 }
 </script>
 <style lang="scss" scoped>
 @import '../../css/myForm'
 </style>
+
