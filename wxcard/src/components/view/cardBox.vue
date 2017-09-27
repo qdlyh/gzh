@@ -65,9 +65,10 @@
                                 <router-link to="/cardForm">
                                     <div class="card-item-box">
                                         <div class="item-img">
-                                            <img :src="'http://192.168.112.110/image/'+item.picture" alt="">
+                                            <img :src="'http://192.168.112.104/image/'+item.picture" alt="">
                                         </div>
                                         <div class="item-msg">
+                                            <input type="text" name="ids" v-model="item.id" class="input-none">
                                             <div class="item-name">
                                                 <span>{{item.name}}</span>
                                                 <img v-if="item.sex===1" src="../../images/1165165.png" alt="">
@@ -132,6 +133,7 @@ export default {
                 },  */
             carditem: {},
             copycarditem: {},
+            name: '',
             searlist: {},
             activeIndex: 0,
             disabled: false,
@@ -148,13 +150,14 @@ export default {
         }
     },
     mounted() {
-        this.$http.get('http://192.168.112.110/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http({
+            method: 'get',
+            url: 'http://192.168.112.104/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+        })
             .then(response => {
-                //console.log(response);
-                //console.log(response.data); 
                 //console.log('成功');
                 this.carditem = response.data;
-                console.log(this.carditem)
+                //console.log(this.carditem)
                 this.copycarditem = this.carditem;
                 //console.log(this.copycarditem)
             })
@@ -162,25 +165,25 @@ export default {
                 console.log(error);
                 console.log('网络错误，不能访问');
             })
-        this.$http({
-            method: 'post',
-            url: 'http://192.168.112.110/con/move/delete?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
-            data: {
-                userId: "78",
-            },
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        })
-            .then(response => {
-                //console.log(response);
-                //console.log(response.data); 
-                console.log('成功');
-            })
-            .catch(error => {
-                console.log(error);
-                console.log('网络错误，不能访问');
-            })
+        /*         this.$http({
+                    method: 'post',
+                    url: 'http://192.168.112.104/con/move/delete?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+                    data: {
+                        userId: "78",
+                    },
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                    .then(response => {
+                        //console.log(response);
+                        //console.log(response.data); 
+                        console.log('成功');
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        console.log('网络错误，不能访问');
+                    }) */
     },
     methods: {
         navSelect() {
@@ -220,7 +223,37 @@ export default {
             }
             this.weuiDialog = false
         },
+        /*       onDeleteCard(index, keys) {
+                  this.carditem[keys].splice(index, 1);
+              }, */
         onDeleteCard(index, keys) {
+            /*   for (let i = 0; i < this.carditem[keys].length; i++) {
+                    console.log(this.carditem[keys].id)
+              } */
+            /*      var deleteId = this.carditem[keys].forEach((element)=>{
+                     console.log(element.id);
+                     
+                })  */
+            this.$http({
+                method: 'get',
+                url: 'http://192.168.112.104/con/move/delete',
+                params: {
+                    openId: 'o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+                    ids: this.carditem[keys][index].id
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+                .then(response => {
+                    //console.log(response);
+                    //console.log(response.data); 
+                    //console.log('删除成功');
+                })
+                .catch(error => {
+                    console.log(error);
+                    console.log('网络错误，不能访问');
+                })
             this.carditem[keys].splice(index, 1);
         },
         openDelete(type) {
@@ -273,6 +306,8 @@ export default {
 <style lang="scss" scoped>
 @import '../../css/cardBox'
 </style>
+
+
 
 
 
