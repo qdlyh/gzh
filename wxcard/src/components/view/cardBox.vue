@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </transition>
-            <div class="card-list" v-for="(items, keys ,index) in carditemLG" :key="keys">
+            <div class="card-list" v-for="(items, keys ,index) in searchFor(carditem,seartext)" :key="keys">
                 <!-- <div>{{carditemText[activeIndex]}}</div> -->
                 <div class="item-wire" :id="'letter'+ keys">{{keys}}</div>
                 <swipeout v-for="(item,index) in items" :key="index">
@@ -65,10 +65,10 @@
                                 <router-link to="/cardForm">
                                     <div class="card-item-box">
                                         <div class="item-img">
-                                            <img :src="'http://192.168.112.104/image/'+item.picture" alt="">
+                                            <img :src="'http://192.168.112.105/image/'+item.picture" alt="">
                                         </div>
                                         <div class="item-msg">
-                                            <input type="text" name="ids" v-model="item.id" class="input-none">
+                                            <!-- <input type="text" name="ids" v-model="item.id" class="input-none"> -->
                                             <div class="item-name">
                                                 <span>{{item.name}}</span>
                                                 <img v-if="item.sex===1" src="../../images/1165165.png" alt="">
@@ -110,31 +110,38 @@ export default {
     },
     data() {
         return {
-            /* carditem: {
-                    A: [{ name: '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false }, { "name": '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false },],
-                    B: [{ name: '伊利丹2', occupation: '广告摄影师', company: '公司', flag: false },],
-                    C: [{ name: '伊利丹3', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    D: [{ name: '伊利丹4', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    E: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    F: [{ name: '伊利丹6', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    G: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    H: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    I: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    J: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    K: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    L: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    M: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    N: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
-                    O:[],
-                    P:[],
-                    Q:[],
-                    Z:[],
-                    '#':[],
-                },  */
+            /*           carditem: {
+                                 A: [{name: '张三'},],
+                                 B: [{name: '李四'},],
+                                 C: [{name: '李四'},],
+                                 D: [{name: '李四'},],
+                                 E: [{name: '李四'},],
+                   } */
+            /*     carditem: {
+                       A: [{id:"78", name: '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false }, {id:"71", "name": '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false },],
+                       B: [{id:"72", name: '伊利丹2', occupation: '广告摄影师', company: '公司', flag: false },],
+                       C: [{ id:"71",name: '伊利丹3', occupation: '广告摄影师', company: '公司', flag: false }, {id:"66", name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, {id:"65", name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       D: [{ id:"1",name: '伊利丹4', occupation: '广告摄影师', company: '公司', flag: false }, {id:"3", name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { id:"91",name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       E: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       F: [{ name: '伊利丹6', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       G: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       H: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       I: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       J: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       K: [{ name: '伊利丹7', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       L: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       M: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       N: [{ name: '伊利丹5', occupation: '广告摄影师', company: '公司', flag: false }, { name: '伊利丹', occupation: '广告摄影师1', company: '公司1', flag: false }, { name: '伊利丹2', occupation: '广告摄影师2', company: '公司2', flag: false }],
+                       O:[],
+                       P:[],
+                       Q:[],
+                       Z:[],
+                       '#':[],
+                   },   */
             carditem: {},
-            copycarditem: {},
-            name: '',
-            searlist: {},
+            //copycarditem: {},
+            //searlist: [],
+            arrDelete: [],
             activeIndex: 0,
             disabled: false,
             letNavIcon: true,
@@ -152,7 +159,7 @@ export default {
     mounted() {
         this.$http({
             method: 'get',
-            url: 'http://192.168.112.104/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+            url: 'http://192.168.112.105/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
         })
             .then(response => {
                 //console.log('成功');
@@ -167,7 +174,7 @@ export default {
             })
         /*         this.$http({
                     method: 'post',
-                    url: 'http://192.168.112.104/con/move/delete?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+                    url: 'http://hx.tunnel.qydev.com/con/move/delete?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
                     data: {
                         userId: "78",
                     },
@@ -214,18 +221,40 @@ export default {
         cardWarn() {
             this.weuiDialog = !false
         },
+
         removeAll() {
             for (let keys in this.carditem) {
                 this.carditem[keys] = this.carditem[keys].filter((all) => {
-                    //console.log(all.flag)
+                    console.log(all.flag)
+                    //console.log(this.carditem[keys][all].id)
                     return all.flag === false;
                 })
             }
+
             this.weuiDialog = false
+
+            this.$http({
+                method: 'get',
+                url: 'http://192.168.112.105/con/move/delete',
+                params: {
+                    openId: 'o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+                    ids: '1'
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+                .then(response => {
+                    //console.log(response);
+                    //console.log(response.data); 
+                    //console.log('删除成功');
+                })
+                .catch(error => {
+                    console.log(error);
+                    console.log('网络错误，不能访问');
+                })
+
         },
-        /*       onDeleteCard(index, keys) {
-                  this.carditem[keys].splice(index, 1);
-              }, */
         onDeleteCard(index, keys) {
             /*   for (let i = 0; i < this.carditem[keys].length; i++) {
                     console.log(this.carditem[keys].id)
@@ -236,7 +265,7 @@ export default {
                 })  */
             this.$http({
                 method: 'get',
-                url: 'http://192.168.112.104/con/move/delete',
+                url: 'http://192.168.112.105/con/move/delete',
                 params: {
                     openId: 'o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
                     ids: this.carditem[keys][index].id
@@ -265,49 +294,83 @@ export default {
         onLetter(keys) {
             let letter = this.$el.querySelector(keys)
             document.body.scrollTop = letter.offsetTop
-        }
-    },
-    computed: {
-        carditemText() {
-            return Object.keys(this.carditem);
         },
-        carditemLG() {
+        /* 搜索 */
+        searchFor(value, seartext) {
             for (let keys in this.carditem) {
                 //console.log(this.carditem[keys])
                 if (!this.carditem[keys].length) {
                     delete this.carditem[keys]
                 }
             }
-            return this.carditem
-        }
-    },
-    watch: {
-        seartext(cur) {
-            if (cur == '') {
-                this.carditem = this.copycarditem;
-                //console.log(this.copycarditem)
+            var result = {};  //用result来存放查到的结果
+            if (!seartext) { 
+                return this.carditem;
             }
-            else {
-                this.searlist = [];
-                for (let i = 0; i < this.carditem.length; i++) {
-                    //console.log(this.carditem[i])
-                    if (this.carditem[i].indexOf(cur) >= 0) {
-                        this.searlist.push(this.carditem[i]);
-                        //console.log(this.carditem[i])
+            seartext = seartext.trim().toLowerCase();   //把查询的内容转为小写的
+            for (var key in this.carditem) {
+                for (var i = 0; i < this.carditem[key].length; i++) {
+                    if (this.carditem[key][i].name.toLowerCase().indexOf(seartext) != -1) {
+                        result[key] = this.carditem[key];
                     }
                 }
-                this.carditem = this.searlist;
+/*                 for (var i = 0; i < this.carditem[key].length; i++) {
+                   if (this.carditem[key][i].company.indexOf(seartext) != -1) {
+                         result[key] = this.carditem[key];
+                  }
+                } */
             }
-        }
+            return result;
+        },
+    },
+    computed: {
+        carditemText() {
+            return Object.keys(this.carditem);
+        },
+        /*        carditemLG() {
+                   for (let keys in this.carditem) {
+                       //console.log(this.carditem[keys])
+                       if (!this.carditem[keys].length) {
+                           delete this.carditem[keys]
+                       }
+                   }
+                   return this.carditem
+               } */
+    },
+    watch: {
+        /*         seartext(cur) {
+                    if (cur == '') {
+                        this.carditem = this.copycarditem;
+                        //console.log(this.copycarditem)
+                    }
+                    else {
+                        this.searlist = [];
+                        for (let keys in this.carditem){
+                            //console.log(this.carditem[keys])
+                            for (let i = 0; i < this.carditem.length; i++) {
+                                if (this.carditem[i].indexOf(cur) >= 0) {
+                                    this.searlist.push(this.carditem[i]);
+                                }
+                            }
+                        }
+                        this.carditem = this.searlist;
+                    }
+                } */
     }
 
+    /*     for (let keys in this.carditem){
+            //console.log(this.carditem[keys])
+            for (let i = 0; i < this.carditem[keys].length; i++) {
+                if(this.carditem[key][i].name == cur){
+                    
+                }
+            }
+        } */
 }
 </script>
 <style lang="scss" scoped>
 @import '../../css/cardBox'
 </style>
-
-
 
 
 
