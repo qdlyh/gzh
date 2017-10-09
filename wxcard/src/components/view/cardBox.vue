@@ -48,12 +48,11 @@
             <transition name="slide-fade">
                 <div class="right-menu" v-show="!rightMenu">
                     <div class="right-menu-box" v-for="(keys , index) in carditemText" :key="index">
-                        <a href="javascript:;" @click="onLetter('#letter'+ keys)">{{keys}}</a>
+                        <a href="javascript:;" @click="onLetter('#letter'+ keys.target)">{{keys.letters}}</a>
                     </div>
                 </div>
             </transition>
             <div class="card-list" v-for="(items, keys ,index) in searchFor(carditem,seartext)" :key="keys">
-                <!-- <div>{{carditemText[activeIndex]}}</div> -->
                 <div class="item-wire" :id="'letter'+ keys">{{keys}}</div>
                 <swipeout v-for="(item,index) in items" :key="index">
                     <swipeout-item underlay-color="#fff" @on-open="openDelete('open')" @on-close="closeDelete('close')" :right-menu-width="144" :disabled="disabled">
@@ -62,13 +61,13 @@
                         </div>
                         <div slot="content" class="demo-content vux-1px-tb">
                             <div class="card-item">
-                                <router-link to="/cardForm">
+                                <router-link :to="{path:'/cardForm',params:{id:item.openId}}">
                                     <div class="card-item-box">
                                         <div class="item-img">
-                                            <img :src="'http://192.168.112.105/image/'+item.picture" alt="">
+                                            <img :src="'http://192.168.112.103/image/'+item.picture" alt="">
                                         </div>
                                         <div class="item-msg">
-                                            <!-- <input type="text" name="ids" v-model="item.id" class="input-none"> -->
+                                            <!-- hidden="hidden" -->
                                             <div class="item-name">
                                                 <span>{{item.name}}</span>
                                                 <img v-if="item.sex===1" src="../../images/1165165.png" alt="">
@@ -110,13 +109,13 @@ export default {
     },
     data() {
         return {
-            /*           carditem: {
-                                 A: [{name: '张三'},],
-                                 B: [{name: '李四'},],
-                                 C: [{name: '李四'},],
-                                 D: [{name: '李四'},],
-                                 E: [{name: '李四'},],
-                   } */
+/*                      carditem: {
+                                 A: [{id: 82,flag: false,}],
+                                 B: [{id: 83,flag: false,}],
+                                 C: [{id: 84,flag: false,}],
+                                 D: [{id: 85,flag: false,}],
+                                 E: [{id: 86,flag: false,}],
+                   },  */
             /*     carditem: {
                        A: [{id:"78", name: '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false }, {id:"71", "name": '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false },],
                        B: [{id:"72", name: '伊利丹2', occupation: '广告摄影师', company: '公司', flag: false },],
@@ -139,9 +138,7 @@ export default {
                        '#':[],
                    },   */
             carditem: {},
-            //copycarditem: {},
-            //searlist: [],
-            arrDelete: [],
+            seartext: '',
             activeIndex: 0,
             disabled: false,
             letNavIcon: true,
@@ -153,44 +150,22 @@ export default {
             deleteIcon: false,
             checkbox: false,
             weuiDialog: false,
-            seartext: '',
         }
     },
     mounted() {
         this.$http({
             method: 'get',
-            url: 'http://192.168.112.105/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
+            url: 'http://192.168.112.103/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
         })
             .then(response => {
                 //console.log('成功');
                 this.carditem = response.data;
                 //console.log(this.carditem)
-                this.copycarditem = this.carditem;
-                //console.log(this.copycarditem)
             })
             .catch(error => {
                 console.log(error);
                 console.log('网络错误，不能访问');
             })
-        /*         this.$http({
-                    method: 'post',
-                    url: 'http://hx.tunnel.qydev.com/con/move/delete?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
-                    data: {
-                        userId: "78",
-                    },
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                })
-                    .then(response => {
-                        //console.log(response);
-                        //console.log(response.data); 
-                        console.log('成功');
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        console.log('网络错误，不能访问');
-                    }) */
     },
     methods: {
         navSelect() {
@@ -219,26 +194,40 @@ export default {
             this.letNavIcon = !false;
         },
         cardWarn() {
-            this.weuiDialog = !false
-        },
-
-        removeAll() {
             for (let keys in this.carditem) {
+                for (let i = 0; i < this.carditem[keys].length; i++) {
+                    if (this.carditem[keys][i].flag) {
+                        this.weuiDialog = !false
+                    }
+                }
+            }
+        },
+        removeAll() {
+            this.weuiDialog = false;
+            let arr = [];
+            let arrDelete
+/*             for (let keys in this.carditem) {
                 this.carditem[keys] = this.carditem[keys].filter((all) => {
-                    console.log(all.flag)
-                    //console.log(this.carditem[keys][all].id)
                     return all.flag === false;
                 })
-            }
-
-            this.weuiDialog = false
-
+            } */
+            for (let keys in this.carditem) {
+                for (let i = 0; i < this.carditem[keys].length; i++) {
+                    if (this.carditem[keys][i].flag) {
+                        //console.log(this.carditem[keys][i].id)
+                        arr.push(this.carditem[keys][i].id)
+                        this.carditem[keys].splice(i,1)
+                    }
+                }
+            } 
+            arrDelete = arr.join(",")
+            console.log(arrDelete)
             this.$http({
                 method: 'get',
-                url: 'http://192.168.112.105/con/move/delete',
+                url: 'http://192.168.112.103/con/move/delete',
                 params: {
                     openId: 'o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
-                    ids: '1'
+                    ids: arrDelete
                 },
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -253,19 +242,11 @@ export default {
                     console.log(error);
                     console.log('网络错误，不能访问');
                 })
-
         },
         onDeleteCard(index, keys) {
-            /*   for (let i = 0; i < this.carditem[keys].length; i++) {
-                    console.log(this.carditem[keys].id)
-              } */
-            /*      var deleteId = this.carditem[keys].forEach((element)=>{
-                     console.log(element.id);
-                     
-                })  */
             this.$http({
                 method: 'get',
-                url: 'http://192.168.112.105/con/move/delete',
+                url: 'http://192.168.112.103/con/move/delete',
                 params: {
                     openId: 'o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
                     ids: this.carditem[keys][index].id
@@ -296,36 +277,41 @@ export default {
             document.body.scrollTop = letter.offsetTop
         },
         /* 搜索 */
-        searchFor(value, seartext) {
+        searchFor(carditem, seartext) {
             for (let keys in this.carditem) {
                 //console.log(this.carditem[keys])
                 if (!this.carditem[keys].length) {
                     delete this.carditem[keys]
                 }
             }
-            var result = {};  //用result来存放查到的结果
-            if (!seartext) { 
+            let result = {};  //用result来存放查到的结果
+            if (!seartext) {
                 return this.carditem;
             }
             seartext = seartext.trim().toLowerCase();   //把查询的内容转为小写的
-            for (var key in this.carditem) {
-                for (var i = 0; i < this.carditem[key].length; i++) {
-                    if (this.carditem[key][i].name.toLowerCase().indexOf(seartext) != -1) {
-                        result[key] = this.carditem[key];
+            for (let keys in this.carditem) {
+                for (let i = 0; i < this.carditem[keys].length; i++) {
+                    if (this.carditem[keys][i].name.toLowerCase().indexOf(seartext) != -1) {
+                        result[keys] = this.carditem[keys];
                     }
                 }
-/*                 for (var i = 0; i < this.carditem[key].length; i++) {
-                   if (this.carditem[key][i].company.indexOf(seartext) != -1) {
-                         result[key] = this.carditem[key];
-                  }
-                } */
             }
             return result;
         },
     },
     computed: {
         carditemText() {
-            return Object.keys(this.carditem);
+            let carditemText = Object.keys(this.carditem);
+            let res = [];
+            for (let t of carditemText) {
+                res.push({
+                    "letters": t,
+                    "target": t.replace(/[~'!@#￥$%^&*()-+_=:]/g, function(str) {
+                        return "\\" + str;
+                    })
+                });
+            }
+            return res;
         },
         /*        carditemLG() {
                    for (let keys in this.carditem) {
@@ -371,6 +357,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../css/cardBox'
 </style>
+
 
 
 
