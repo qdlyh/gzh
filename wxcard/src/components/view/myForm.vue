@@ -7,18 +7,17 @@
                         <router-link to="/cardBox"><img src="../../images/1561651.png" alt=""></router-link>
                     </span>
                 </div>
-                <form action="http://192.168.112.104/con/move/update" method="post" enctype="multipart/form-data">
+                <form action="api/con/move/update" method="post" enctype="multipart/form-data">
                     <div class="edit-form">
-                        <input type="text" name="id" v-model="item.id" class="input-none">
-                        <input type="text" name="openId" v-model="item.openId" class="input-none">
+                        <input type="text" name="id" v-model="item.id" hidden>
+                        <input type="text" name="openId" v-model="item.openId" hidden>
                         <div class="company company-center">
                             <x-input name="company" @on-blur="onLeast()" ref="Least" v-model="item.company" placeholder="请输入您的公司名字" :show-clear="false" :required="true" :min="5" :max="20"></x-input>
-                            <!-- <i class="form-hint">啊啊啊啊啊啊啊啊啊啊</i> -->
                         </div>
                         <div class="file-box">
-                            <img id="file-img" name="picture" :src="'http://192.168.112.104/image/'+item.picture">
-                            <input id="file" name="file" type="file" @change="getFile($event)">
-                            <input type="text" name="oldImg" :value="item.picture" class="input-none">
+                            <img id="file-img" name="picture" :src="'api/image/'+item.picture">
+                            <input id="file" name="file" type="file">
+                            <input type="text" name="oldImg" :value="item.picture" hidden>
                         </div>
                         <div class="user-name">
                             <div style="margin-top:20px;">
@@ -47,7 +46,7 @@
                             </div>
                             <div>
                                 <i><img src="../../images/561561651.png" alt=""></i>
-                                <x-input name="email" placeholder="请输入邮箱地址" @on-blur="onLeast5()" ref="Least5" :show-clear="false" :required="true" is-type="email"></x-input>
+                                <x-input name="email" v-model="item.email" placeholder="请输入邮箱地址" @on-blur="onLeast5()" ref="Least5" :show-clear="false" :required="true" is-type="email"></x-input>
 
                             </div>
                             <div>
@@ -59,19 +58,20 @@
                                 <input @blur="industryLeast()" v-model="industryValue" type="text" placeholder="点击选择公司主营业务">
                                 <span class="WarnIcon" v-show="inputLeast"></span>
                             </div>
-                            <input name="scope" v-for="(i , index) in item.scopes" :key="index" v-model="i.id" class="input-none">
+                            <input name="scope" v-for="(i , index) in item.scopes" :key="index" v-model="i.id" hidden>
                             <div>
                                 <i><img src="../../images/15165161.png" alt=""></i>
                                 <x-input name="address" v-model="item.address" placeholder="请输入公司地址" @on-blur="onLeast6()" ref="Least6" :show-clear="false" :required="true" :min="4" :max="30"></x-input>
                             </div>
                         </div>
                     </div>
-                    <div class="btn-green" @click="submit()">
-                        <x-button type="primary">
-                            <a link="/cardBox">完成</a>
-                        </x-button>
-                    </div>
                 </form>
+
+                <div class="btn-green" @click="submit()">
+                    <x-button type="primary">
+                        <p>完成</p>
+                    </x-button>
+                </div>
 
                 <transition name="fade">
                     <div class="weui-box" v-show="weuiDialog">
@@ -141,6 +141,8 @@ export default {
             industry: false,
             inputLeast: false,
             weuiDialog: false,  //单选框
+            submitTrue: false,
+            submitFalse: false,
             succeed: false,
             succeed2: false,
             succeed3: false,
@@ -181,34 +183,19 @@ export default {
 
 
     mounted() {
-
-        /*        axios({
-                    method: 'post',
-                    url: 'http://hx.tunnel.qydev.com/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
-                    data: {//参数
-                        firstName: 'Fred',
-                        lastName: 'Flintstone'
-                    }
-                }).then(response => {
-                    console.log('post成功');
-                })
-                    .catch(error => {
-                        //console.log(error);
-                        console.log('网络错误，不能访问');
-                        
-              }) */
-        this.$http.get('http://192.168.112.104/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http.get('api/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 //console.log(response.data);
                 //console.log('form成功');
                 this.listData = response.data
+                //console.log(this.listData)
             })
             .catch(error => {
                 console.log(error);
                 console.log('网络错误，不能访问');
             })
 
-        this.$http.get('http://192.168.112.104/con/scope?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http.get('api/con/scope?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 //console.log('tab成功');
                 this.option = response.data
@@ -217,7 +204,7 @@ export default {
                 console.log(error);
                 console.log('网络错误，不能访问');
             })
-        this.$http.get('http://192.168.112.104/con/scope/allChild?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        this.$http.get('api/con/scope/allChild?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
             .then(response => {
                 //console.log('tabs成功');
                 this.tabData = response.data
@@ -229,38 +216,57 @@ export default {
     },
 
     methods: {
-        getFile(event) {
+        /*getFile(event) {
             this.file = event.target.files[0];
             console.log(this.file);
         },
-        /*      var myform = document.querySelector("form");
+              var myform = document.querySelector("form");
                     let formData = new FormData(myform);
                     //formData.append('file', this.file);
                     formData.append('file','event.target.files[0]');
                     formData.append('name', this.name);
                     formData.append('department', this.department); */
-        submit() {
-            var myform = document.querySelector("form");
-            let formData = new FormData(myform);
-            formData.append('file', this.file);
-            formData.append('sex', this.sex);
-            this.$http({
-                method: 'post',
-                url: 'http://192.168.112.104/con/move/update?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
-                data: {
-                    myform
-                },
-
-            })
-                .then(response => {
-                    console.log(response)
-                    console.log('post成功');
-                })
-                .catch(error => {
-                    //console.log(error);
-                    console.log('网络错误，不能访问');
-                })
-        },
+        //submit() {
+        // //let scope = this.listData[0].scopes[0].id
+        // // let scope = [];
+        // // let scopeBox
+        // //  if (this.industryValue.length !== 0) {
+        // //       scope.push(this.listData[0].scopes.id)
+        // //  }
+        // let formData = new FormData();
+        // formData.append('id', this.listData[0].id);
+        // formData.append('openId', this.listData[0].openId);
+        // formData.append('company', this.listData[0].company);
+        // formData.append("file", document.getElementById('file').files[0]);
+        // formData.append('oldImg', this.listData[0].picture);
+        // formData.append('name', this.listData[0].name);
+        // formData.append('department', this.listData[0].department);
+        // formData.append('sex', this.listData[0].sex);
+        // formData.append('telephone', this.listData[0].telephone);
+        // formData.append('fixedLine', this.listData[0].fixedLine);
+        // formData.append('email', this.listData[0].email);
+        // formData.append('scopes',this.listData[0].scopes[0].id);
+        // formData.append('scopes',this.listData[0].scopes[1].id);
+        // formData.append('scopes',this.listData[0].scopes[2].id);
+        // formData.append('net', this.listData[0].net);
+        // formData.append('address', this.listData[0].address);
+        // //formData.append("file", document.getElementById('file').files[0]);
+        // //console.log(formData)
+        // this.$http({
+        //     method: 'post',
+        //     url: 'api/con/move/update',
+        //     headers: { 'Content-Type': 'multipart/form-data' },
+        //     data: formData,
+        // })
+        //     .then(response => {
+        //         console.log(response)
+        //         //console.log('post成功');
+        //     })
+        //     .catch(error => {
+        //         //console.log(error);
+        //         console.log('网络错误，不能访问');
+        //     })
+        //},
 
         goIndustry() {
             if (this.editForm === true) {
@@ -383,22 +389,61 @@ export default {
             }
         },
 
-        /*         submit() {
-                    this.onLeast();
-                    this.onLeast2();
-                    this.onLeast3();
-                    this.onLeast4();
-                    this.onLeast5();
-                    this.onLeast6();
-                    this.industryLeast();
-                    if (this.succeed === false || this.succeed2 === false || this.succeed3 === false || this.succeed4 === false || this.succeed5 === false || this.succeed6 === false || this.inputLeast === !false) {
-                        alert('失败')
-                        return false;
-                    } else {
-                        alert('成功')
-                        return false;
-                    }
-                }, */
+        submit() {
+            let scopex = [];
+            if (this.industryValue.length !== 0) {
+                scopex.push(this.listData[0].scopes.id)
+                console.log(scopex)
+            }
+            this.onLeast();
+            this.onLeast2();
+            this.onLeast3();
+            this.onLeast4();
+            this.onLeast5();
+            this.onLeast6();
+            this.industryLeast();
+            if (this.succeed === false || this.succeed2 === false || this.succeed3 === false || this.succeed4 === false || this.succeed5 === false || this.succeed6 === false || this.inputLeast === !false) {
+                alert('失败')
+                return false;
+            } else {
+                alert('成功')
+                let formData = new FormData();
+                formData.append('id', this.listData[0].id);
+                formData.append('openId', this.listData[0].openId);
+                formData.append('company', this.listData[0].company);
+                formData.append("file", document.getElementById('file').files[0]);
+                formData.append('oldImg', this.listData[0].picture);
+                formData.append('name', this.listData[0].name);
+                formData.append('department', this.listData[0].department);
+                formData.append('sex', this.listData[0].sex);
+                formData.append('telephone', this.listData[0].telephone);
+                formData.append('fixedLine', this.listData[0].fixedLine);
+                formData.append('email', this.listData[0].email);
+                formData.append('scope', scopex);
+                // formData.append('scope', this.listData[0].scopes[1].id);
+                // formData.append('scope', this.listData[0].scopes[2].id);
+                formData.append('net', this.listData[0].net);
+                formData.append('address', this.listData[0].address);
+                //console.log(formData)
+                this.$http({
+                    method: 'post',
+                    url: 'api/con/move/update',
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    data: formData,
+                })
+                    .then(response => {
+                        console.log(response)
+                        //console.log('post成功');
+                    })
+                    .catch(error => {
+                        //console.log(error);
+                        console.log('网络错误，不能访问');
+                    })
+                //3775865050@qq.com
+                //this.$router.push('/myCard')
+                return false;
+            }
+        },
         weuiWarn() {
             this.weuiDialog = false;
         },
@@ -485,4 +530,5 @@ export default {
 <style lang="scss" scoped>
 @import '../../css/myForm'
 </style>
+
 
