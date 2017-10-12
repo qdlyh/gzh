@@ -13,12 +13,23 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
 
         }
     },
+    /*     created() {
+            axios.get('')
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('网络错误，不能访问');
+                })
+        }, */
 }
 </script>
 <style lang="scss" scoped>

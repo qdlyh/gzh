@@ -25,9 +25,9 @@
                     <li @click="showDelete()">选择更多
                         <x-button @click.native="disabled = true" type="warn" :disabled="disabled" id="delete-true">{{('不可操作') }}</x-button>
                     </li>
+                    <li>选择更多</li>
                 </ul>
             </div>
-
             <!-- 删除多选框 -->
             <div class="weui-box" v-show="weuiDialog">
                 <div class="weui-mask"></div>
@@ -52,13 +52,6 @@
                     </div>
                 </div>
             </transition>
-
-            <div class="empty" v-if="!this.carditem">
-                <img src="../../images/41485156.png" alt="">
-                <p>您的名片夹是空的</p>
-                <p>赶紧添加些名片吧</p>
-            </div>
-
             <div class="card-list" v-for="(items, keys ,index) in searchFor(carditem,seartext)" :key="keys">
                 <div class="item-wire" :id="'letter'+ keys">{{keys}}</div>
                 <swipeout v-for="(item,index) in items" :key="index">
@@ -68,11 +61,10 @@
                         </div>
                         <div slot="content" class="demo-content vux-1px-tb">
                             <div class="card-item">
-                                <router-link :to="{ path: '/cardForm/' + item.openId}">
+                                <router-link :to="{path:'/cardForm',params:{id:item.openId}}">
                                     <div class="card-item-box">
                                         <div class="item-img">
-                                            <img v-if="item.picture!==null" :src="'api/image/'+item.picture">
-                                            <img v-else src="../../images/logo.png">
+                                            <img :src="'http://192.168.112.103/image/'+item.picture" alt="">
                                         </div>
                                         <div class="item-msg">
                                             <!-- hidden="hidden" -->
@@ -117,13 +109,13 @@ export default {
     },
     data() {
         return {
-            /*                      carditem: {
-                                             A: [{id: 82,flag: false,}],
-                                             B: [{id: 83,flag: false,}],
-                                             C: [{id: 84,flag: false,}],
-                                             D: [{id: 85,flag: false,}],
-                                             E: [{id: 86,flag: false,}],
-                               },  */
+/*                      carditem: {
+                                 A: [{id: 82,flag: false,}],
+                                 B: [{id: 83,flag: false,}],
+                                 C: [{id: 84,flag: false,}],
+                                 D: [{id: 85,flag: false,}],
+                                 E: [{id: 86,flag: false,}],
+                   },  */
             /*     carditem: {
                        A: [{id:"78", name: '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false }, {id:"71", "name": '伊利丹1', occupation: '广告摄影师', company: '公司', flag: false },],
                        B: [{id:"72", name: '伊利丹2', occupation: '广告摄影师', company: '公司', flag: false },],
@@ -158,16 +150,12 @@ export default {
             deleteIcon: false,
             checkbox: false,
             weuiDialog: false,
-            carditemLG:'',
         }
     },
     mounted() {
         this.$http({
             method: 'get',
-            url: 'api/con/move/list',
-            params: {
-                openId: this.$parent.wxOpenId,
-            },
+            url: 'http://192.168.112.103/con/move/list?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
         })
             .then(response => {
                 //console.log('成功');
@@ -218,27 +206,27 @@ export default {
             this.weuiDialog = false;
             let arr = [];
             let arrDelete
-            /*             for (let keys in this.carditem) {
-                            this.carditem[keys] = this.carditem[keys].filter((all) => {
-                                return all.flag === false;
-                            })
-                        } */
+/*             for (let keys in this.carditem) {
+                this.carditem[keys] = this.carditem[keys].filter((all) => {
+                    return all.flag === false;
+                })
+            } */
             for (let keys in this.carditem) {
                 for (let i = 0; i < this.carditem[keys].length; i++) {
                     if (this.carditem[keys][i].flag) {
                         //console.log(this.carditem[keys][i].id)
                         arr.push(this.carditem[keys][i].id)
-                        this.carditem[keys].splice(i, 1)
+                        this.carditem[keys].splice(i,1)
                     }
                 }
-            }
+            } 
             arrDelete = arr.join(",")
-            //console.log(arrDelete)
+            console.log(arrDelete)
             this.$http({
                 method: 'get',
-                url: 'api/con/move/delete',
+                url: 'http://192.168.112.103/con/move/delete',
                 params: {
-                    openId: this.$parent.wxOpenId,
+                    openId: 'o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
                     ids: arrDelete
                 },
                 headers: {
@@ -258,9 +246,9 @@ export default {
         onDeleteCard(index, keys) {
             this.$http({
                 method: 'get',
-                url: 'api/con/move/delete',
+                url: 'http://192.168.112.103/con/move/delete',
                 params: {
-                    openId: this.$parent.wxOpenId,
+                    openId: 'o03n2w4MHPzjlYMkRQ7qeYXQi4X0',
                     ids: this.carditem[keys][index].id
                 },
                 headers: {
@@ -335,11 +323,41 @@ export default {
                    return this.carditem
                } */
     },
+    watch: {
+        /*         seartext(cur) {
+                    if (cur == '') {
+                        this.carditem = this.copycarditem;
+                        //console.log(this.copycarditem)
+                    }
+                    else {
+                        this.searlist = [];
+                        for (let keys in this.carditem){
+                            //console.log(this.carditem[keys])
+                            for (let i = 0; i < this.carditem.length; i++) {
+                                if (this.carditem[i].indexOf(cur) >= 0) {
+                                    this.searlist.push(this.carditem[i]);
+                                }
+                            }
+                        }
+                        this.carditem = this.searlist;
+                    }
+                } */
+    }
 
+    /*     for (let keys in this.carditem){
+            //console.log(this.carditem[keys])
+            for (let i = 0; i < this.carditem[keys].length; i++) {
+                if(this.carditem[key][i].name == cur){
+                    
+                }
+            }
+        } */
 }
 </script>
 <style lang="scss" scoped>
 @import '../../css/cardBox'
 </style>
+
+
 
 

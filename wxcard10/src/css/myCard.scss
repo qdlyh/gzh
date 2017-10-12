@@ -1,22 +1,4 @@
 $text-color:#555b5a;
-
-.empty {
-    img {
-        display: block;
-        width: 425px;
-        margin: 0 auto;
-        margin-top: 100px;
-        margin-bottom: 100px;
-    }
-    p {
-        text-align: center;
-        font-family: 'pingfang sc regular';
-        font-size: 28px;
-        color: #D3D3D3;
-    }
-}
-
-
 .company-name {
   margin-top: 36px;
   height: 48px;
@@ -29,16 +11,14 @@ $text-color:#555b5a;
 
 .company-logo {
   margin-top: 24px;
-  width: 160px;
-  height: 160px;
-  margin: 0 auto;
+  text-align: center;
   img {
     width: 160px;
     height: 160px;
     border-radius: 50%;
+    /* background: #000; */
   }
 }
-
 .message-name {
   text-align: center;
   ul {
@@ -91,16 +71,17 @@ $text-color:#555b5a;
       font-size: 24px;
       text-align: right;
       color: $text-color;
-    } // .industry-p {
-    //   display: flex;
-    //   justify-content: flex-end;
-    //   height: 72px;
-    //   font-size: 24px;
-    //   text-align: right;
-    //   color: $text-color;
-    //   span{
-    //     margin: 0 5px;
-    //   }
-    // }
+    }
+    .industry-p {
+      display: flex;
+      justify-content: flex-end;
+      height: 72px;
+      font-size: 24px;
+      text-align: right;
+      color: $text-color;
+      span{
+        margin: 0 5px;
+      }
+    }
   }
 }

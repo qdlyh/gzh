@@ -153,6 +153,8 @@ $text-color:#5c5c5c;
   color: $text-color;
 }
 
+
+
 #industry-page {
   max-width: 750px;
   height: 100%;
@@ -245,6 +247,9 @@ $text-color:#5c5c5c;
   }
 }
 
+.input-none{
+  display: none;
+}
 
 /* 自定义职业警告图标 */
 
@@ -256,7 +261,6 @@ $text-color:#5c5c5c;
     font-size: 28px;
   }
 }
-
 
 /* .form-hint {
   position: relative;

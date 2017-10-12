@@ -1,6 +1,15 @@
 <template>
     <div>
-        <div class="myCard">
+
+        <div class="empty" v-if="!this.listData">
+            <img src="../../images/41485156.png" alt="">
+            <p>尚未填写您的名片信息</p>
+            <div class="btn-blue">
+                <router-link to="/myForm">完善资料</router-link>
+            </div>
+        </div>
+
+        <div class="myCard" v-else>
             <div class="page-top">
                 <letfNav>
                     <a href="javascript:;"><img src="../../images/631561651.png" alt=""></a>
@@ -12,7 +21,7 @@
                     </span>
                     <div class="icon-line"></div>
                     <span>
-                        <router-link to='/myForm'><img src="../../images/156165165.png" alt=""></router-link>
+                        <router-link to="/myForm"><img src="../../images/156165165.png" alt=""></router-link>
                     </span>
                 </div>
             </div>
@@ -22,7 +31,8 @@
                     <p>{{item.company}}</p>
                 </div>
                 <div class="company-logo">
-                    <img :src="'http://hx.tunnel.qydev.com/image/'+item.picture" alt="">
+                    <img v-if="item.picture!==null" :src="'api/image/'+item.picture">
+                    <img v-else src="../../images/logo.png">
                 </div>
                 <div class="message-name">
                     <ul>
@@ -54,10 +64,7 @@
                     </div>
                     <div>
                         <i><img src="../../images/165165165.png" alt=""></i>
-                        <!-- <p>{{item.scopes[0].title}};{{item.scopes[1].title}};</p> -->
-                        <div class="industry-p">
-                            <span v-for="(t , index) in item.scopes" :key="index">{{t.title}}</span>
-                        </div>
+                        <p>{{scopes}}</p>
                     </div>
                     <div>
                         <i><img src="../../images/15165161.png" alt=""></i>
@@ -68,7 +75,7 @@
                     <div class="weui-box" v-show="wxImg">
                         <div class="weui-mask" @click="wxImg = false"></div>
                         <div class="weui-Wx">
-                            <div><img :src="'http://hx.tunnel.qydev.com/qrcode/'+item.coreFileName" alt=""></div>
+                            <div><img :src="'api/qrcode/'+item.coreFileName" alt=""></div>
                         </div>
                     </div>
                 </transition>
@@ -91,31 +98,20 @@ export default {
         }
     },
     mounted() {
-/*         function UrlSearch() {
-            var name, value;
-            var str = location.href; //取得整个地址栏
-            var num = str.indexOf("?")
-            str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
-
-            var arr = str.split("&"); //各个参数放到数组里
-            for (var i = 0; i < arr.length; i++) {
-                num = arr[i].indexOf("=");
-                if (num > 0) {
-                    name = arr[i].substring(0, num);
-                    value = arr[i].substr(num + 1);
-                    this[name] = value;
-                }
+        //  alert(this.$parent.wxOpenId)
+        //  return
+        this.$http({
+            method: 'get',
+            url: 'api/con/move',
+            params: {
+                openId: this.$parent.wxOpenId
             }
-        }
-        var OpenId = new UrlSearch(); //实例化
-        alert(OpenId.id); */
-
-        this.$http.get('http://hx.tunnel.qydev.com/con/move?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
+        })
             .then(response => {
-                console.log(response);
-                console.log(response.data);
-                console.log('成功');
-                this.listData = response.data
+                //console.log(response);
+                //console.log(response.data);
+                //console.log('成功');
+                this.listData = response.data;
             })
             .catch(error => {
                 console.log(error);
@@ -127,6 +123,19 @@ export default {
             this.wxImg = !false;
         },
     },
+    computed: {
+        scopes() {
+            let arr = [];
+            let scopeBox;
+            for (let i = 0; i < this.listData[0].scopes.length; i++) {
+                console.log(this.listData[0].scopes[i].title)
+                arr.push(this.listData[0].scopes[i].title)
+            }
+            scopeBox = arr.join("; ")
+            //console.log(scopeBox)
+            return scopeBox
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

@@ -12,14 +12,9 @@ import cardForm from '@/components/view/cardForm'
 
 Vue.use(Router)
 
-const Foo1 = () => view('../cardBox')
-const Foo2 = () => view('../cardForm')
-const Foo3 = () => view('../myCard')
-const Foo4 = () => view('../myForm')
-
 export default new Router({
   routes: [{
-      path: 'empty',
+      path: '/',
       name: 'empty',
       component: empty
     },
@@ -44,7 +39,7 @@ export default new Router({
       component: cardBox
     },
     {
-      path: '/cardForm/:id',
+      path: '/cardForm',
       name: 'cardForm',
       component: cardForm
     },

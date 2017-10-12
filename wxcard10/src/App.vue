@@ -11,39 +11,30 @@ export default {
   },
   data() {
     return {
-      wxOpenId: '',
+  
     }
   },
-  created() {
-    function UrlSearch() {
-      var name, value;
-      var str = location.href; //取得整个地址栏
-      var num = str.indexOf("?")
-      str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
+   mounted() {
+         function UrlSearch() {
+            var name, value;
+            var str = location.href; //取得整个地址栏
+            var num = str.indexOf("?")
+            str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
 
-      var arr = str.split("&"); //各个参数放到数组里
-      for (var i = 0; i < arr.length; i++) {
-        num = arr[i].indexOf("=");
-        if (num > 0) {
-          name = arr[i].substring(0, num);
-          value = arr[i].substr(num + 1);
-          this[name] = value;
+            var arr = str.split("&"); //各个参数放到数组里
+            for (var i = 0; i < arr.length; i++) {
+                num = arr[i].indexOf("=");
+                if (num > 0) {
+                    name = arr[i].substring(0, num);
+                    value = arr[i].substr(num + 1);
+                    this[name] = value;
+                }
+            }
         }
-      }
-    }
-    var OpenId = new UrlSearch(); //实例化
-    //alert(OpenId.id);
-    if (OpenId.id == null) {
-      //alert('不存在');
-      this.wxOpenId = localStorage.getItem("idear")
-      return false;
-    } else {
-      localStorage.setItem("idear", OpenId.id)
-      this.wxOpenId = localStorage.getItem("idear")
-      //alert('存在')
-    }
-    //alert(this.wxOpenId)
-  },
+        var OpenId = new UrlSearch(); //实例化
+        //alert(OpenId.id); 
+
+   }
 }
 </script>
 
@@ -65,26 +56,12 @@ body {
 
 
 
-
-
-
-
-
-
-
 /* x-input红色警告伪类 */
 
 .vux-input-icon.weui-icon-warn:before,
 .vux-input-icon.weui-icon-success:before {
   font-size: 28px !important;
 }
-
-
-
-
-
-
-
 
 
 /* 表单公司居中 */
@@ -101,12 +78,15 @@ body {
 
 
 
-/* input隐藏 */
 
 
-/*.input-none{
-  display: none; 
-}*/
+
+
+
+
+
+
+
 
 
 /* 返回 */
@@ -118,10 +98,8 @@ body {
   background: #383C43;
   display: flex;
   justify-content: space-between;
-  span,
-  a {
+  span {
     width: 88px;
-    height: 88px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -147,13 +125,6 @@ body {
     margin-top: 23px;
   }
 }
-
-
-
-
-
-
-
 
 
 
@@ -205,14 +176,11 @@ body {
   overflow: hidden;
   .weui-dialog__hd {
     padding: 1.3em 1.6em .5em;
-    strong {
-      font-size: 19px;
-    }
   }
   .weui-dialog__bd {
     padding: 0 1.6em .8em;
-    min-height: 50px;
-    font-size: 18px;
+    min-height: 40px;
+    font-size: 15px;
     line-height: 1.3;
     word-wrap: break-word;
     word-break: break-all;
@@ -221,7 +189,7 @@ body {
   .weui-dialog__ft {
     position: relative;
     line-height: 48px;
-    font-size: 20px;
+    font-size: 19px;
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -271,13 +239,6 @@ body {
 
 
 
-
-
-
-
-
-
-
 /* 微信图片弹出 */
 
 .weui-Wx {
@@ -294,16 +255,13 @@ body {
   overflow: hidden;
 }
 
-.weui-btn {
-  height: 72px;
-}
+
 
 .btn-green {
   /*  <x-button type="primary">primary</x-button> */
   margin: 100px 24px;
-  p {
+  a {
     color: #fff;
-    font-size: 24px;
   }
 }
 

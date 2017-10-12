@@ -8,8 +8,7 @@
         <ul>
           <div class="Message-box">
             <div class="menu-img">
-              <img v-if="msg.picture!==null" :src="'api/image/'+msg.picture">
-              <img v-else src="../../images/logo.png">
+              <img src="../../images/logo.png" :src="'http://hx.tunnel.qydev.com/image/'+msg.picture">
             </div>
             <div class="menuMsg">
               <span>{{msg.name}}</span>
@@ -17,20 +16,19 @@
               <p class="occupation">{{msg.department}}</p>
             </div>
             <!--          <div class="menuMsg-number" @click="toggle()">
-                            <div>
-                              <p>收藏量</p>
-                              <p>{{msg.number}}</p>
-                            </div>
-                            <div class="line"></div>
-                            <div>
-                              <p>名片量</p>
-                              <p>{{msg.numbers}}</p>
-                            </div>
-                          </div> -->
+                <div>
+                  <p>收藏量</p>
+                  <p>{{msg.number}}</p>
+                </div>
+                <div class="line"></div>
+                <div>
+                  <p>名片量</p>
+                  <p>{{msg.numbers}}</p>
+                </div>
+              </div> -->
           </div>
-          <div class="menNav" @click="toggle()">
-            <router-link to="/myCard">我的名片</router-link>
-            <router-link to="/cardBox">名片夹</router-link>
+          <div class="menNav">
+            <li @click="toggle()" v-for="(nav,index) in menuNav" :key="index">{{nav.name}}</li>
           </div>
         </ul>
         <div class="cover" @click="toggle()"></div>
@@ -44,23 +42,19 @@ import { WechatPlugin } from 'vux'
 export default {
   data() {
     return {
-      menuMsg: [],
+      /* menuMsg: [{ myname: '伊利丹', occupation: '广告摄影师', number: '123', numbers: '321', mycard: '我的名片', namea: '我的收藏', nameb: '名片夹', namec: '扫一扫' }], */
+      menuMsg:[],
+      menuNav: [{ name: '我的名片' }, { name: '我的收藏' }, { name: '名片夹' }, { name: '扫一扫' }],
       open: false,
       block: false,
     }
   },
   mounted() {
-    this.$http({
-      method: 'get',
-      url: 'api/con/move',
-      params: {
-        openId: this.$parent.$parent.wxOpenId
-      }
-    })
+    this.$http.get('http://hx.tunnel.qydev.com/con/move/?openId=o03n2w4MHPzjlYMkRQ7qeYXQi4X0')
       .then(response => {
         //console.log(response);
         //console.log(response.data);
-        //console.log('菜单栏成功');
+        console.log('菜单栏成功');
         this.menuMsg = response.data
       })
       .catch(error => {
@@ -110,20 +104,8 @@ export default {
   img {
     width: 160px;
     height: 160px;
-    border-radius: 50%; 
-    // position: relative;
-    // /* background: #fff; */
-    // &::after {
-    //   width: 160px;
-    //   height: 160px;
-    //   border-radius: 50%;
-    //   content: url('../../images/logo2.png');
-    //   display: block;
-    //   position: absolute; //图片加载失败显示默认图
-    //   top: 0;
-    //   left: 0;
-    //   background-color: #fff;
-    // }
+    border-radius: 50%;
+    /* background: #fff; */
   }
 }
 
@@ -149,7 +131,8 @@ export default {
   width: 360px;
   height: 72px;
   div {
-    width: 179.5px; //float: left;
+    width: 179.5px;
+    float: left;
     display: inline-block;
     color: #c6c6c6;
     cursor: pointer;
@@ -192,9 +175,8 @@ export default {
     -webkit-overflow-scrolling: touch;
   }
   .menNav {
-    a {
-      width: 360px;
-      display: inline-block;
+    width: 360px;
+    li {
       height: 84px;
       font-size: 28px;
       color: #fff;
@@ -202,7 +184,7 @@ export default {
       text-align: left;
       padding-left: 100px;
       &:active {
-        background: #34363d;
+        background: #ccc;
       }
     }
   }
