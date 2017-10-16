@@ -72,49 +72,12 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /* x-input红色警告伪类 */
 
 .vux-input-icon.weui-icon-warn:before,
 .vux-input-icon.weui-icon-success:before {
   font-size: 28px !important;
 }
-
-
-
-
-
-
-
-
-
-
-/* x-input下划线 */
-
-.weui-cell__bd {
-  border-bottom: 1px solid #b4b4b4;
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -131,17 +94,6 @@ body {
     text-align: center;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -222,17 +174,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /* 单选 */
 
 .weui-mask,
@@ -252,8 +193,8 @@ body {
   position: fixed;
   transition: opacity .5s;
   z-index: 5000;
-  width: 70%; // max-width: 300px;
-  // height: 30%;
+  width: 80%;
+  max-width: 300px;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -263,17 +204,15 @@ body {
   border-radius: 3px;
   overflow: hidden;
   .weui-dialog__hd {
-    // padding: 1.3em 1.6em .5em;
-    height: 100px;
-    line-height: 100px;
+    padding: 1.3em 1.6em .5em;
     strong {
-      font-size: 28px;
+      font-size: 19px;
     }
   }
   .weui-dialog__bd {
     padding: 0 1.6em .8em;
-    min-height: 100px;
-    font-size: 28px;
+    min-height: 50px;
+    font-size: 18px;
     line-height: 1.3;
     word-wrap: break-word;
     word-break: break-all;
@@ -282,7 +221,7 @@ body {
   .weui-dialog__ft {
     position: relative;
     line-height: 48px;
-    font-size: 28px;
+    font-size: 20px;
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -302,8 +241,6 @@ body {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     flex: 1;
-    height: 100px;
-    line-height: 100px;
     color: #3cc51f;
     text-decoration: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -341,16 +278,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
 /* 微信图片弹出 */
 
 .weui-Wx {
@@ -365,14 +292,10 @@ body {
   transform: translate(-50%, -50%);
   text-align: center;
   overflow: hidden;
-  img {
-    width: 430px;
-    height: 430px;
-  }
 }
 
 .weui-btn {
-  height: 92px;
+  height: 72px;
 }
 
 .btn-green {
@@ -410,82 +333,6 @@ body {
     &:active {
       background: #78b4ed;
     }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* loading */
-
-.loading-box {
-  position: relative;
-  .loading {
-    position: fixed;
-    transition: opacity .5s;
-    z-index: 5000;
-    width: 150px;
-    height: 15px;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-
-  .loading span {
-    display: inline-block;
-    width: 15px;
-    height: 100%;
-    margin-right: 5px;
-    border-radius: 50%;
-    background: lightgreen;
-    -webkit-animation: load 1.04s ease infinite;
-  }
-
-  .loading span:last-child {
-    margin-right: 0px;
-  }
-
-  @-webkit-keyframes load {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .loading span:nth-child(1) {
-    -webkit-animation-delay: 0.13s;
-  }
-
-  .loading span:nth-child(2) {
-    -webkit-animation-delay: 0.26s;
-  }
-
-  .loading span:nth-child(3) {
-    -webkit-animation-delay: 0.39s;
-  }
-
-  .loading span:nth-child(4) {
-    -webkit-animation-delay: 0.52s;
-  }
-
-  .loading span:nth-child(5) {
-    -webkit-animation-delay: 0.65s;
   }
 }
 </style>

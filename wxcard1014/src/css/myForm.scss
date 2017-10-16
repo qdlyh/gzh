@@ -19,7 +19,7 @@ $text-color:#5c5c5c;
 
 .company {
   text-align: center;
-  // border-bottom: 1px solid #b4b4b4;
+  border-bottom: 1px solid #b4b4b4;
   font-size: 24px;
   color: $text-color;
   input {
@@ -35,7 +35,7 @@ $text-color:#5c5c5c;
   width: 120px;
   height: 120px;
   float: left;
-  margin-top: 28px;
+  margin-top: 23px;
   img {
     @extend .file-box;
     position: absolute;
@@ -50,7 +50,7 @@ $text-color:#5c5c5c;
   height: 72px;
   line-height: 72px;
   margin-left: 140px;
-  // border-bottom: 1px solid #b4b4b4;
+  border-bottom: 1px solid #b4b4b4;
   font-size: 24px;
   color: $text-color;
   input {
@@ -106,6 +106,7 @@ $text-color:#5c5c5c;
   transition: .2s;
   -webkit-transition: .2s;
 }
+
 .user-message>div {
   height: 72px;
   line-height: 72px;
@@ -113,19 +114,22 @@ $text-color:#5c5c5c;
   display: flex;
   align-items: center;
   font-size: 24px;
-  // border-bottom: 1px solid #b4b4b4;
+  border-bottom: 1px solid #b4b4b4;
   i {
     width: 48px;
     height: 48px;
     text-align: center;
     margin-right: 24px;
   }
+  /*   span {
+    margin: 0 12px;
+    float: right;
+  } */
   input {
     width: 100%;
-    height: 70px;
+    height: 72px;
     font-size: 24px;
     color: $text-color;
-    border-bottom: 1px solid #b4b4b4;
   }
    ::-webkit-input-placeholder {
     color: $input-color;

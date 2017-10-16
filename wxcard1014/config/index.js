@@ -6,7 +6,7 @@ module.exports = {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'statics',
+    assetsSubDirectory: 'static',
     assetsPublicPath: './',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
@@ -25,18 +25,17 @@ module.exports = {
     env: require('./dev.env'),
     port: 8080,
     autoOpenBrowser: true,
-    assetsSubDirectory: 'statics',
+    assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/apiData': {
-        target: 'http://hx.tunnel.qydev.com/vcard-manage-web/',
-        //target: 'http://hx.tunnel.qydev.com/vcard-manage-web',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/apiData': ''
-        }
-      }
-    },
+      '/api': {
+       target: 'http://hx.tunnel.qydev.com',
+       changeOrigin:true,
+       pathRewrite: {
+         '^/api': ''
+         }
+       }
+     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)

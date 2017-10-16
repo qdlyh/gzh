@@ -1,18 +1,15 @@
 <template>
     <div>
 
-        <!-- <div class="empty" v-if="!this.listData">
-                <img src="../../images/41485156.png" alt="">
-                <p>尚未填写您的名片信息</p>
-                <div class="btn-blue">
-                    <router-link to="/myForm">完善资料</router-link>
-                </div>
-            </div> -->
-        <div v-if="this.listData[0].subscribe==0">
-            <p>您还没关注该公众号哦!!!</p>
+        <div class="empty" v-if="!this.listData">
+            <img src="../../images/41485156.png" alt="">
+            <p>尚未填写您的名片信息</p>
+            <div class="btn-blue">
+                <router-link to="/myForm">完善资料</router-link>
+            </div>
         </div>
 
-        <div class="myCard" v-if="this.listData[0].subscribe==0">
+        <div class="myCard" v-else>
             <div class="page-top">
                 <letfNav>
                     <a href="javascript:;"><img src="../../images/631561651.png" alt=""></a>
@@ -34,7 +31,7 @@
                     <p>{{item.company}}</p>
                 </div>
                 <div class="company-logo">
-                    <img v-if="item.picture!==null" :src="'apiData/image/'+item.picture">
+                    <img v-if="item.picture!==null" :src="'api/image/'+item.picture">
                     <img v-else src="../../images/logo.png">
                 </div>
                 <div class="message-name">
@@ -53,11 +50,7 @@
                         <i><img src="../../images/1561561651.png" alt=""></i>
                         <p>{{item.telephone}}</p>
                     </div>
-                    <div v-if="item.telephone2!=''">
-                        <i></i>
-                        <p>{{item.telephone2}}</p>
-                    </div>
-                    <div v-if="item.fixedLine!=''">
+                    <div>
                         <i><img src="../../images/41651651.png" alt=""></i>
                         <p>{{item.fixedLine}}</p>
                     </div>
@@ -65,10 +58,9 @@
                         <i><img src="../../images/561561651.png" alt=""></i>
                         <p>{{item.email}}</p>
                     </div>
-                    <div v-if="item.net!=''">
+                    <div>
                         <i><img src="../../images/11651651.png" alt=""></i>
-                        <a :href="item.net">{{item.net}}</a>
-                        <!-- <a :href="'http://'+item.net">{{item.net}}</a> -->
+                        <p>{{item.net}}</p>
                     </div>
                     <div>
                         <i><img src="../../images/165165165.png" alt=""></i>
@@ -83,7 +75,7 @@
                     <div class="weui-box" v-show="wxImg">
                         <div class="weui-mask" @click="wxImg = false"></div>
                         <div class="weui-Wx">
-                            <div><img :src="'apiData/qrcode/'+item.coreFileName" alt=""></div>
+                            <div><img :src="'api/qrcode/'+item.coreFileName" alt=""></div>
                         </div>
                     </div>
                 </transition>
@@ -110,7 +102,7 @@ export default {
         //  return
         this.$http({
             method: 'get',
-            url: 'apiData/con/move',
+            url: 'api/con/move',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -143,7 +135,7 @@ export default {
             //console.log(scopeBox)
             return scopeBox
         }
-    },
+    }
 }
 </script>
 <style lang="scss" scoped>

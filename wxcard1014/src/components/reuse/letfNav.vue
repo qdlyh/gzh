@@ -8,7 +8,7 @@
         <ul>
           <div class="Message-box">
             <div class="menu-img">
-              <img v-if="msg.picture!==null" :src="'apiData/image/'+msg.picture">
+              <img v-if="msg.picture!==null" :src="'api/image/'+msg.picture">
               <img v-else src="../../images/logo.png">
             </div>
             <div class="menuMsg">
@@ -52,7 +52,7 @@ export default {
   mounted() {
     this.$http({
       method: 'get',
-      url: 'apiData/con/move',
+      url: 'api/con/move',
       params: {
         openId: this.$parent.$parent.wxOpenId
       }

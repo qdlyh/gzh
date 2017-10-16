@@ -3,22 +3,30 @@ import Router from 'vue-router'
 import wx from 'weixin-js-sdk'
 import myForm from '@/components/view/myForm'
 import myCard from '@/components/view/myCard'
+import form from '@/components/view/form'
+import userCard from '@/components/view/userCard'
 import cardBox from '@/components/view/cardBox'
-import Error from '@/components/view/Error'
-import youCard from '@/components/view/youCard'
+import empty from '@/components/view/empty'
+import cardEmpty from '@/components/view/cardEmpty'
+import cardForm from '@/components/view/cardForm'
 
 Vue.use(Router)
 
 const Foo1 = () => view('../cardBox')
-const Foo2 = () => view('../youCard')
+const Foo2 = () => view('../cardForm')
 const Foo3 = () => view('../myCard')
 const Foo4 = () => view('../myForm')
 
 export default new Router({
   routes: [{
-      path: '/myCard',
-      name: 'myCard',
-      component: myCard
+      path: 'empty',
+      name: 'empty',
+      component: empty
+    },
+    {
+      path: '/cardEmpty',
+      name: 'cardEmpty',
+      component: cardEmpty
     },
     {
       path: '/myCard',
@@ -36,14 +44,9 @@ export default new Router({
       component: cardBox
     },
     {
-      path: '/youCard/:id',
-      name: 'youCard',
-      component: youCard
-    },
-    {
-      path: '*',
-      name: 'Error',
-      component: Error,
+      path: '/cardForm/:id',
+      name: 'cardForm',
+      component: cardForm
     },
   ]
 })

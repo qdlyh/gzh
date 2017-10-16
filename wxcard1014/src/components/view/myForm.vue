@@ -7,27 +7,21 @@
                         <router-link to="/myCard"><img src="../../images/1561651.png" alt=""></router-link>
                     </span>
                 </div>
-                <form action="/con/move/update" method="post" enctype="multipart/form-data">
+                <form action="api/con/move/update" method="post" enctype="multipart/form-data">
                     <div class="edit-form">
                         <input type="text" name="id" v-model="item.id" hidden>
                         <input type="text" name="openId" v-model="item.openId" hidden>
                         <div class="company company-center">
-                            <x-input name="company" @on-blur="onLeast()" ref="Least" v-model="item.company" placeholder="请输入您的公司名字" :show-clear="false" :required="true" :min="2" :max="20"></x-input>
+                            <x-input name="company" @on-blur="onLeast()" ref="Least" v-model="item.company" placeholder="请输入您的公司名字" :show-clear="false" :required="true" :min="5" :max="20"></x-input>
                         </div>
                         <div class="file-box">
-                            <!-- <input id="file" name="file" type="file" @change="getPicture()">
-                            <canvas id="myCanvas" style="display: none"></canvas>
-                            <img id="file-img" name="picture" :src="'/image/'+item.picture">
-                            <input type="button" value="ya suo->" @click="pressss()" /> 
-                            <img src="" alt="" id="getPic">
-                            <input type="text" name="oldImg" :value="item.picture" hidden> -->
-                            <img id="file-img" name="picture" :src="'apiData/image/'+item.picture">
+                            <img id="file-img" name="picture" :src="'api/image/'+item.picture">
                             <input id="file" name="file" type="file">
                             <input type="text" name="oldImg" :value="item.picture" hidden>
                         </div>
                         <div class="user-name">
                             <div style="margin-top:20px;">
-                                <x-input name="name" v-model="item.name" @on-blur="onLeast2()" ref="Least2" placeholder="请输入您的名字" :show-clear="false" :required="true" :min="1" :max="6"></x-input>
+                                <x-input name="name" v-model="item.name" @on-blur="onLeast2()" ref="Least2" placeholder="请输入您的名字" :show-clear="false" :required="true" :min="2" :max="6"></x-input>
                             </div>
                             <div>
                                 <x-input name="department" v-model="item.department" @on-blur="onLeast3()" ref="Least3" placeholder="请输入您的职位" :show-clear="false" :required="true" :min="2" :max="6"></x-input>
@@ -47,25 +41,21 @@
                                 <x-input name="telephone" v-model="item.telephone" @on-blur="onLeast4()" ref="Least4" placeholder="请输入手机号码" :show-clear="false" :required="true" keyboard="number" is-type="china-mobile"></x-input>
                             </div>
                             <div>
-                                <i></i>
-                                <x-input name="telephone2" v-model="item.telephone2" @on-blur="telephone2()" ref="phone2" placeholder="请输入手机号码(选填)" :show-clear="false" keyboard="number" is-type="china-mobile"></x-input>
-                            </div>
-                            <div>
                                 <i><img src="../../images/41651651.png" alt=""></i>
                                 <x-input v-model="item.fixedLine" name="fixedLine" :show-clear="false" :min="7" :max="15" placeholder="请输入您的座机号码"></x-input>
                             </div>
                             <div>
                                 <i><img src="../../images/561561651.png" alt=""></i>
                                 <x-input name="email" v-model="item.email" placeholder="请输入邮箱地址" @on-blur="onLeast5()" ref="Least5" :show-clear="false" :required="true" is-type="email"></x-input>
+
                             </div>
                             <div>
                                 <i><img src="../../images/11651651.png" alt=""></i>
-                                <input v-model="item.net" name="net" id="Net" @blur="LeastNet()" type="text" placeholder="请输入您的公司官方网址">
-                                <span class="WarnIcon" v-show="netLeast"></span>
+                                <x-input v-model="item.net" name="net" :show-clear="false" placeholder="请输入您的公司官方网址"></x-input>
                             </div>
                             <div @click="goIndustry()">
                                 <i><img src="../../images/165165165.png" alt=""></i>
-                                <input @click="industryLeast()" v-model="industryValue" type="text" placeholder="点击选择公司主营业务">
+                                <input @blur="industryLeast()" v-model="industryValue" type="text" placeholder="点击选择公司主营业务">
                                 <span class="WarnIcon" v-show="inputLeast"></span>
                             </div>
                             <div>
@@ -76,26 +66,10 @@
                     </div>
                 </form>
 
-                <div class="btn-green" @click="submit()" v-show="btnTrue">
+                <div class="btn-green" @click="submit()">
                     <x-button type="primary">
                         <p>完成</p>
                     </x-button>
-                </div>
-                <div class="btn-green" v-show="btnFalse">
-                    <x-button type="primary">
-                        <p>完成</p>
-                    </x-button>
-                </div>
-
-                <div class="loading-box" v-show="loading">
-                    <div class="weui-mask"></div>
-                    <div class="loading">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
                 </div>
 
                 <transition name="fade">
@@ -163,12 +137,8 @@ export default {
             activeIndex: 0,
             tabIndex: 0,
             editForm: true,
-            btnTrue: true,
-            btnFalse: false,
-            loading: false,
             industry: false,
-            inputLeast: false,  //主营
-            netLeast: false,     //网址
+            inputLeast: false,
             weuiDialog: false,  //单选框
             submitTrue: false,
             submitFalse: false,
@@ -178,7 +148,6 @@ export default {
             succeed4: false,
             succeed5: false,
             succeed6: false,
-            phoneNull: false,
             listData: [],
             scopesId: [],    //存放选中主营的ID
             //tabBox: [],
@@ -197,16 +166,10 @@ export default {
         var $file = document.getElementById('file')
         function readFile() {
             var $fileImg = document.getElementById('file-img')
-            var imagSize = document.getElementById("file").files[0].size
             var file = this.files[0];
-            console.log(file)
             if (!/image\/\w+/.test(file.type)) {
                 //alert("请选择图片类型");
                 return false;
-            }
-            if (imagSize > 1024 * 1024 * 3) {
-                alert('图片不能大于3M');
-                return true;
             }
             var reader = new FileReader();
             reader.readAsDataURL(file);
@@ -222,7 +185,7 @@ export default {
     mounted() {
         this.$http({
             method: 'get',
-            url: 'apiData/con/move',
+            url: 'api/con/move',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -241,7 +204,7 @@ export default {
         // this.$http.get('api/con/scope?openId=' + this.$route.params.id)
         this.$http({
             method: 'get',
-            url: 'apiData/con/scope',
+            url: 'api/con/scope',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -257,7 +220,7 @@ export default {
         // this.$http.get('api/con/scope/allChild?openId=' + this.$route.params.id)
         this.$http({
             method: 'get',
-            url: 'apiData/con/scope/allChild',
+            url: 'api/con/scope/allChild',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -273,45 +236,6 @@ export default {
     },
 
     methods: {
-
-        // getPicture() {
-        //     var $fileImg = document.getElementById('file-img')
-        //     var Cnv = document.getElementById('myCanvas');
-        //     var Cntx = Cnv.getContext('2d');//获取2d编辑容器
-        //     var file = document.getElementById('file').files[0]
-        //     var reader = new FileReader();
-        //     reader.readAsDataURL(file);
-        //     reader.onload = function(e) {
-        //         if (!/image\/\w+/.test(file.type)) {
-        //             //alert("请选择图片类型");
-        //             return false;
-        //         }
-        //         $fileImg.src = e.target.result;
-        //         $fileImg.onload = function() {
-        //             //等比缩放
-        //             var m = $fileImg.width / $fileImg.height;
-        //             Cnv.height = 300;//该值影响缩放后图片的大小
-        //             Cnv.width = 300 * m;
-        //             //img放入画布中
-        //             //设置起始坐标，结束坐标
-        //             Cntx.drawImage($fileImg, 0, 0, 300 * m, 300);
-        //         }
-        //     }
-
-        // },
-        // pressss() {//
-        //     //获取canvas压缩后的图片数据
-        //     var Pic = document.getElementById("myCanvas").toDataURL("image/png");
-        //     var imgs = document.getElementById("press");
-        //     imgs.src = Pic;
-        //     //console.log(Pic)
-        //     //上传
-        //     // 去除多余，得到base64编码的图片字节流
-        //     Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "");
-        //     //可以用ajax提交到后台，提交后可以直接存数据库，也可以保存成图片，此处略
-        // }
-
-
         goIndustry() {
             if (this.editForm === true) {
                 this.editForm = false
@@ -389,22 +313,6 @@ export default {
                 }
             }
         },
-        telephone2() {
-            for (let i = 0; i < this.$refs.phone2.length; i++) {
-                //console.log(this.$refs.phone2[i].valid)
-                if (!this.$refs.phone2[i].valid) {
-                    //console.log('手机2错误')
-                    //console.log(this.$refs.phone2[i].valid)
-                    this.phoneNull = false;
-                    return false;
-                } else {
-                    //console.log('手机2正确')
-                    //console.log(this.$refs.phone2[i].valid)
-                    this.phoneNull = !false;
-                    return false;
-                }
-            }
-        },
         onLeast5() {
             for (let i = 0; i < this.$refs.Least5.length; i++) {
                 if (!this.$refs.Least5[i].valid) {
@@ -449,49 +357,7 @@ export default {
             }
         },
 
-        LeastNet() {
-            var reg=/(?:http(?:s|):\/\/|)+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
-            var url = this.listData[0].net;
-            console.log(url);
-            console.log(reg.test(url));
-            if (!reg.test(url)) {
-                alert("网址格式错误")
-                //this.netLeast = !false;
-                return false;
-            }
-            alert('1')
-            //this.netLeast = false;
-            url = url.substr(0, 7).toLowerCase() == "http://" ? url : "http://" + url;
-            this.listData[0].net = url;
-            console.log(url);
-            // var v = new RegExp();
-            // var net = document.getElementById('Net')
-            // v.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");
-            // if (net.value != '') {
-            //     if (!v.test(net.value)) {
-            //         //alert("错误");
-            //         this.netLeast = !false;
-            //         return false;
-            //     } else {
-            //         this.netLeast = false;
-            //         //alert('正确')
-            //         return false;
-            //     }
-            // } else {
-            //     this.netLeast = false;
-            // }
-        },
-
         submit() {
-            //获取canvas压缩后的图片数据
-            // var Pic = document.getElementById("myCanvas").toDataURL("image/png");
-            // var imgs = document.getElementById("getPic");
-            // imgs.src = Pic;
-            // //console.log(Pic)
-            // //上传
-            // // 去除多余，得到base64编码的图片字节流
-            // Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "");
-
             let arr = [];
             let scopesId = '';
             for (let i = 0; i < this.tabBox.length; i++) {
@@ -506,10 +372,8 @@ export default {
             this.onLeast4();
             this.onLeast5();
             this.onLeast6();
-            this.telephone2();
-            this.LeastNet();
             this.industryLeast();
-            if (this.succeed === false || this.succeed2 === false || this.phoneNull === false || this.succeed3 === false || this.succeed4 === false || this.succeed5 === false || this.succeed6 === false || this.netLeast === !false || this.inputLeast === !false) {
+            if (this.succeed === false || this.succeed2 === false || this.succeed3 === false || this.succeed4 === false || this.succeed5 === false || this.succeed6 === false || this.inputLeast === !false) {
                 //alert('失败')
                 this.weuiDialog = !false;
                 return false;
@@ -525,43 +389,30 @@ export default {
                 formData.append('department', this.listData[0].department);
                 formData.append('sex', this.listData[0].sex);
                 formData.append('telephone', this.listData[0].telephone);
-                formData.append('telephone2', this.listData[0].telephone2);
                 formData.append('fixedLine', this.listData[0].fixedLine);
                 formData.append('email', this.listData[0].email);
+                //formData.append('scope', arr);
                 formData.append('scope', scopesId);
                 formData.append('net', this.listData[0].net);
                 formData.append('address', this.listData[0].address);
                 //console.log(formData)
-
-                this.$http.interceptors.request.use((config) => {
-                    //在请求发送之前做一些事
-                    this.btnFalse = !false;
-                    this.loading = !false;
-                    this.btnTrue = false;
-                    //console.log(config)
-                    return config;
-                }, function(error) {
-                    //当出现请求错误是做一些事
-                    alert('保存失败')
-                    return Promise.reject(error);
-                });
                 this.$http({
                     method: 'post',
-                    url: 'apiData/con/move/update',
+                    url: 'api/con/move/update',
                     headers: { 'Content-Type': 'multipart/form-data' },
                     data: formData,
                 })
                     .then(response => {
                         console.log(response)
-                        this.$router.push('/myCard')
                         //console.log('post成功');
                     })
                     .catch(error => {
                         //console.log(error);
-                        alert('网络错误，不能访问');
+                        console.log('网络错误，不能访问');
                     })
+                this.$router.push('/myCard')
                 //this.$router.replace('/myCard')
-                //return false;
+                return false;
             }
         },
         weuiWarn() {

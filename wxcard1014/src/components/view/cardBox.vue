@@ -44,36 +44,20 @@
                     </div>
                 </div>
             </div>
-            <!-- 字母
-                                                                    <transition name="slide-fade">
-                                                                        <div class="right-menu" v-show="!rightMenu">
-                                                                            <div class="right-menu-box" v-for="(keys , index) in carditemText" :key="index">
-                                                                                <a href="javascript:;" @click="onLetter('#letter'+ keys.target)">{{keys.letters}}</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </transition> -->
-            <div class="right-menu" v-show="!rightMenu">
-                <div class="right-menu-box" v-for="(keys , index) in carditemText" :key="index">
-                    <a href="javascript:;" @click="onLetter('#letter'+ keys.target)">{{keys.letters}}</a>
+            <!-- 字母 -->
+            <transition name="slide-fade">
+                <div class="right-menu" v-show="!rightMenu">
+                    <div class="right-menu-box" v-for="(keys , index) in carditemText" :key="index">
+                        <a href="javascript:;" @click="onLetter('#letter'+ keys.target)">{{keys.letters}}</a>
+                    </div>
                 </div>
+            </transition>
+
+            <div class="empty" v-if="!this.carditem">
+                <img src="../../images/41485156.png" alt="">
+                <p>您的名片夹是空的</p>
+                <p>赶紧添加些名片吧</p>
             </div>
-
-            <!-- <div class="empty" v-show="!Object.keys(this.carditem).length && empty">
-                                                            <img src="../../images/41485156.png" alt="">
-                                                            <p>您的名片夹是空的</p>
-                                                            <p>赶紧添加些名片吧</p>
-                                                        </div> -->
-            <!-- <div class="empty" v-show="!this.carditem">
-                                                        <img src="../../images/41485156.png" alt="">
-                                                        <p>您的名片夹是空的</p>
-                                                        <p>赶紧添加些名片吧</p>
-                                                    </div>
-
-                                                    <div class="empty" v-show="emptySeek">
-                                                        <img src="../../images/41485156.png" alt="">
-                                                        <p>没有找到您需要的名片</p>
-                                                        <p>赶紧添加些名片吧</p>
-                                                    </div> -->
 
             <div class="card-list" v-for="(items, keys ,index) in searchFor(carditem,seartext)" :key="keys">
                 <div class="item-wire" :id="'letter'+ keys">{{keys}}</div>
@@ -84,10 +68,10 @@
                         </div>
                         <div slot="content" class="demo-content vux-1px-tb">
                             <div class="card-item">
-                                <router-link :to="{ path: '/youCard/' + item.openId}">
+                                <router-link :to="{ path: '/cardForm/' + item.openId}">
                                     <div class="card-item-box">
                                         <div class="item-img">
-                                            <img v-if="item.picture!=null" :src="'apiData/image/'+item.picture">
+                                            <img v-if="item.picture!==null" :src="'api/image/'+item.picture">
                                             <img v-else src="../../images/logo.png">
                                         </div>
                                         <div class="item-msg">
@@ -106,11 +90,6 @@
                                         </div>
                                     </div>
                                 </router-link>
-                                <div class="telephone" v-show="!phone">
-                                    <a :href="'tel:'+item.telephone">
-                                        <img src="../../images/156156515.png" alt="">
-                                    </a>
-                                </div>
                                 <div class="item-checkbox" v-show="checkbox">
                                     <label>
                                         <input type="checkbox" v-model="item.flag">
@@ -120,9 +99,6 @@
                             </div>
                         </div>
                     </swipeout-item>
-                    <!-- <div style="margin-top:60px">
-                                             <a :href="tel">{{item.telephone}}</a>
-                                        </div> -->
                 </swipeout>
             </div>
         </div>
@@ -182,16 +158,13 @@ export default {
             deleteIcon: false,
             checkbox: false,
             weuiDialog: false,
-            empty: false,
-            emptySeek: false,
-            phone: false,
-            carditemLG: '',
+            carditemLG:'',
         }
     },
     mounted() {
         this.$http({
             method: 'get',
-            url: 'apiData/con/move/list',
+            url: 'api/con/move/list',
             params: {
                 openId: this.$parent.wxOpenId,
             },
@@ -220,14 +193,12 @@ export default {
             this.checkbox = !false;
             this.rightMenu = !false;
             this.navIcon = false;
-            this.phone = !false;
             this.letNavIcon = false;
             this.seekIcon = false;
         },
         cancelCard() {
-            this.deleteIcon = false;     //返回显示
+            this.deleteIcon = false;
             this.cancelIcon = false;
-            this.phone = false;          //返回显示手机图标
             this.checkbox = false;
             this.rightMenu = false;
             this.seekIcon = !false;
@@ -265,7 +236,7 @@ export default {
             //console.log(arrDelete)
             this.$http({
                 method: 'get',
-                url: 'apiData/con/move/delete',
+                url: 'api/con/move/delete',
                 params: {
                     openId: this.$parent.wxOpenId,
                     ids: arrDelete
@@ -287,7 +258,7 @@ export default {
         onDeleteCard(index, keys) {
             this.$http({
                 method: 'get',
-                url: 'apiData/con/move/delete',
+                url: 'api/con/move/delete',
                 params: {
                     openId: this.$parent.wxOpenId,
                     ids: this.carditem[keys][index].id
@@ -309,11 +280,9 @@ export default {
         },
         openDelete(type) {
             this.rightMenu = !false;
-            //this.phone = !false;          //打开隐藏手机图标
         },
         closeDelete(type) {
             this.rightMenu = false;
-            //this.phone = false;          //返回显示手机图标
         },
         onLetter(keys) {
             let letter = this.$el.querySelector(keys)
@@ -322,21 +291,15 @@ export default {
         /* 搜索 */
         searchFor(carditem, seartext) {
             for (let keys in this.carditem) {
-                //console.log(this.carditem[keys].length)
+                //console.log(this.carditem[keys])
                 if (!this.carditem[keys].length) {
-                    //this.empty = !false;  //数据没有，显示提示图
-                    //this.rightMenu = !false; //隐藏字母
-                    this.emptySeek = false;
                     delete this.carditem[keys]
                 }
             }
             let result = {};  //用result来存放查到的结果
             if (!seartext) {
-                //this.rightMenu = false;
-                this.emptySeek = false;
                 return this.carditem;
             }
-            //this.rightMenu = !false;
             seartext = seartext.trim().toLowerCase();   //把查询的内容转为小写的
             for (let keys in this.carditem) {
                 for (let i = 0; i < this.carditem[keys].length; i++) {
@@ -344,14 +307,6 @@ export default {
                         result[keys] = this.carditem[keys];
                     }
                 }
-            }
-            if (!Object.keys(result).length) {
-                //alert('没数据')
-                //this.emptySeek = !false;
-                return false;
-            } else {
-                this.emptySeek = false;
-                //alert('有数据')
             }
             return result;
         },
