@@ -1,18 +1,19 @@
 <template>
     <div>
 
-        <!-- <div class="empty" v-if="!this.listData">
+        <div class="empty" v-if="this.listData[0].subscribe==0">
                 <img src="../../images/41485156.png" alt="">
-                <p>尚未填写您的名片信息</p>
-                <div class="btn-blue">
+                <p>请关注公众号，获取名片信息</p>
+                <!-- <div class="btn-blue">
                     <router-link to="/myForm">完善资料</router-link>
-                </div>
-            </div> -->
-        <div v-if="this.listData[0].subscribe==0">
+                </div> -->
+            </div>
+        <!-- <div v-if="this.listData[0].subscribe==1">
+             <img src="../../images/41485156.png" alt="">
             <p>您还没关注该公众号哦!!!</p>
-        </div>
+        </div> -->
 
-        <div class="myCard" v-if="this.listData[0].subscribe==0">
+        <div class="myCard" v-if="this.listData[0].subscribe==1">
             <div class="page-top">
                 <letfNav>
                     <a href="javascript:;"><img src="../../images/631561651.png" alt=""></a>

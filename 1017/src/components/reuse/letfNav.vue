@@ -17,16 +17,16 @@
               <p class="occupation">{{msg.department}}</p>
             </div>
             <!--          <div class="menuMsg-number" @click="toggle()">
-                                  <div>
-                                    <p>收藏量</p>
-                                    <p>{{msg.number}}</p>
-                                  </div>
-                                  <div class="line"></div>
-                                  <div>
-                                    <p>名片量</p>
-                                    <p>{{msg.numbers}}</p>
-                                  </div>
-                                </div> -->
+                            <div>
+                              <p>收藏量</p>
+                              <p>{{msg.number}}</p>
+                            </div>
+                            <div class="line"></div>
+                            <div>
+                              <p>名片量</p>
+                              <p>{{msg.numbers}}</p>
+                            </div>
+                          </div> -->
           </div>
           <div class="menNav" @click="toggle()">
             <router-link to="/myCard">我的名片</router-link>
@@ -110,7 +110,8 @@ export default {
   img {
     width: 160px;
     height: 160px;
-    border-radius: 50%; // position: relative;
+    border-radius: 50%; 
+    // position: relative;
     // /* background: #fff; */
     // &::after {
     //   width: 160px;
@@ -127,23 +128,18 @@ export default {
 }
 
 .menuMsg {
-  margin: 24px 0;
+  margin-bottom: 24px;
   span {
     display: inline-block;
-    width: 100px;
     height: 48px;
     color: #fefefe;
     font-size: 24px;
-    // line-height: 48px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    vertical-align: middle;
+    line-height: 48px;
+    img {
+      margin-left: 12px;
+    }
   }
   .occupation {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     font-size: 20px;
     color: #fff;
   }

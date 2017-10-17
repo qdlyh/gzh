@@ -47,8 +47,7 @@
                     </div>
                     <div v-if="item.fixedLine!=''">
                         <i><img src="../../images/41651651.png" alt=""></i>
-                        <!-- <p>{{item.fixedLine}}</p> -->
-                        <a :href="'tel:'+item.fixedLine">{{item.fixedLine}}</a>
+                        <p>{{item.fixedLine}}</p>
                     </div>
                     <div>
                         <i><img src="../../images/561561651.png" alt=""></i>
@@ -65,8 +64,7 @@
                     </div>
                     <div>
                         <i><img src="../../images/15165161.png" alt=""></i>
-                        <!-- <p>{{item.address}}</p> -->
-                        <a href="youMap.html">{{item.address}}</a>
+                        <p>{{item.address}}</p>
                     </div>
                 </div>
                 <!-- 微信 -->
@@ -133,8 +131,7 @@ export default {
                 //console.log(response);
                 //console.log(response.data);
                 //console.log('成功');
-                this.listData = response.data;
-                localStorage.setItem("youAddress",this.listData[0].address)
+                this.listData = response.data
             })
             .catch(error => {
                 console.log(error);
@@ -146,7 +143,7 @@ export default {
             this.wxImg = !false;
         },
         cardWarn() {
-            this.weuiDialog = !false;
+            this.weuiDialog = !false
         },
         removeAll() {
             for (let i = 0; i < this.listData.length; i++) {
@@ -167,14 +164,14 @@ export default {
                         //console.log(response);
                         //console.log(response.data); 
                         //console.log('成功');
-                        this.weuiDialog = false;
-                        this.$router.push('/cardBox')
                     })
                     .catch(error => {
                         console.log(error);
                         console.log('网络错误，不能访问');
                     })
             }
+            this.weuiDialog = false;
+            this.$router.push('/cardBox')
         }
     },
     computed: {

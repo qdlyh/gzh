@@ -16,21 +16,21 @@
                         </div>
                         <div class="file-box">
                             <!-- <input id="file" name="file" type="file" @change="getPicture()">
-                                <canvas id="myCanvas" style="display: none"></canvas>
-                                <img id="file-img" name="picture" :src="'/image/'+item.picture">
-                                <input type="button" value="ya suo->" @click="pressss()" /> 
-                                <img src="" alt="" id="getPic">
-                                <input type="text" name="oldImg" :value="item.picture" hidden> -->
+                            <canvas id="myCanvas" style="display: none"></canvas>
+                            <img id="file-img" name="picture" :src="'/image/'+item.picture">
+                            <input type="button" value="ya suo->" @click="pressss()" /> 
+                            <img src="" alt="" id="getPic">
+                            <input type="text" name="oldImg" :value="item.picture" hidden> -->
                             <img id="file-img" name="picture" :src="'apiData/image/'+item.picture">
                             <input id="file" name="file" type="file">
                             <input type="text" name="oldImg" :value="item.picture" hidden>
                         </div>
                         <div class="user-name">
                             <div style="margin-top:20px;">
-                                <x-input name="name" v-model="item.name" @on-blur="onLeast2()" ref="Least2" placeholder="请输入您的名字" :show-clear="false" :required="true" :min="1" :max="20"></x-input>
+                                <x-input name="name" v-model="item.name" @on-blur="onLeast2()" ref="Least2" placeholder="请输入您的名字" :show-clear="false" :required="true" :min="1" :max="6"></x-input>
                             </div>
                             <div>
-                                <x-input name="department" v-model="item.department" @on-blur="onLeast3()" ref="Least3" placeholder="请输入您的职位" :show-clear="false" :required="true" :min="2" :max="15"></x-input>
+                                <x-input name="department" v-model="item.department" @on-blur="onLeast3()" ref="Least3" placeholder="请输入您的职位" :show-clear="false" :required="true" :min="2" :max="6"></x-input>
                             </div>
                         </div>
                         <div class="user-sex">
@@ -44,15 +44,15 @@
                         <div class="user-message">
                             <div>
                                 <i><img src="../../images/1561561651.png" alt=""></i>
-                                <x-input type="number" name="telephone" v-model="item.telephone" @on-blur="onLeast4()" ref="Least4" placeholder="请输入手机号码" :show-clear="false" :required="true" keyboard="number" is-type="china-mobile"></x-input>
+                                <x-input name="telephone" v-model="item.telephone" @on-blur="onLeast4()" ref="Least4" placeholder="请输入手机号码" :show-clear="false" :required="true" keyboard="number" is-type="china-mobile"></x-input>
                             </div>
                             <div>
                                 <i></i>
-                                <x-input type="number" name="telephone2" v-model="item.telephone2" @on-blur="telephone2()" ref="phone2" placeholder="请输入手机号码(选填)" :show-clear="false" keyboard="number" is-type="china-mobile"></x-input>
+                                <x-input name="telephone2" v-model="item.telephone2" @on-blur="telephone2()" ref="phone2" placeholder="请输入手机号码(选填)" :show-clear="false" keyboard="number" is-type="china-mobile"></x-input>
                             </div>
                             <div>
                                 <i><img src="../../images/41651651.png" alt=""></i>
-                                <x-input type="number" v-model="item.fixedLine" name="fixedLine" :show-clear="false" :min="7" :max="15" placeholder="请输入您的座机号码"></x-input>
+                                <x-input v-model="item.fixedLine" name="fixedLine" :show-clear="false" :min="7" :max="15" placeholder="请输入您的座机号码"></x-input>
                             </div>
                             <div>
                                 <i><img src="../../images/561561651.png" alt=""></i>
@@ -70,7 +70,7 @@
                             </div>
                             <div>
                                 <i><img src="../../images/15165161.png" alt=""></i>
-                                <x-input name="address" v-model="item.address" placeholder="请输入公司地址" @on-blur="onLeast6()" ref="Least6" :show-clear="false" :required="true" :min="2" :max="30"></x-input>
+                                <x-input name="address" v-model="item.address" placeholder="请输入公司地址" @on-blur="onLeast6()" ref="Least6" :show-clear="false" :required="true" :min="4" :max="30"></x-input>
                             </div>
                         </div>
                     </div>
@@ -230,9 +230,8 @@ export default {
             .then(response => {
                 //console.log(response.data);
                 //console.log('form成功');
-                this.listData = response.data;
-                // this.listData[0].address = localStorage.getItem("myAddress")
-                // console.log(this.listData[0].address)
+                this.listData = response.data
+                //console.log(this.listData)
             })
             .catch(error => {
                 console.log(error);
@@ -451,23 +450,20 @@ export default {
         },
 
         LeastNet() {
-            if (this.listData[0].net != '') {
-                var reg = /(?:http(?:s|):\/\/|)+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
-                var url = this.listData[0].net;
-                //console.log(reg.test(url));
-                if (!reg.test(url)) {
-                 //alert("网址格式错误")
-                    this.netLeast = !false;
-                    return false;
-                }
-                 //alert('正确')
-                this.netLeast = false;
-                url = url.substr(0, 7).toLowerCase() == "http://" ? url : "http://" + url;
-                this.listData[0].net = url;
-                //console.log(url);
-            } else {
-                this.netLeast = false;
+            var reg=/(?:http(?:s|):\/\/|)+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
+            var url = this.listData[0].net;
+            console.log(url);
+            console.log(reg.test(url));
+            if (!reg.test(url)) {
+                alert("网址格式错误")
+                //this.netLeast = !false;
+                return false;
             }
+            alert('1')
+            //this.netLeast = false;
+            url = url.substr(0, 7).toLowerCase() == "http://" ? url : "http://" + url;
+            this.listData[0].net = url;
+            console.log(url);
             // var v = new RegExp();
             // var net = document.getElementById('Net')
             // v.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");
@@ -545,8 +541,6 @@ export default {
                     //console.log(config)
                     return config;
                 }, function(error) {
-                    this.btnFalse = false;
-                    this.btnTrue = !false;
                     //当出现请求错误是做一些事
                     alert('保存失败')
                     return Promise.reject(error);

@@ -1,19 +1,31 @@
 <template>
     <div>
-        <div class="cardForm" style="margin-bottom:100px;">
+
+        <!-- <div class="empty" v-if="!this.listData">
+                <img src="../../images/41485156.png" alt="">
+                <p>尚未填写您的名片信息</p>
+                <div class="btn-blue">
+                    <router-link to="/myForm">完善资料</router-link>
+                </div>
+            </div> -->
+        <div v-if="this.listData[0].subscribe==0">
+            <p>您还没关注该公众号哦!!!</p>
+        </div>
+
+        <div class="myCard" v-if="this.listData[0].subscribe==0">
             <div class="page-top">
                 <letfNav>
                     <a href="javascript:;"><img src="../../images/631561651.png" alt=""></a>
                 </letfNav>
                 <div class="icon-right">
-                    <span @click="cardWarn()">
-                        <a href="javascript:;"><img src="../../images/14151561.png" alt=""></a>
-                    </span>
                     <div class="icon-line"></div>
                     <span @click="onwxImg()">
                         <a href="javascript:;"><img src="../../images/15616516.png" alt=""></a>
                     </span>
                     <div class="icon-line"></div>
+                    <span>
+                        <router-link to="/myForm"><img src="../../images/156165165.png" alt=""></router-link>
+                    </span>
                 </div>
             </div>
 
@@ -39,16 +51,15 @@
                 <div class="message-form">
                     <div>
                         <i><img src="../../images/1561561651.png" alt=""></i>
-                        <a :href="'tel:'+item.telephone">{{item.telephone}}</a>
+                        <p>{{item.telephone}}</p>
                     </div>
                     <div v-if="item.telephone2!=''">
                         <i></i>
-                        <a :href="'tel:'+item.telephone2">{{item.telephone2}}</a>
+                        <p>{{item.telephone2}}</p>
                     </div>
                     <div v-if="item.fixedLine!=''">
                         <i><img src="../../images/41651651.png" alt=""></i>
-                        <!-- <p>{{item.fixedLine}}</p> -->
-                        <a :href="'tel:'+item.fixedLine">{{item.fixedLine}}</a>
+                        <p>{{item.fixedLine}}</p>
                     </div>
                     <div>
                         <i><img src="../../images/561561651.png" alt=""></i>
@@ -65,11 +76,9 @@
                     </div>
                     <div>
                         <i><img src="../../images/15165161.png" alt=""></i>
-                        <!-- <p>{{item.address}}</p> -->
-                        <a href="youMap.html">{{item.address}}</a>
+                        <p>{{item.address}}</p>
                     </div>
                 </div>
-                <!-- 微信 -->
                 <transition name="fade">
                     <div class="weui-box" v-show="wxImg">
                         <div class="weui-mask" @click="wxImg = false"></div>
@@ -78,30 +87,6 @@
                         </div>
                     </div>
                 </transition>
-
-                <!-- 删除多选框 -->
-                <transition name="fade">
-                    <div class="weui-box" v-show="weuiDialog">
-                        <div class="weui-mask"></div>
-                        <div class="weui-dialog">
-                            <div class="weui-dialog__hd">
-                                <strong>确认删除吗？</strong>
-                            </div>
-                            <div class="weui-dialog__bd">
-                                <p>删除后信息将不能找回</p>
-                            </div>
-                            <div class="weui-dialog__ft">
-                                <p class="weui-dialog__btn" @click="weuiDialog = !weuiDialog">取消</p>
-                                <p class="weui-dialog__btn" @click="removeAll()">确认</p>
-                            </div>
-                        </div>
-                    </div>
-                </transition>
-
-                <div class="btn-blue">
-                    <!-- <router-link to="listData[0].net">前往企业官网</router-link> -->
-                    <a :href="listData[0].net">前往企业官网</a>
-                </div>
             </div>
         </div>
     </div>
@@ -118,15 +103,16 @@ export default {
         return {
             listData: [],
             wxImg: false,
-            weuiDialog: false,
         }
     },
     mounted() {
+        //  alert(this.$parent.wxOpenId)
+        //  return
         this.$http({
             method: 'get',
-            url: 'apiData/con/move?',
+            url: 'apiData/con/move',
             params: {
-                openId: this.$route.params.id
+                openId: this.$parent.wxOpenId
             }
         })
             .then(response => {
@@ -134,7 +120,6 @@ export default {
                 //console.log(response.data);
                 //console.log('成功');
                 this.listData = response.data;
-                localStorage.setItem("youAddress",this.listData[0].address)
             })
             .catch(error => {
                 console.log(error);
@@ -145,37 +130,6 @@ export default {
         onwxImg() {
             this.wxImg = !false;
         },
-        cardWarn() {
-            this.weuiDialog = !false;
-        },
-        removeAll() {
-            for (let i = 0; i < this.listData.length; i++) {
-                //console.log(this.listData[i].id)
-
-                this.$http({
-                    method: 'get',
-                    url: 'apiData/con/move/delete',
-                    params: {
-                        openId: this.$route.params.id,
-                        ids: this.listData[i].id
-                    },
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                })
-                    .then(response => {
-                        //console.log(response);
-                        //console.log(response.data); 
-                        //console.log('成功');
-                        this.weuiDialog = false;
-                        this.$router.push('/cardBox')
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        console.log('网络错误，不能访问');
-                    })
-            }
-        }
     },
     computed: {
         scopes() {
@@ -189,7 +143,7 @@ export default {
             //console.log(scopeBox)
             return scopeBox
         }
-    }
+    },
 }
 </script>
 <style lang="scss" scoped>
