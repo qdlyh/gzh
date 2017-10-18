@@ -29,7 +29,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/apiData': {
-        target: 'http://hx.tunnel.qydev.com',
+        target: 'http://hx.tunnel.qydev.com/vcard-manage-web/',
         //target: 'http://hx.tunnel.qydev.com/vcard-manage-web',
         changeOrigin: true,
         pathRewrite: {

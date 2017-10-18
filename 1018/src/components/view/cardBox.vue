@@ -87,7 +87,7 @@
                                 <router-link :to="{ path: '/youCard/' + item.openId}">
                                     <div class="card-item-box">
                                         <div class="item-img">
-                                            <img v-if="item.picture!=null" :src="'/vcard-manage-web/image/'+item.picture">
+                                            <img v-if="item.picture!=null" :src="'apiData/image/'+item.picture">
                                             <img v-else src="../../images/logo.png">
                                         </div>
                                         <div class="item-msg">
@@ -191,7 +191,7 @@ export default {
     mounted() {
         this.$http({
             method: 'get',
-            url: '/vcard-manage-web/con/move/list',
+            url: 'apiData/con/move/list',
             params: {
                 openId: this.$parent.wxOpenId,
             },
@@ -265,7 +265,7 @@ export default {
             //console.log(arrDelete)
             this.$http({
                 method: 'get',
-                url: '/vcard-manage-web/con/move/delete',
+                url: 'apiData/con/move/delete',
                 params: {
                     openId: this.$parent.wxOpenId,
                     ids: arrDelete
@@ -287,7 +287,7 @@ export default {
         onDeleteCard(index, keys) {
             this.$http({
                 method: 'get',
-                url: '/vcard-manage-web/con/move/delete',
+                url: 'apiData/con/move/delete',
                 params: {
                     openId: this.$parent.wxOpenId,
                     ids: this.carditem[keys][index].id

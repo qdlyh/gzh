@@ -1,23 +1,19 @@
 <template>
     <div>
 
-        <!-- <div class="empty" v-if="this.listData[0].subscribe==0">
-                    <img src="../../images/41485156.png" alt="">
-                    <p>请关注公众号，获取名片信息</p>
-                   <div class="btn-blue">
-                                    <router-link to="/myForm">完善资料</router-link>
-                   </div>
+        <div class="empty" v-if="this.listData[0].subscribe==0">
+                <img src="../../images/41485156.png" alt="">
+                <p>请关注公众号，获取名片信息</p>
+                <!-- <div class="btn-blue">
+                    <router-link to="/myForm">完善资料</router-link>
                 </div> -->
+            </div>
         <!-- <div v-if="this.listData[0].subscribe==1">
-                             <img src="../../images/41485156.png" alt="">
-                            <p>您还没关注该公众号哦!!!</p>
-                        </div> -->
+             <img src="../../images/41485156.png" alt="">
+            <p>您还没关注该公众号哦!!!</p>
+        </div> -->
 
-        <!-- <div class="empty" v-if="item.subscribe==0">
-                    <img src="../../images/41485156.png" alt="">
-                    <p>请关注公众号，获取您的名片信息</p>
-                </div> -->
-        <div class="myCard">
+        <div class="myCard" v-if="this.listData[0].subscribe==1">
             <div class="page-top">
                 <letfNav>
                     <a href="javascript:;"><img src="../../images/631561651.png" alt=""></a>
@@ -39,7 +35,7 @@
                     <p>{{item.company}}</p>
                 </div>
                 <div class="company-logo">
-                    <img v-if="item.picture!==null" :src="'/vcard-manage-web/image/'+item.picture">
+                    <img v-if="item.picture!==null" :src="'apiData/image/'+item.picture">
                     <img v-else src="../../images/logo.png">
                 </div>
                 <div class="message-name">
@@ -88,7 +84,7 @@
                     <div class="weui-box" v-show="wxImg">
                         <div class="weui-mask" @click="wxImg = false"></div>
                         <div class="weui-Wx">
-                            <div><img :src="'/vcard-manage-web/qrcode/'+item.coreFileName" alt=""></div>
+                            <div><img :src="'apiData/qrcode/'+item.coreFileName" alt=""></div>
                         </div>
                     </div>
                 </transition>
@@ -115,7 +111,7 @@ export default {
         //  return
         this.$http({
             method: 'get',
-            url: '/vcard-manage-web/con/move',
+            url: 'apiData/con/move',
             params: {
                 openId: this.$parent.wxOpenId
             }

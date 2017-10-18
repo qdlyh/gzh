@@ -16,12 +16,12 @@
                         </div>
                         <div class="file-box">
                             <!-- <input id="file" name="file" type="file" @change="getPicture()">
-                                    <canvas id="myCanvas" style="display: none"></canvas>
-                                    <img id="file-img" name="picture" :src="'/image/'+item.picture">
-                                    <input type="button" value="ya suo->" @click="pressss()" /> 
-                                    <img src="" alt="" id="getPic">
-                                    <input type="text" name="oldImg" :value="item.picture" hidden> -->
-                            <img id="file-img" name="picture" :src="'/vcard-manage-web/image/'+item.picture">
+                                <canvas id="myCanvas" style="display: none"></canvas>
+                                <img id="file-img" name="picture" :src="'/image/'+item.picture">
+                                <input type="button" value="ya suo->" @click="pressss()" /> 
+                                <img src="" alt="" id="getPic">
+                                <input type="text" name="oldImg" :value="item.picture" hidden> -->
+                            <img id="file-img" name="picture" :src="'apiData/image/'+item.picture">
                             <input id="file" name="file" type="file">
                             <input type="text" name="oldImg" :value="item.picture" hidden>
                         </div>
@@ -222,7 +222,7 @@ export default {
     mounted() {
         this.$http({
             method: 'get',
-            url: '/vcard-manage-web/con/move',
+            url: 'apiData/con/move',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -242,7 +242,7 @@ export default {
         // this.$http.get('api/con/scope?openId=' + this.$route.params.id)
         this.$http({
             method: 'get',
-            url: '/vcard-manage-web/con/scope',
+            url: 'apiData/con/scope',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -258,7 +258,7 @@ export default {
         // this.$http.get('api/con/scope/allChild?openId=' + this.$route.params.id)
         this.$http({
             method: 'get',
-            url: '/vcard-manage-web/con/scope/allChild',
+            url: 'apiData/con/scope/allChild',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -451,22 +451,21 @@ export default {
         },
 
         LeastNet() {
-            var net = document.getElementById('Net')
-            if (net.value != '') {
+            if (this.listData[0].net != '') {
                 var reg = /(?:http(?:s|):\/\/|)+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
                 var url = this.listData[0].net;
                 //console.log(reg.test(url));
                 if (!reg.test(url)) {
-                    //alert("网址格式错误")
+                 //alert("网址格式错误")
                     this.netLeast = !false;
                     return false;
                 }
-                //alert('正确')
+                 //alert('正确')
                 this.netLeast = false;
                 url = url.substr(0, 7).toLowerCase() == "http://" ? url : "http://" + url;
                 this.listData[0].net = url;
-                console.log(url);
-            } else {  
+                //console.log(url);
+            } else {
                 this.netLeast = false;
             }
             // var v = new RegExp();
@@ -547,7 +546,6 @@ export default {
                     return config;
                 }, function(error) {
                     this.btnFalse = false;
-                    this.loading = false;
                     this.btnTrue = !false;
                     //当出现请求错误是做一些事
                     alert('保存失败')
@@ -555,7 +553,7 @@ export default {
                 });
                 this.$http({
                     method: 'post',
-                    url: '/vcard-manage-web/con/move/update',
+                    url: 'apiData/con/move/update',
                     headers: { 'Content-Type': 'multipart/form-data' },
                     data: formData,
                 })
@@ -565,9 +563,6 @@ export default {
                         //console.log('post成功');
                     })
                     .catch(error => {
-                        this.btnFalse = false;
-                        this.loading = false;
-                        this.btnTrue = !false;
                         //console.log(error);
                         alert('网络错误，不能访问');
                     })

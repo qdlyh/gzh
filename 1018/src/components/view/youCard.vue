@@ -1,24 +1,19 @@
 <template>
     <div>
         <div class="cardForm" style="margin-bottom:100px;">
-            <div v-for="(myitem , index) in myData" :key="index">
-                <div class="page-subscribe" v-if="myitem.subscribe==0">
-                    <p>请关注云之康公众号获取您的名片信息</p>
-                </div>
-                <div class="page-top" v-if="myitem.subscribe==1">
-                    <letfNav>
-                        <a href="javascript:;"><img src="../../images/631561651.png" alt=""></a>
-                    </letfNav>
-                    <div class="icon-right">
-                        <span @click="cardWarn()">
-                            <a href="javascript:;"><img src="../../images/14151561.png" alt=""></a>
-                        </span>
-                        <div class="icon-line"></div>
-                        <span @click="onwxImg()">
-                            <a href="javascript:;"><img src="../../images/15616516.png" alt=""></a>
-                        </span>
-                        <div class="icon-line"></div>
-                    </div>
+            <div class="page-top">
+                <letfNav>
+                    <a href="javascript:;"><img src="../../images/631561651.png" alt=""></a>
+                </letfNav>
+                <div class="icon-right">
+                    <span @click="cardWarn()">
+                        <a href="javascript:;"><img src="../../images/14151561.png" alt=""></a>
+                    </span>
+                    <div class="icon-line"></div>
+                    <span @click="onwxImg()">
+                        <a href="javascript:;"><img src="../../images/15616516.png" alt=""></a>
+                    </span>
+                    <div class="icon-line"></div>
                 </div>
             </div>
 
@@ -27,7 +22,7 @@
                     <p>{{item.company}}</p>
                 </div>
                 <div class="company-logo">
-                    <img v-if="item.picture!==null" :src="'/vcard-manage-web/image/'+item.picture">
+                    <img v-if="item.picture!==null" :src="'apiData/image/'+item.picture">
                     <img v-else src="../../images/logo.png">
                 </div>
                 <div class="message-name">
@@ -79,7 +74,7 @@
                     <div class="weui-box" v-show="wxImg">
                         <div class="weui-mask" @click="wxImg = false"></div>
                         <div class="weui-Wx">
-                            <div><img :src="'/vcard-manage-web/qrcode/'+item.coreFileName" alt=""></div>
+                            <div><img :src="'apiData/qrcode/'+item.coreFileName" alt=""></div>
                         </div>
                     </div>
                 </transition>
@@ -123,34 +118,13 @@ export default {
         return {
             listData: [],
             wxImg: false,
-            ids: '',
             weuiDialog: false,
         }
     },
     mounted() {
-        //  alert(this.$parent.wxOpenId)
-        //  return
         this.$http({
             method: 'get',
-            url: 'apiData/vcard-manage-web/con/move',
-            params: {
-                openId: this.$parent.wxOpenId
-            }
-        })
-            .then(response => {
-                //console.log(response);
-                //console.log(response.data);
-                //console.log('成功');
-                this.myData = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-                console.log('网络错误，不能访问');
-            })
-
-        this.$http({
-            method: 'get',
-            url: 'apiData/vcard-manage-web/con/move?',
+            url: 'apiData/con/move?',
             params: {
                 openId: this.$route.params.id
             }
@@ -160,7 +134,7 @@ export default {
                 //console.log(response.data);
                 //console.log('成功');
                 this.listData = response.data;
-                localStorage.setItem("youAddress", this.listData[0].address)
+                localStorage.setItem("youAddress",this.listData[0].address)
             })
             .catch(error => {
                 console.log(error);
@@ -175,33 +149,32 @@ export default {
             this.weuiDialog = !false;
         },
         removeAll() {
-            //alert(this.$parent.wxOpenId)
             for (let i = 0; i < this.listData.length; i++) {
                 //console.log(this.listData[i].id)
-                this.ids = this.listData[i].id
+
+                this.$http({
+                    method: 'get',
+                    url: 'apiData/con/move/delete',
+                    params: {
+                        openId: this.$route.params.id,
+                        ids: this.listData[i].id
+                    },
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                    .then(response => {
+                        //console.log(response);
+                        //console.log(response.data); 
+                        //console.log('成功');
+                        this.weuiDialog = false;
+                        this.$router.push('/cardBox')
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        console.log('网络错误，不能访问');
+                    })
             }
-            this.$http({
-                method: 'get',
-                url: '/vcard-manage-web/con/move/delete',
-                params: {
-                    openId: this.$parent.wxOpenId,
-                    ids: this.ids
-                },
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
-                .then(response => {
-                    //console.log(response);
-                    //console.log(response.data); 
-                    //console.log('成功');
-                    this.weuiDialog = false;
-                    this.$router.push('/cardBox')
-                })
-                .catch(error => {
-                    console.log(error);
-                    console.log('网络错误，不能访问');
-                })
         }
     },
     computed: {
@@ -209,7 +182,7 @@ export default {
             let arr = [];
             let scopeBox;
             for (let i = 0; i < this.listData[0].scopes.length; i++) {
-                //console.log(this.listData[0].scopes[i].title)
+                console.log(this.listData[0].scopes[i].title)
                 arr.push(this.listData[0].scopes[i].title)
             }
             scopeBox = arr.join("; ")

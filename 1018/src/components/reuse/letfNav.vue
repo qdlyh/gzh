@@ -8,26 +8,25 @@
         <ul>
           <div class="Message-box">
             <div class="menu-img">
-              <img v-if="msg.picture!==null" :src="'/vcard-manage-web/image/'+msg.picture">
+              <img v-if="msg.picture!==null" :src="'apiData/image/'+msg.picture">
               <img v-else src="../../images/logo.png">
             </div>
             <div class="menuMsg">
               <span>{{msg.name}}</span>
-              <div v-if="msg.sex==1"><img src="../../images/1165165.png" alt=""></div>
-              <div v-else><img src="../../images/1651651.png" alt=""></div>
+              <i><img src="../../images/1165165.png" alt=""></i>
               <p class="occupation">{{msg.department}}</p>
             </div>
-            <!--          <div class="menuMsg-number" @click="toggle()"> 
-                                    <div>
-                                      <p>收藏量</p>
-                                      <p>{{msg.number}}</p>
-                                    </div>
-                                    <div class="line"></div>
-                                    <div>
-                                      <p>名片量</p>
-                                      <p>{{msg.numbers}}</p>
-                                    </div>
-                                  </div> -->
+            <!--          <div class="menuMsg-number" @click="toggle()">
+                                  <div>
+                                    <p>收藏量</p>
+                                    <p>{{msg.number}}</p>
+                                  </div>
+                                  <div class="line"></div>
+                                  <div>
+                                    <p>名片量</p>
+                                    <p>{{msg.numbers}}</p>
+                                  </div>
+                                </div> -->
           </div>
           <div class="menNav" @click="toggle()">
             <router-link to="/myCard">我的名片</router-link>
@@ -53,7 +52,7 @@ export default {
   mounted() {
     this.$http({
       method: 'get',
-      url: '/vcard-manage-web/con/move',
+      url: 'apiData/con/move',
       params: {
         openId: this.$parent.$parent.wxOpenId
       }
@@ -128,24 +127,18 @@ export default {
 }
 
 .menuMsg {
-  margin-bottom: 24px;
-  position: relative;
+  margin: 24px 0;
   span {
     display: inline-block;
     width: 100px;
     height: 48px;
     color: #fefefe;
     font-size: 24px;
-    line-height: 48px;
+    // line-height: 48px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: middle;
-  }
-  div {
-    position: absolute;
-    top: 11px;
-    right:110px;
   }
   .occupation {
     overflow: hidden;
