@@ -36,7 +36,7 @@ export default new Router({
       component: cardBox
     },
     {
-      path: '/youCard',
+      path: '/youCard/:id',
       name: 'youCard',
       component: youCard
     },

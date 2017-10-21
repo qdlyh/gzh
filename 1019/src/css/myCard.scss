@@ -99,3 +99,21 @@ $text-color:#555b5a;
     }
   }
 }
+
+/* 公众号提示 */
+.page-subscribe {
+  width: 100%;
+  height: 88px;
+  text-align: center;
+  background: #383C43;
+  display: flex;
+  justify-content: space-between;
+  p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      font-size: 24px;
+      color: #fff;
+  }
+}

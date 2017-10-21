@@ -21,7 +21,7 @@
                                     <input type="button" value="ya suo->" @click="pressss()" /> 
                                     <img src="" alt="" id="getPic">
                                     <input type="text" name="oldImg" :value="item.picture" hidden> -->
-                            <img id="file-img" name="picture" :src="'http://card.image.degjsm.cn/Image/card/image/'+item.picture">
+                            <img id="file-img" name="picture" :src="'/vcard-manage-web/image/'+item.picture">
                             <input id="file" name="file" type="file">
                             <input type="text" name="oldImg" :value="item.picture" hidden>
                         </div>
@@ -222,7 +222,7 @@ export default {
     mounted() {
         this.$http({
             method: 'get',
-            url: 'http://card.degjsm.cn/vcard-manage-web/con/move',
+            url: '/vcard-manage-web/con/move',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -242,7 +242,7 @@ export default {
         // this.$http.get('api/con/scope?openId=' + this.$route.params.id)
         this.$http({
             method: 'get',
-            url: 'http://card.degjsm.cn/vcard-manage-web/con/scope',
+            url: '/vcard-manage-web/con/scope',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -258,7 +258,7 @@ export default {
         // this.$http.get('api/con/scope/allChild?openId=' + this.$route.params.id)
         this.$http({
             method: 'get',
-            url: 'http://card.degjsm.cn/vcard-manage-web/con/scope/allChild',
+            url: '/vcard-manage-web/con/scope/allChild',
             params: {
                 openId: this.$parent.wxOpenId
             }
@@ -555,7 +555,7 @@ export default {
                 });
                 this.$http({
                     method: 'post',
-                    url: 'http://card.degjsm.cn/vcard-manage-web/con/move/update',
+                    url: '/vcard-manage-web/con/move/update',
                     headers: { 'Content-Type': 'multipart/form-data' },
                     data: formData,
                 })

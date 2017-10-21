@@ -39,7 +39,7 @@
                     <p>{{item.company}}</p>
                 </div>
                 <div class="company-logo">
-                    <img v-if="item.picture!==null" :src="'http://card.image.degjsm.cn/Image/card/image/'+item.picture">
+                    <img v-if="item.picture!==null" :src="'/vcard-manage-web/image/'+item.picture">
                     <img v-else src="../../images/logo.png">
                 </div>
                 <div class="message-name">
@@ -88,7 +88,7 @@
                     <div class="weui-box" v-show="wxImg">
                         <div class="weui-mask" @click="wxImg = false"></div>
                         <div class="weui-Wx">
-                            <div><img :src="'http://card.image.degjsm.cn/Image/card/qrcode/'+item.coreFileName" alt=""></div>
+                            <div><img :src="'/vcard-manage-web/qrcode/'+item.coreFileName" alt=""></div>
                         </div>
                     </div>
                 </transition>
@@ -115,7 +115,7 @@ export default {
         //  return
         this.$http({
             method: 'get',
-            url: 'http://card.degjsm.cn/vcard-manage-web/con/move',
+            url: '/vcard-manage-web/con/move',
             params: {
                 openId: this.$parent.wxOpenId
             }
